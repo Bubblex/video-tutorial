@@ -2,11 +2,33 @@
   "parser": "babel-eslint",
   "extends": "airbnb",
   "rules": {
+    // 0: "off"
+    // 1: "warning"
+    // 2: "error"
+
+    // 统一代码缩进方式，默认值是4 spaces.
+    "indent": [2, 2],
+
+    //两个可选参数，always 和never 
+    //默认配置always，要求在行末加上分号。
+    "semi": [2, "never"],
+
+    // 在 jsx 使用 2 个空格的缩进
+    "react/jsx-indent": [2, 2],
+    
+    // 在 jsx 中使用单引号
+    "jsx-quotes": [2, "prefer-single"],
+
+    //统一换行符，"\n" unix(for LF) and "\r\n" for windows(CRLF)，默认unix
+    "linebreak-style": [2, "windows"],
+
+    //强制require()出现在模块作用域的顶部
+    "global-require": [0],
+
     "generator-star-spacing": [0],
     "consistent-return": [0],
     "react/forbid-prop-types": [0],
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-    "global-require": [1],
     "import/prefer-default-export": [0],
     "react/jsx-no-bind": [0],
     "react/prop-types": [0],

@@ -1,5 +1,5 @@
 {
-  "entry": "src/index.js",
+  "entry": "src/app.js",
   "env": {
     "development": {
       "extraBabelPlugins": [
@@ -11,6 +11,11 @@
       "extraBabelPlugins": [
         "transform-runtime"
       ]
-    }
+    },
+    "extraBabelPlugins": [
+      "transform-runtime",
+      ["import", { "libraryName": "antd", "style": true }]
+    ],
+    "theme": "./src/config/theme.js"
   }
 }
