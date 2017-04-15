@@ -1,16 +1,18 @@
 import React from 'react'
 import { connect } from 'dva'
 
-class Info extends React.Component {
+import Info from './info'
+
+class Home extends React.Component {
 
   render() {
     return (
       <div>
-        {this.props.info}
+        <Info />
       </div>
     )
   }
 
 }
 
-export default connect()(Info)
+export default connect()(Home)

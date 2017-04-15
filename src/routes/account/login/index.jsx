@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'dva'
 
-class Home extends React.Component {
+class Login extends React.Component {
   render() {
     return (
-      <div>主页</div>
+      <div>登录</div>
     )
   }
 }
 
-export default connect()(Home)
+export default connect()(Login)
