@@ -11,11 +11,11 @@
       "extraBabelPlugins": [
         "transform-runtime"
       ]
-    },
-    "extraBabelPlugins": [
-      "transform-runtime",
-      ["import", { "libraryName": "antd", "style": true }]
-    ],
-    "theme": "./src/config/theme.js"
-  }
+    }
+  },
+  "extraBabelPlugins": [
+    "transform-runtime",
+    ["import", { "libraryName": "antd", "style": true }]
+  ],
+  "theme": "./src/config/theme.js"
 }
