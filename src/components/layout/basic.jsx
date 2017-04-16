@@ -27,6 +27,12 @@ const {
   Sider,
 } = Layout
 
+/**
+ * 前台的基本布局组件
+ *
+ * @class BasicLayout
+ * @extends {React.Component}
+ */
 class BasicLayout extends React.Component {
   render() {
     const {

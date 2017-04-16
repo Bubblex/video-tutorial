@@ -14,6 +14,18 @@ import styles from './header-account.less'
 
 const { Item: MenuItem } = Menu
 
+/**
+ * 头部的登录状态组件
+ * 共有两种状态
+ * 1: 已登录
+ * 2: 未登录
+ *
+ * @class HeaderAccount
+ * @extends {React.Component}
+ * @param {Number} status 登录状态 1: 未登录 2: 已登录
+ * @example
+ * <HeaderAccount status />
+ */
 class HeaderAccount extends React.Component {
   render() {
     const {
