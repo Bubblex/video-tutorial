@@ -1,9 +1,10 @@
 import React from 'react'
 import classNames from 'classnames'
+import { Link } from 'dva/router'
 
 import {
-  Menu,
   Layout,
+  Breadcrumb,
 } from 'antd'
 
 import AdminSideBar from '../sidebar/admin'
@@ -17,7 +18,7 @@ import {
 import basicStyles from './basic.less'
 import styles from './admin.less'
 
-const { Item: MenuItem } = Menu
+const { Item: BreadcrumbItem } = Breadcrumb
 const {
   Header,
   Sider,
@@ -30,6 +31,10 @@ class AdminLayout extends React.Component {
     const {
       menuClass,
       layoutClass,
+      contentClass,
+      mainClass,
+
+      children
     } = this.props
 
     return (
@@ -39,16 +44,26 @@ class AdminLayout extends React.Component {
             <img src={WEBSITE_LOGO} alt={WEBSITE_TITLE} />
           </div>
           <div className={styles.sider}>
-            <AdminSideBar />
+            <AdminSideBar className={menuClass} />
           </div>
         </Sider>
         <Layout>
           <Header>
 
           </Header>
-          <Content>
-
-          </Content>
+          <Layout className={classNames(styles.content, contentClass)}>
+            <Breadcrumb className={styles.breadcrumb}>
+              <BreadcrumbItem>
+                <Link>首页</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                用户管理
+              </BreadcrumbItem>
+            </Breadcrumb>
+            <Content className={classNames(styles.main, mainClass)}>
+              {children}
+            </Content>
+          </Layout>
           <Footer>
             {WEBSITE_TITLE} ©2017 江肖毕设
           </Footer>

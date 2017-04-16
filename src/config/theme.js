@@ -5,4 +5,5 @@
  */
 module.exports = {
   '@font-size-base': '14px',
+  '@layout-footer-padding': '12px 24px',
 }
