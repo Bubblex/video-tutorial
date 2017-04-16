@@ -50,6 +50,19 @@ class HeaderAccount extends React.Component {
             </MenuItem>
           </Menu>
         }
+        {
+          status === 2
+          &&
+          <Menu
+            theme='dark'
+            mode='horizontal'
+            style={{ lineHeight: '64px' }}
+          >
+            <MenuItem key='1' style={{ padding: '0 8px' }}>
+              <Link to={URL_LOGIN}>退出登录</Link>
+            </MenuItem>
+          </Menu>
+        }
       </div>
     )
   }

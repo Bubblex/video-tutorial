@@ -55,8 +55,10 @@ const USER_TABLE_COLUMNS = [
     render() {
       return (
         <span>
-          <a>查看</a>
-          <a>禁用</a>
+          <a style={{ marginRight: 8 }}>查看</a>
+          <a style={{ marginRight: 8 }}>禁用</a>
+          <a style={{ marginRight: 8 }}>审核</a>
+          <a style={{ marginRight: 8 }}>查看评论</a>
         </span>
       )
     },

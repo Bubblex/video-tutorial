@@ -9,6 +9,7 @@ import {
 } from 'antd'
 
 import AdminSideBar from '../sidebar/admin'
+import HeaderAccount from '../header-account'
 
 import {
   WEBSITE_TITLE,
@@ -70,7 +71,9 @@ class AdminLayout extends React.Component {
         </Sider>
         <Layout>
           <Header>
-
+            <div style={{ float: 'right' }}>
+              <HeaderAccount status={2} />
+            </div>
           </Header>
           <Layout className={classNames(styles.content, contentClass)}>
             <Breadcrumb className={styles.breadcrumb}>
