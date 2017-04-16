@@ -17,7 +17,7 @@ import {
   SIDER_WIDTH,
 } from '../../config'
 
-import styles from './layout.less'
+import styles from './basic.less'
 
 const { Item: MenuItem } = Menu
 const {
