@@ -11,6 +11,14 @@ import {
   SIDER_WIDTH,
 } from '../../config'
 
+import {
+  URL_ADMIN_USER,
+  URL_ADMIN_ARTICLE,
+  URL_ADMIN_VIDEO,
+  URL_ADMIN_COMMENT_ARTICLE,
+  URL_ADMIN_COMMENT_VIDEO
+} from '../../config/web'
+
 const { Item: MenuItem } = Menu
 
 class AdminSideBar extends React.Component {
@@ -23,16 +31,16 @@ class AdminSideBar extends React.Component {
         defaultSelectedKeys={['1']}
       >
         <MenuItem key='1'>
-          <Link><Icon type='user' />用户管理</Link>
+          <Link to={URL_ADMIN_USER}><Icon type='user' />用户管理</Link>
         </MenuItem>
         <MenuItem key='2'>
-          <Link><Icon type='video-camera' />视频管理</Link>
+          <Link to={URL_ADMIN_VIDEO}><Icon type='video-camera' />视频管理</Link>
         </MenuItem>
         <MenuItem key='3'>
-          <Link><Icon type='file-text' />文章管理</Link>
+          <Link to={URL_ADMIN_ARTICLE}><Icon type='file-text' />文章管理</Link>
         </MenuItem>
         <MenuItem key='4'>
-          <Link><Icon type='message' />评论管理</Link>
+          <Link to={URL_ADMIN_COMMENT_VIDEO}><Icon type='message' />评论管理</Link>
         </MenuItem>
       </Menu>
     )
