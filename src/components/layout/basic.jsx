@@ -71,7 +71,7 @@ class BasicLayout extends React.Component {
               {
                 hasSider
                 &&
-                <Sider width={SIDER_WIDTH}>
+                <Sider className={styles.sider} width={SIDER_WIDTH}>
                   <SideBar />
                 </Sider>
               }
