@@ -1,10 +1,18 @@
 import React from 'react'
 import { connect } from 'dva'
 
+import BasicLayout from '../../../components/layout/basic'
+import UserData from './user-data'
+
 class UserInfo extends React.Component {
   render() {
     return (
-      <div>个人主页</div>
+      <BasicLayout
+        hasSider
+        contentBefore={UserData}
+      >
+        1
+      </BasicLayout>
     )
   }
 }

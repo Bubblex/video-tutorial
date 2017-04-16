@@ -7,12 +7,14 @@ import {
   Layout,
 } from 'antd'
 
+import SideBar from '../sidebar'
 import Container from '../container'
 import HeaderAccount from '../header-account'
 
 import {
   WEBSITE_TITLE,
   WEBSITE_LOGO,
+  SIDER_WIDTH,
 } from '../../config'
 
 import styles from './layout.less'
@@ -22,6 +24,7 @@ const {
   Header,
   Content,
   Footer,
+  Sider,
 } = Layout
 
 class BasicLayout extends React.Component {
@@ -32,6 +35,10 @@ class BasicLayout extends React.Component {
       headerClass,
       contentClass,
       footerClass,
+
+      children,
+      hasSider,
+      contentBefore: ContentBefore,
     } = this.props
 
     return (
@@ -53,8 +60,26 @@ class BasicLayout extends React.Component {
             <HeaderAccount status={1} />
           </Container>
         </Header>
-        <Content className={classNames(styles.content, contentClass)}>
-
+        <Content>
+          {
+            ContentBefore
+            &&
+            <ContentBefore />
+          }
+          <Container className={styles.contentContainer}>
+            <Layout>
+              {
+                hasSider
+                &&
+                <Sider width={SIDER_WIDTH}>
+                  <SideBar />
+                </Sider>
+              }
+              <Content className={classNames(styles.content, contentClass)}>
+                {children}
+              </Content>
+            </Layout>
+          </Container>
         </Content>
         <Footer className={classNames(styles.footer, footerClass)}>
           {WEBSITE_TITLE} ©2017 江肖毕设

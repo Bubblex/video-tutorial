@@ -33,10 +33,10 @@ function RouterConfig({ history }) {
       {/* 主页*/}
       <Route path='/' component={HomePage} />
 
+      {/* 个人主页*/}
+      <Route path='/user' component={UserIndexPage} />
       {/* 个人资料*/}
       <Route path='/user/info' component={UserInfoPage} />
-      {/* 个人主页*/}
-      <Route path='/user/index' component={UserIndexPage} />
       {/* 我的视频*/}
       <Route path='/user/video' component={UserVideoPage} />
       {/* 我的文章*/}
