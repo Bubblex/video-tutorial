@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Link } from 'dva/router'
 
 import {
+  Icon,
   Layout,
   Breadcrumb,
 } from 'antd'
@@ -15,6 +16,10 @@ import {
   SIDER_WIDTH,
 } from '../../config'
 
+import {
+  URL_ADMIN_USER,
+} from '../../config/web'
+
 import basicStyles from './basic.less'
 import styles from './admin.less'
 
@@ -26,6 +31,21 @@ const {
   Content,
 } = Layout
 
+function createBreadcrumb(breadcrumb = []) {
+  return breadcrumb.map(({ text, link, icon }, index) => {
+    return (
+      <BreadcrumbItem key={index}>
+        {
+          icon
+          &&
+          <Icon type={icon} />
+        }
+        {text}
+      </BreadcrumbItem>
+    )
+  })
+}
+
 class AdminLayout extends React.Component {
   render() {
     const {
@@ -34,7 +54,8 @@ class AdminLayout extends React.Component {
       contentClass,
       mainClass,
 
-      children
+      children,
+      breadcrumb,
     } = this.props
 
     return (
@@ -54,11 +75,9 @@ class AdminLayout extends React.Component {
           <Layout className={classNames(styles.content, contentClass)}>
             <Breadcrumb className={styles.breadcrumb}>
               <BreadcrumbItem>
-                <Link>首页</Link>
+                <Link to={URL_ADMIN_USER}><Icon type='home' />首页</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem>
-                用户管理
-              </BreadcrumbItem>
+              {createBreadcrumb(breadcrumb)}
             </Breadcrumb>
             <Content className={classNames(styles.main, mainClass)}>
               {children}
