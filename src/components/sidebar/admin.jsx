@@ -15,8 +15,7 @@ import {
   URL_ADMIN_USER,
   URL_ADMIN_ARTICLE,
   URL_ADMIN_VIDEO,
-  URL_ADMIN_COMMENT_ARTICLE,
-  URL_ADMIN_COMMENT_VIDEO
+  URL_ADMIN_COMMENT_VIDEO,
 } from '../../config/web'
 
 const { Item: MenuItem } = Menu
@@ -40,7 +39,7 @@ class AdminSideBar extends React.Component {
           <Link to={URL_ADMIN_ARTICLE}><Icon type='file-text' />文章管理</Link>
         </MenuItem>
         <MenuItem key='4'>
-          <Link to={URL_ADMIN_COMMENT_VIDEO}><Icon type='message' />评论管理</Link>
+          <Link to={URL_ADMIN_COMMENT_VIDEO} ><Icon type='message' />评论管理</Link>
         </MenuItem>
       </Menu>
     )
