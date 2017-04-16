@@ -20,7 +20,7 @@
     "jsx-quotes": [2, "prefer-single"],
 
     //统一换行符，"\n" unix(for LF) and "\r\n" for windows(CRLF)，默认unix
-    "linebreak-style": [2, "unix"],
+    "linebreak-style": [0, "unix"],
 
     //强制require()出现在模块作用域的顶部
     "global-require": [0],
