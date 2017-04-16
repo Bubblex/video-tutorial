@@ -9,6 +9,7 @@ import {
 
 import SideBar from '../sidebar'
 import Container from '../container'
+import HeaderSearch from '../header-search'
 import HeaderAccount from '../header-account'
 
 import {
@@ -63,7 +64,10 @@ class BasicLayout extends React.Component {
               <MenuItem key='2'>视频</MenuItem>
               <MenuItem key='3'>文章</MenuItem>
             </Menu>
-            <HeaderAccount status={1} />
+            <div style={{ float: 'right' }}>
+              <HeaderSearch />
+              <HeaderAccount status={1} />
+            </div>
           </Container>
         </Header>
         <Content>

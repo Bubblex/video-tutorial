@@ -1,0 +1,20 @@
+@import '../../config/theme';
+
+.headerSearch {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  :global(.ant-input-suffix) {
+    color: #fff;
+  }
+}
+
+.search {
+  color: #fff;
+  border: none;
+  background-color: lighten(@headerBackground, 8%);
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
