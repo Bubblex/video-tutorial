@@ -68,7 +68,7 @@ class AdminArticleIndex extends React.Component {
   render() {
     return (
       <AdminLayout breadcrumb={breadcrumb}>
-        <Table rowKey='id' columns={USER_TABLE_COLUMNS} dataSource={USER_TABLE_DATA} />
+        <Table rowKey='id' columns={USER_TABLE_COLUMNS} pagination={{ pageSize: 5 }} dataSource={USER_TABLE_DATA} />
       </AdminLayout>
     )
   }
