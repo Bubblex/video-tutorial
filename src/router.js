@@ -1,6 +1,5 @@
 import React from 'react'
 import { Router, Route } from 'dva/router'
-import IndexPage from './routes/IndexPage'
 
 import HomePage from './routes/home/index'
 import AccountLoginPage from './routes/account/login/index'
@@ -31,55 +30,52 @@ import AdminCommentArticlePage from './routes/admin/comment/article/index'
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
-      <Route path='/' component={IndexPage} />
-      <Route path='/test' component={require('./routes/test/index')} />
       {/* 主页*/}
-      <Route path='/home'component={HomePage} />
+      <Route path='/' component={HomePage} />
 
       {/* 个人资料*/}
-      <Route path='/user/info'component={UserInfoPage} />
+      <Route path='/user/info' component={UserInfoPage} />
       {/* 个人主页*/}
-      <Route path='/user/index'component={UserIndexPage} />
+      <Route path='/user/index' component={UserIndexPage} />
       {/* 我的视频*/}
-      <Route path='/user/video'component={UserVideoPage} />
+      <Route path='/user/video' component={UserVideoPage} />
       {/* 我的文章*/}
-      <Route path='/user/article'component={UserArticlePage} />
+      <Route path='/user/article' component={UserArticlePage} />
       {/* 我的收藏*/}
-      <Route path='/user/like'component={UserLikePage} />
+      <Route path='/user/like' component={UserLikePage} />
       {/* 我的评论*/}
-      <Route path='/user/Comment'component={UserCommentPage} />
+      <Route path='/user/Comment' component={UserCommentPage} />
 
       {/* 发布视频*/}
-      <Route path='/release/video'component={ReleaseVideoPage} />
+      <Route path='/release/video' component={ReleaseVideoPage} />
       {/* 发布文章*/}
-      <Route path='/release/article'component={ReleaseArticlePage} />
+      <Route path='/release/article' component={ReleaseArticlePage} />
 
       {/* 视频列表*/}
-      <Route path='/video/list'component={VedioListPage} />
+      <Route path='/video/list' component={VedioListPage} />
       {/* 视频详情*/}
-      <Route path='/video/detail'component={VedioDetailPage} />
+      <Route path='/video/detail' component={VedioDetailPage} />
 
       {/* 文章列表*/}
-      <Route path='/article/list'component={ArticleListPage} />
+      <Route path='/article/list' component={ArticleListPage} />
       {/* 文章详情*/}
-      <Route path='/article/detail'component={ArticleDetailPage} />
+      <Route path='/article/detail' component={ArticleDetailPage} />
 
       {/* 登录*/}
-      <Route path='/account/login'component={AccountLoginPage} />
+      <Route path='/account/login' component={AccountLoginPage} />
       {/* 注册*/}
-      <Route path='/account/register'component={AccountRegisterPage} />
+      <Route path='/account/register' component={AccountRegisterPage} />
 
       {/* 用户管理*/}
-      <Route path='/admin/user'component={AdminUserIndexPage} />
+      <Route path='/admin/user' component={AdminUserIndexPage} />
       {/* 文章管理*/}
-      <Route path='/admin/article'component={AdminArticleIndexPage} />
+      <Route path='/admin/article' component={AdminArticleIndexPage} />
       {/* 视频管理*/}
-      <Route path='/admin/video'component={AdminVideoIndexPage} />
+      <Route path='/admin/video' component={AdminVideoIndexPage} />
       {/* 视频评论管理*/}
-      <Route path='/admin/comment/video'component={AdminCommentVideoPage} />
+      <Route path='/admin/comment/video' component={AdminCommentVideoPage} />
       {/* 文章评论管理*/}
-      <Route path='/admin/comment/article'component={AdminCommentArticlePage} />
-
+      <Route path='/admin/comment/article' component={AdminCommentArticlePage} />
     </Router>
   )
 }
