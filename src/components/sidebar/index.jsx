@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'dva/router'
 
 import {
+  Icon,
   Menu,
 } from 'antd'
 
@@ -20,19 +21,19 @@ class SideBar extends React.Component {
         theme='dark'
       >
         <MenuItem key='1'>
-          <Link>我的资料</Link>
+          <Link><Icon type='user' />我的资料</Link>
         </MenuItem>
         <MenuItem key='2'>
-          <Link>我的视频</Link>
+          <Link><Icon type='video-camera' />我的视频</Link>
         </MenuItem>
         <MenuItem key='3'>
-          <Link>我的文章</Link>
+          <Link><Icon type='file-text' />我的文章</Link>
         </MenuItem>
         <MenuItem key='4'>
-          <Link>我的评论</Link>
+          <Link><Icon type='message' />我的评论</Link>
         </MenuItem>
         <MenuItem key='5'>
-          <Link>我的关注</Link>
+          <Link><Icon type='heart-o' />我的关注</Link>
         </MenuItem>
       </Menu>
     )
