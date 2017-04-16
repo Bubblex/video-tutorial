@@ -20,6 +20,7 @@ class AdminSideBar extends React.Component {
         style={{ width: SIDER_WIDTH }}
         mode='inline'
         theme='dark'
+        defaultSelectedKeys={['1']}
       >
         <MenuItem key='1'>
           <Link><Icon type='user' />用户管理</Link>

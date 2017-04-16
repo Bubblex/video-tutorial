@@ -13,7 +13,7 @@ import {
   DEFAULT_AVATAR,
   DEFAULT_USERNAME,
   DEFAULT_SUMMARY,
-} from '../../../config'
+} from '../../config'
 
 class UserData extends React.Component {
   static defaultProps = {

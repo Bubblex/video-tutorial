@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'dva'
 
 import BasicLayout from '../../../components/layout/basic'
-import UserData from './user-data'
+import UserData from '../../../components/user-data'
 
 class UserInfo extends React.Component {
   render() {
