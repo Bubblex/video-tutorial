@@ -1,10 +1,129 @@
 import React from 'react'
+import { Link } from 'dva/router'
 import { connect } from 'dva'
 
+import {
+  Carousel,
+  Card,
+  Row,
+  Col,
+  Pagination,
+  Icon,
+} from 'antd'
+
+import BasicLayout from '../../../components/layout/basic'
+
+import styles from './index.less'
+import {
+  URL_USER,
+  URL_ARTICLE_DETAIL,
+  URL_RELEASE_ARTICLE,
+ } from '../../../config/web'
+
+import {
+  DEFAULT_AVATAR,
+  DEFAULT_USERNAME,
+} from '../../../config'
+
 class ArticleList extends React.Component {
+  static defaultProps = {
+    avatar: DEFAULT_AVATAR,
+    username: DEFAULT_USERNAME,
+  }
+
   render() {
+    const slickDatas = [{
+      link: URL_ARTICLE_DETAIL,
+      img: 'aaa.png',
+    },
+    {
+      link: URL_ARTICLE_DETAIL,
+      img: 'bbb.png',
+    }]
+
+    const renderSlick = slickDatas.map((slick, index) => {
+      return (
+        <Link className={styles.slick} to={slick.link} key={index}>
+          <img alt='article' src={slick.img} />
+        </Link>
+      )
+    })
+
+    const articleListDatas = [{
+      title: '文章标题',
+      article_summary: '摘要',
+      author: '作者',
+      look_num: 333,
+      like_num: 111,
+      comment_num: 222,
+      link: URL_ARTICLE_DETAIL,
+    },
+    {
+      title: '文章标题',
+      article_summary: '摘要',
+      author: '作者',
+      look_num: 333,
+      like_num: 111,
+      comment_num: 222,
+      link: URL_ARTICLE_DETAIL,
+    }]
+
+    const renderArtrcleList = articleListDatas.map((articleList, index) => {
+      return (
+        <Link className={styles.item} to={articleList.link} key={index}>
+          <Card>
+            <h2> {articleList.title}</h2>
+            <p>{articleList.article_summary}</p>
+            <Row>
+              <Col span={5}><p>{articleList.author}</p></Col>
+              <Col span={2} offset={13}><p><span>{articleList.look_num}</span> <Icon type='eye-o' /> </p></Col>
+              <Col span={2}><p><span>{articleList.like_num}</span> <Icon type='heart-o' /> </p></Col>
+              <Col span={2}><p><span>{articleList.comment_num}</span> <Icon type='message' /> </p></Col>
+            </Row>
+          </Card>
+        </Link>
+      )
+    })
+
+    const recommendUserDatas = [{
+      username: '11111',
+      avatar: '',
+    },
+    {
+      username: '222222',
+      avatar: '',
+    }]
+
+    const renderRecommendUser = recommendUserDatas.map((recommenduser, index) => {
+      return (
+        <Link to={URL_USER} className={styles.user} key={index}>
+          <img alt='11' src={recommenduser.avatar} />
+          <span>{recommenduser.username}</span>
+        </Link>
+      )
+    })
+
     return (
-      <div>文章列表</div>
+      <BasicLayout>
+        <Carousel autoplay>
+          {renderSlick}
+        </Carousel>
+        <Row>
+          <Col span={18}>
+            {renderArtrcleList}
+            <Pagination showQuickJumper defaultCurrent={2} total={500} style={{ float: 'right', margin: '20' }} />
+          </Col>
+          <Col span={5} offset={1}>
+            <Link to={URL_RELEASE_ARTICLE} className={styles.release}>
+              <Icon type='edit' />
+              发布资讯
+            </Link>
+            <Card title='推荐作者'>
+              {renderRecommendUser}
+            </Card>
+          </Col>
+        </Row>
+      </BasicLayout>
     )
   }
 }

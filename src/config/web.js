@@ -15,3 +15,11 @@ export const URL_ADMIN_COMMENT_VIDEO = '/admin/comment/video'
 export const URL_ADMIN_COMMENT_ARTICLE = '/admin/comment/article'
 
 export const URL_USER = '/user'
+
+export const URL_USER_INFO = '/user/info'
+
+export const URL_ARTICLE_LIST = '/article/list'
+
+export const URL_ARTICLE_DETAIL = '/article/detail'
+
+export const URL_RELEASE_ARTICLE = '/release/article'
