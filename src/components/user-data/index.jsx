@@ -53,15 +53,15 @@ class UserData extends React.Component {
               <Row>
                 <Col span={6}>
                   <p className={styles.num}>1</p>
-                  <span className={styles.text}>视频</span>
+                  <span className={styles.text}>视频教程</span>
                 </Col>
                 <Col span={6}>
                   <p className={styles.num}>1</p>
-                  <span className={styles.text}>文章</span>
+                  <span className={styles.text}>文章资讯</span>
                 </Col>
                 <Col span={6}>
                   <p className={styles.num}>1</p>
-                  <span className={styles.text}>手记</span>
+                  <span className={styles.text}>关注</span>
                 </Col>
                 <Col span={6}>
                   <p className={styles.num}>1</p>
