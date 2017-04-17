@@ -9,6 +9,7 @@ import {
   Col,
   Pagination,
   Icon,
+  Tag,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -53,6 +54,7 @@ class ArticleList extends React.Component {
       title: '文章标题',
       article_summary: '摘要',
       author: '作者',
+      time: '2017-1-1',
       look_num: 333,
       like_num: 111,
       comment_num: 222,
@@ -62,6 +64,7 @@ class ArticleList extends React.Component {
       title: '文章标题',
       article_summary: '摘要',
       author: '作者',
+      time: '2017-1-1',
       look_num: 333,
       like_num: 111,
       comment_num: 222,
@@ -76,7 +79,8 @@ class ArticleList extends React.Component {
             <p>{articleList.article_summary}</p>
             <Row>
               <Col span={5}><p>{articleList.author}</p></Col>
-              <Col span={2} offset={13}><p><span>{articleList.look_num}</span> <Icon type='eye-o' /> </p></Col>
+              <Col span={5}><p>发布时间：{articleList.time}</p></Col>
+              <Col span={2} offset={8}><p><span>{articleList.look_num}</span> <Icon type='eye-o' /> </p></Col>
               <Col span={2}><p><span>{articleList.like_num}</span> <Icon type='heart-o' /> </p></Col>
               <Col span={2}><p><span>{articleList.comment_num}</span> <Icon type='message' /> </p></Col>
             </Row>
@@ -110,8 +114,12 @@ class ArticleList extends React.Component {
         </Carousel>
         <Row>
           <Col span={18}>
+            <div style={{ marginTop: '20px' }}>
+              <Tag color='#f50'>最新资讯</Tag>
+              <Tag color='#87d068'>最热资讯</Tag>
+            </div>
             {renderArtrcleList}
-            <Pagination showQuickJumper defaultCurrent={2} total={500} style={{ float: 'right', margin: '20' }} />
+            <Pagination showQuickJumper defaultCurrent={2} total={500} style={{ float: 'right', margin: '20px' }} />
           </Col>
           <Col span={5} offset={1}>
             <Link to={URL_RELEASE_ARTICLE} className={styles.release}>
