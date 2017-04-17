@@ -13,3 +13,5 @@ export const URL_ADMIN_VIDEO = '/admin/video'
 export const URL_ADMIN_COMMENT_VIDEO = '/admin/comment/video'
 
 export const URL_ADMIN_COMMENT_ARTICLE = '/admin/comment/article'
+
+export const URL_USER = '/user'

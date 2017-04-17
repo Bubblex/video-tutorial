@@ -8,7 +8,14 @@ import {
 import {
   URL_LOGIN,
   URL_REGISTER,
+  URL_USER,
 } from '../../config/web'
+
+import {
+  DEFAULT_AVATAR,
+  DEFAULT_USERNAME,
+} from '../../config'
+
 
 import styles from './header-account.less'
 
@@ -27,8 +34,14 @@ const { Item: MenuItem } = Menu
  * <HeaderAccount status />
  */
 class HeaderAccount extends React.Component {
+  static defaultProps = {
+    avatar: DEFAULT_AVATAR,
+    username: DEFAULT_USERNAME,
+  }
   render() {
     const {
+      avatar,
+      username,
       status,
     } = this.props
 
@@ -59,6 +72,12 @@ class HeaderAccount extends React.Component {
             style={{ lineHeight: '64px' }}
           >
             <MenuItem key='1' style={{ padding: '0 8px' }}>
+              <img src={avatar} alt={username} className={styles.avatar} />
+            </MenuItem>
+            <MenuItem key='2' style={{ padding: '0 8px' }}>
+              <Link to={URL_USER}>{username}</Link>
+            </MenuItem>
+            <MenuItem key='3' style={{ padding: '0 8px' }}>
               <Link to={URL_LOGIN}>退出登录</Link>
             </MenuItem>
           </Menu>

@@ -61,12 +61,12 @@ class BasicLayout extends React.Component {
               className={classNames(styles.menu, menuClass)}
             >
               <MenuItem key='1'>首页</MenuItem>
-              <MenuItem key='2'>视频</MenuItem>
-              <MenuItem key='3'>文章</MenuItem>
+              <MenuItem key='2'>视频教程</MenuItem>
+              <MenuItem key='3'>文章资讯</MenuItem>
             </Menu>
             <div style={{ float: 'right' }}>
               <HeaderSearch />
-              <HeaderAccount status={1} />
+              <HeaderAccount status={2} />
             </div>
           </Container>
         </Header>
