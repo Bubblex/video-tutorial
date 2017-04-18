@@ -92,6 +92,7 @@ class BasicLayout extends React.Component {
           </Container>
         </Content>
         <Footer className={classNames(styles.footer, footerClass)}>
+          <h3>友情链接：</h3>
           {WEBSITE_TITLE} ©2017 江肖毕设
         </Footer>
       </Layout>

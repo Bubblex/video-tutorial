@@ -8,5 +8,5 @@ module.exports = {
   '@layout-footer-padding': '12px 24px',
   '@primary-color': '#a3bd1d',
   '@layout-header-background': '#000',
-  '@btn-border-radius-base': '13px',
+  '@btn-border-radius-base': '15px',
 }
