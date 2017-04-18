@@ -10,6 +10,7 @@ import {
   Pagination,
   Icon,
   Tag,
+  Button,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -122,10 +123,15 @@ class ArticleList extends React.Component {
             <Pagination showQuickJumper defaultCurrent={2} total={500} style={{ float: 'right', margin: '20px' }} />
           </Col>
           <Col span={5} offset={1}>
-            <Link to={URL_RELEASE_ARTICLE} className={styles.release}>
-              <Icon type='edit' />
+            <Button
+              type='primary'
+              icon='edit'
+              size='large'
+              style={{ marginTop: 20, marginBottom: 20 }}
+              onClick={() => { window.location.href = URL_RELEASE_ARTICLE }}
+            >
               发布资讯
-            </Link>
+            </Button>
             <Card title='推荐作者'>
               {renderRecommendUser}
             </Card>
