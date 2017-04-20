@@ -121,7 +121,7 @@ class BasicLayout extends React.Component {
             </Col>
             <Col span={6}>
               <p style={{ margin: '10px' }}>{WEBSITE_TITLE}</p>
-              <p style={{ margin: '10px' }}>Built with <a target='_blank' href='https://github.com/Bubblex'>江肖</a></p>
+              <p style={{ margin: '10px' }}>Built with <a target='_blank' href='https://github.com/Bubblex'><Icon type='github' /> 江肖</a></p>
             </Col>
           </Row>
         </Footer>
