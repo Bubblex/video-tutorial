@@ -11,12 +11,14 @@ import {
   Icon,
   Tag,
   Button,
+  Breadcrumb,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
 
 import styles from './index.less'
 import {
+  URL_HOME,
   URL_USER,
   URL_ARTICLE_DETAIL,
   URL_RELEASE_ARTICLE,
@@ -110,6 +112,10 @@ class ArticleList extends React.Component {
 
     return (
       <BasicLayout>
+        <Breadcrumb separator='>' style={{ marginBottom: '15px' }}>
+          <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
+          <Breadcrumb.Item>文章资讯</Breadcrumb.Item>
+        </Breadcrumb>
         <Carousel autoplay>
           {renderSlick}
         </Carousel>
@@ -123,15 +129,16 @@ class ArticleList extends React.Component {
             <Pagination showQuickJumper defaultCurrent={2} total={500} style={{ float: 'right', margin: '20px' }} />
           </Col>
           <Col span={5} offset={1}>
-            <Button
-              type='primary'
-              icon='edit'
-              size='large'
-              style={{ marginTop: 20, marginBottom: 20 }}
-              onClick={() => { window.location.href = URL_RELEASE_ARTICLE }}
-            >
-              发布资讯
-            </Button>
+            <Link to={URL_RELEASE_ARTICLE}>
+              <Button
+                type='primary'
+                icon='edit'
+                size='large'
+                style={{ marginTop: 20, marginBottom: 20 }}
+              >
+                发布资讯
+              </Button>
+            </Link>
             <Card title='推荐作者'>
               {renderRecommendUser}
             </Card>

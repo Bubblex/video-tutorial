@@ -16,10 +16,18 @@ export const URL_ADMIN_COMMENT_ARTICLE = '/admin/comment/article'
 
 export const URL_USER = '/user'
 
+export const URL_HOME = '/'
+
 export const URL_USER_INFO = '/user/info'
 
 export const URL_ARTICLE_LIST = '/article/list'
 
+export const URL_VIDEO_LIST = '/video/list'
+
 export const URL_ARTICLE_DETAIL = '/article/detail'
 
+export const URL_VIDEO_DETAIL = '/video/detail'
+
 export const URL_RELEASE_ARTICLE = '/release/article'
+
+export const URL_RELEASE_VIDEO = '/release/video'

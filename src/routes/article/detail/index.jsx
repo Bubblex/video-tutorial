@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'dva'
+import { Link } from 'dva/router'
 
 import {
   Row,
   Col,
   Tag,
   Button,
+  Breadcrumb,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -17,6 +19,11 @@ import {
   DEFAULT_AVATAR,
   DEFAULT_USERNAME,
 } from '../../../config'
+
+import {
+  URL_HOME,
+  URL_ARTICLE_LIST,
+} from '../../../config/web'
 
 const { CheckableTag } = Tag
 
@@ -32,7 +39,12 @@ class ArticleDetail extends React.Component {
     } = this.props
 
     return (
-      <BasicLayout>
+      <BasicLayout >
+        <Breadcrumb separator='>' style={{ marginBottom: '15px' }}>
+          <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to={URL_ARTICLE_LIST}>文章资讯</Link></Breadcrumb.Item>
+          <Breadcrumb.Item>文章名称</Breadcrumb.Item>
+        </Breadcrumb>
         <SummaryCard avatar={avatar} username={username} />
         <div style={{ margin: '10px 0' }}>
           <Tag color='pink' style={{ marginLeft: '20px' }}>所属分类</Tag>

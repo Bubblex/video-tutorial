@@ -1,12 +1,14 @@
 import React from 'react'
 import { connect } from 'dva'
 import { Player } from 'video-react'
+import { Link } from 'dva/router'
 
 import {
   Row,
   Col,
   Tag,
   Button,
+  Breadcrumb,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -18,6 +20,11 @@ import {
   DEFAULT_AVATAR,
   DEFAULT_USERNAME,
 } from '../../../config'
+
+import {
+  URL_HOME,
+  URL_VIDEO_LIST,
+} from '../../../config/web'
 
 const { CheckableTag } = Tag
 
@@ -34,6 +41,11 @@ class VideoDetail extends React.Component {
 
     return (
       <BasicLayout>
+        <Breadcrumb separator='>' style={{ marginBottom: '15px' }}>
+          <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to={URL_VIDEO_LIST}>视频教程</Link></Breadcrumb.Item>
+          <Breadcrumb.Item>视频教程</Breadcrumb.Item>
+        </Breadcrumb>
         <SummaryCard avatar={avatar} username={username} />
         <Player>
           <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' />

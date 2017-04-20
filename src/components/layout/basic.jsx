@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'dva'
+import { Link } from 'dva/router'
 
 import {
   Menu,
@@ -21,10 +22,21 @@ import {
   SIDER_WIDTH,
 } from '../../config'
 
+import {
+  URL_HOME,
+  URL_ARTICLE_LIST,
+  URL_VIDEO_LIST,
+  URL_RELEASE_ARTICLE,
+  URL_RELEASE_VIDEO,
+} from '../../config/web'
 
 import styles from './basic.less'
 
-const { Item: MenuItem } = Menu
+const {
+  Item: MenuItem,
+  SubMenu,
+} = Menu
+
 const {
   Header,
   Content,
@@ -65,9 +77,13 @@ class BasicLayout extends React.Component {
               mode='horizontal'
               className={classNames(styles.menu, menuClass)}
             >
-              <MenuItem key='1'>首页</MenuItem>
-              <MenuItem key='2'>视频教程</MenuItem>
-              <MenuItem key='3'>文章资讯</MenuItem>
+              <MenuItem key='1'><Link to={URL_HOME}>首页</Link></MenuItem>
+              <MenuItem key='2'><Link to={URL_VIDEO_LIST}>视频教程</Link></MenuItem>
+              <MenuItem key='3'><Link to={URL_ARTICLE_LIST}>文章资讯</Link></MenuItem>
+              <SubMenu title='发布'>
+                <MenuItem><Link to={URL_RELEASE_VIDEO}>发布视频</Link></MenuItem>
+                <MenuItem><Link to={URL_RELEASE_ARTICLE}>发布资讯</Link></MenuItem>
+              </SubMenu>
             </Menu>
             <div style={{ float: 'right' }}>
               <HeaderSearch />

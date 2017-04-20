@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'dva'
+import { Link } from 'dva/router'
 
 import {
   Steps,
@@ -10,7 +11,12 @@ import {
   Col,
   Input,
   Alert,
+  Breadcrumb,
 } from 'antd'
+
+import {
+  URL_HOME,
+} from '../../../config/web'
 
 import BasicLayout from '../../../components/layout/basic'
 
@@ -21,6 +27,10 @@ class ReleaseVideo extends React.Component {
   render() {
     return (
       <BasicLayout>
+        <Breadcrumb separator='>' style={{ marginBottom: '15px' }}>
+          <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
+          <Breadcrumb.Item>发布视频</Breadcrumb.Item>
+        </Breadcrumb>
         <Steps style={{ marginTop: '30px', marginBottom: '30px' }}>
           <Step status='finish' title='上传视频' icon={<Icon type='upload' />} />
           <Step status='process' title='填写简介' icon={<Icon type='edit' />} />
