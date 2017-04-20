@@ -2,6 +2,7 @@ import dva from 'dva'
 import { browserHistory } from 'dva/router'
 
 import './index.less'
+import '../node_modules/video-react/dist/video-react.css'
 
 // 1. Initialize
 const app = dva(

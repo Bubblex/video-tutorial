@@ -98,7 +98,7 @@ class BasicLayout extends React.Component {
         </Content>
         <Footer className={classNames(styles.footer, footerClass)}>
           <Row>
-            <Col span={6} ><h3>友情链接</h3></Col>
+            <Col span={6}><h3>友情链接</h3></Col>
           </Row>
           <Row>
             <Col span={6}>
