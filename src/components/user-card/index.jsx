@@ -25,6 +25,7 @@ class UserCard extends React.Component {
       avatar,
       username,
     } = this.props
+
     return (
       <Card bodyStyle={{ background: '#f8f8f8' }}>
         <Row>
