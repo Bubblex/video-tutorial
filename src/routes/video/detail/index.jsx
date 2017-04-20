@@ -19,6 +19,8 @@ import {
 
 import styles from './index.less'
 
+const { CheckableTag } = Tag
+
 class VideoDetail extends React.Component {
   static defaultProps = {
     avatar: DEFAULT_AVATAR,
@@ -54,6 +56,11 @@ class VideoDetail extends React.Component {
         <Player>
           <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' />
         </Player>
+        <Row>
+          <Col span={1} offset={23}>
+            <CheckableTag color='#f50' style={{ marginTop: '10px' }}>投诉</CheckableTag>
+          </Col>
+        </Row>
         <div style={{ marginTop: '20px', marginBottom: '20px' }}>
           <UserCard avatar={avatar} username={username} />
         </div>

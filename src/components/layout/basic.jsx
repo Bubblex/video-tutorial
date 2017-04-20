@@ -1,13 +1,13 @@
 import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'dva'
-import { Link } from 'dva/router'
 
 import {
   Menu,
   Layout,
   Row,
   Col,
+  Icon,
 } from 'antd'
 
 import SideBar from '../sidebar'
@@ -98,31 +98,32 @@ class BasicLayout extends React.Component {
         </Content>
         <Footer className={classNames(styles.footer, footerClass)}>
           <Row>
-            <Col span={6}><h3>友情链接</h3></Col>
+            <Col span={6}><h3><Icon type='link' /> 友情链接</h3></Col>
+            <Col span={6}><h3><Icon type='link' /> 相关站点</h3></Col>
+            <Col span={6}><h3><Icon type='link' /> 交易中心</h3></Col>
+            <Col span={6}><h3>Copyright © 2017</h3></Col>
           </Row>
           <Row>
             <Col span={6}>
-              <p style={{ margin: '10px' }}><Link to='http://www.shscce.com/html/shscce/index.shtml'>上海邮币卡交易中心</Link></p>
-              <p style={{ margin: '10px' }}><Link to='http://www.csc.net.cn/'>中国邮币卡网</Link></p>
-              <p style={{ margin: '10px' }}><Link to='http://www.youbicard.com/'>邮币卡之家</Link></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.shscce.com/html/shscce/index.shtml'>上海邮币卡交易中心</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.csc.net.cn/'>中国邮币卡网</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.youbicard.com/'>邮币卡之家</a></p>
             </Col>
             <Col span={6}>
-              <p style={{ margin: '10px' }}><Link to='http://www.zgnjs.com/'>南京文交所开户</Link></p>
-              <p style={{ margin: '10px' }}><Link to='http://www.csc.net.cn/'>中国邮币卡网</Link></p>
-              <p style={{ margin: '10px' }}><Link to='http://www.youbicard.com/'>邮币卡之家</Link></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.zgnjs.com/'>南京文交所开户</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.csc.net.cn/'>中国邮币卡网</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.youbicard.com/'>邮币卡之家</a></p>
             </Col>
             <Col span={6}>
-              <p style={{ margin: '10px' }}><Link to='http://www.shscce.com/html/shscce/index.shtml'>上海邮币卡交易中心</Link></p>
-              <p style={{ margin: '10px' }}><Link to='http://www.csc.net.cn/'>中国邮币卡网</Link></p>
-              <p style={{ margin: '10px' }}><Link to='http://www.youbicard.com/'>邮币卡之家</Link></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.shscce.com/html/shscce/index.shtml'>上海邮币卡交易中心</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.csc.net.cn/'>中国邮币卡网</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.youbicard.com/'>邮币卡之家</a></p>
             </Col>
             <Col span={6}>
-              <p style={{ margin: '10px' }}><Link to='http://www.shscce.com/html/shscce/index.shtml'>上海邮币卡交易中心</Link></p>
-              <p style={{ margin: '10px' }}><Link to='http://www.csc.net.cn/'>中国邮币卡网</Link></p>
-              <p style={{ margin: '10px' }}><Link to='http://www.youbicard.com/'>邮币卡之家</Link></p>
+              <p style={{ margin: '10px' }}>{WEBSITE_TITLE}</p>
+              <p style={{ margin: '10px' }}>Built with <a target='_blank' href='https://github.com/Bubblex'>江肖</a></p>
             </Col>
           </Row>
-          {WEBSITE_TITLE} ©2017 江肖毕设
         </Footer>
       </Layout>
     )
