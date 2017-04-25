@@ -15,6 +15,12 @@
       "outputPath": "./dist/resource"
     }
   },
+  "proxy": {
+    "/api": {
+      "target": "http://video.app/",
+      "changeOrigin": true
+    }
+  },
   "extraBabelPlugins": [
     "transform-runtime",
     ["import", { "libraryName": "antd", "style": true }]
