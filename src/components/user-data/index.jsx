@@ -18,13 +18,13 @@ import {
 class UserData extends React.Component {
   static defaultProps = {
     avatar: DEFAULT_AVATAR,
-    username: DEFAULT_USERNAME,
+    nickname: DEFAULT_USERNAME,
     summary: DEFAULT_SUMMARY,
   }
   render() {
     const {
       avatar,
-      username,
+      nickname,
       summary,
     } = this.props
 
@@ -33,10 +33,10 @@ class UserData extends React.Component {
         <div className={styles.mask}>
           <div className={styles.content}>
             <div className={styles.avatar}>
-              <img src={avatar} alt={username} />
+              <img src={avatar} alt={nickname} />
             </div>
             <div className={styles.username}>
-              {username}
+              {nickname}
             </div>
             <div className={styles.follow}>
               {/* 未关注 */}

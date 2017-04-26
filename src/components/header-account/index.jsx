@@ -36,13 +36,14 @@ const { Item: MenuItem } = Menu
 class HeaderAccount extends React.Component {
   static defaultProps = {
     avatar: DEFAULT_AVATAR,
-    username: DEFAULT_USERNAME,
+    nickname: DEFAULT_USERNAME,
   }
   render() {
     const {
       avatar,
       username,
       status,
+      nickname,
     } = this.props
 
     return (
@@ -72,10 +73,10 @@ class HeaderAccount extends React.Component {
             style={{ lineHeight: '64px' }}
           >
             <MenuItem key='1' style={{ padding: '0 8px' }}>
-              <img src={avatar} alt={username} className={styles.avatar} />
+              <img src={avatar} alt={nickname} className={styles.avatar} />
             </MenuItem>
             <MenuItem key='2' style={{ padding: '0 8px' }}>
-              <Link to={URL_USER}>{username}</Link>
+              <Link to={URL_USER}>{nickname}</Link>
             </MenuItem>
             <MenuItem key='3' style={{ padding: '0 8px' }}>
               <Link to={URL_LOGIN}>退出登录</Link>

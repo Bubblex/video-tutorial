@@ -21,10 +21,21 @@ class Home extends React.Component {
       home: {
         isDisplayModal,
       },
+      login: {
+        user: {
+          avatar,
+          nickname,
+          summary,
+        },
+      },
     } = this.props
 
     return (
-      <BasicLayout>
+      <BasicLayout
+        nickname={nickname}
+        summary={summary}
+        avatar={avatar}
+      >
         <Button onClick={this.openModal} type='primary'>打开弹框</Button>
         <Modal
           title='我的弹框标题'
@@ -38,8 +49,9 @@ class Home extends React.Component {
   }
 }
 
-export default connect(({ home }) => {
+export default connect(({ home, login }) => {
   return {
     home,
+    login,
   }
 })(Home)

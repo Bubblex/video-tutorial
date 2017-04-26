@@ -63,7 +63,11 @@ class BasicLayout extends React.Component {
       children,
       hasSider,
       contentBefore: ContentBefore,
+      nickname,
+      avatar,
+      summary,
     } = this.props
+
 
     return (
       <Layout className={classNames(styles.layout, layoutClass)}>
@@ -87,7 +91,11 @@ class BasicLayout extends React.Component {
             </Menu>
             <div style={{ float: 'right' }}>
               <HeaderSearch />
-              <HeaderAccount status={2} />
+              <HeaderAccount
+                status={2}
+                nickname={nickname}
+                avatar={avatar}
+              />
             </div>
           </Container>
         </Header>
@@ -95,7 +103,11 @@ class BasicLayout extends React.Component {
           {
             ContentBefore
             &&
-            <ContentBefore />
+            <ContentBefore
+              nickname={nickname}
+              avatar={avatar}
+              summary={summary}
+            />
           }
           <Container className={styles.contentContainer}>
             <Layout>
