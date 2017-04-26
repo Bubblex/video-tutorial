@@ -9,7 +9,7 @@ import {
 export default {
   namespace: 'login',
   state: {
-    uer: '',
+    user: '',
   },
   reducers: {
     saveUser(state, { user }) {
