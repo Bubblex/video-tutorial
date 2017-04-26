@@ -7,10 +7,12 @@ class Register extends React.Component {
   render() {
     return (
       <div>
-        <RegisterForm />
+        <RegisterForm dispatch={this.props.dispatch} />
       </div>
     )
   }
 }
 
-export default connect()(Register)
+export default connect((state) => {
+  return state
+})(Register)

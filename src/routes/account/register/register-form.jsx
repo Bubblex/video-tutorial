@@ -5,6 +5,8 @@ import md5 from 'md5'
 import {
   Form,
   Input,
+  Button,
+  message,
 } from 'antd'
 
 const {
@@ -12,6 +14,34 @@ const {
 } = Form
 
 class RegisterForm extends React.Component {
+  handleRegisterSubmit = (e) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+      form: {
+        getFieldsValue,
+        validateFields,
+      },
+    } = this.props
+
+    validateFields((err) => {
+      if (!err) {
+        const formValue = getFieldsValue()
+
+        dispatch({
+          type: 'register/postRegister',
+          payload: {
+            ...formValue,
+            password: md5(formValue.password),
+            confirm_password: md5(formValue.confirm_password),
+          },
+          message,
+        })
+      }
+    })
+  }
+
   render() {
     const {
       form: {
@@ -20,11 +50,9 @@ class RegisterForm extends React.Component {
       },
     } = this.props
 
-    console.log(this.props)
-
     return (
       <div>
-        <Form>
+        <Form onSubmit={this.handleRegisterSubmit}>
           <FormItem
             label='账户'
           >
@@ -88,7 +116,7 @@ class RegisterForm extends React.Component {
                     message: '密码最长16个字符',
                   },
                 ],
-              })(<Input />)
+              })(<Input type='password' />)
             }
           </FormItem >
           <FormItem
@@ -107,9 +135,10 @@ class RegisterForm extends React.Component {
                     message: '两次密码不一致',
                   },
                 ],
-              })(<Input />)
+              })(<Input type='password' />)
             }
           </FormItem >
+          <Button type='primary' htmlType='submit' size='large'>注册</Button>
         </Form>
       </div>
     )

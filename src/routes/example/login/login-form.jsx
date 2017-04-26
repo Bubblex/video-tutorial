@@ -25,6 +25,7 @@ class LoginForm extends React.Component {
         validateFields,
       },
     } = this.props
+    console.log(this.props)
 
     validateFields((err) => {
       if (!err) {
