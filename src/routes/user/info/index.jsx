@@ -4,22 +4,14 @@ import { connect } from 'dva'
 import {
   Row,
   Col,
-  Icon,
   Button,
   Modal,
-  Form,
-  Input,
-  Upload,
-  InputNumber,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
 import UserData from '../../../components/user-data'
-
 import Auth from '../../../utils/auth'
-
-
-const { Item: FormItem } = Form
+import InfoForm from './info-form'
 
 class UserInfo extends React.Component {
 
@@ -44,15 +36,6 @@ class UserInfo extends React.Component {
   }
 
   render() {
-    const formItemOptions = {
-      labelCol: {
-        span: 6,
-      },
-      wrapperCol: {
-        span: 14,
-      },
-    }
-
     const {
       avatar,
       nickname,
@@ -69,8 +52,9 @@ class UserInfo extends React.Component {
       stars_num: starsNum,
     } = Auth.getInfo('info')
 
-    console.log(Auth.getInfo('info'))
-
+    const {
+      dispatch,
+    } = this.props
     return (
       <BasicLayout
         hasSider
@@ -88,48 +72,12 @@ class UserInfo extends React.Component {
           visible={this.state.displayModal}
           onCancel={() => { this.setState({ displayModal: false }) }}
         >
-          <Form>
-            <FormItem
-              {...formItemOptions}
-              label='昵称'
-            >
-              <Input />
-            </FormItem>
-            <FormItem
-              {...formItemOptions}
-              label='个人简介'
-            >
-              <Input />
-            </FormItem>
-            <FormItem
-              {...formItemOptions}
-              label='年龄'
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </FormItem>
-            <FormItem
-              {...formItemOptions}
-              label='职业'
-            >
-              <Input />
-            </FormItem>
-            <FormItem
-              {...formItemOptions}
-              label='邮箱'
-            >
-              <Input />
-            </FormItem>
-            <FormItem
-              {...formItemOptions}
-              label='上传头像'
-            >
-              <Upload name='logo' action='/upload.do' listType='picture'>
-                <Button>
-                  <Icon type='upload' /> 上传
-                </Button>
-              </Upload>
-            </FormItem>
-          </Form>
+          <InfoForm
+            dispatch={dispatch}
+            nickname={nickname}
+            summary={summary}
+            account={account}
+          />
         </Modal>
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我的资料</h2>
         <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
