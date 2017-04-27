@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'dva/router'
+import Cookies from 'js-cookie'
 
 import {
   Menu,
@@ -41,14 +42,12 @@ class HeaderAccount extends React.Component {
     nickname: DEFAULT_USERNAME,
   }
   render() {
-    const {
-      status,
-    } = this.props
+    // const {
+    //   status,
+    // } = this.props
 
-    const {
-      avatar,
-      nickname,
-    } = Auth.getInfo('info')
+    const info = Auth.getInfo()
+    const status = info === null ? 1 : 2
 
     return (
       <div className={styles.headerAccount}>
@@ -77,13 +76,13 @@ class HeaderAccount extends React.Component {
             style={{ lineHeight: '64px' }}
           >
             <MenuItem key='1' style={{ padding: '0 8px' }}>
-              <img src={avatar} alt={nickname} className={styles.avatar} />
+              <img src={info.avatar} alt={info.nickname} className={styles.avatar} />
             </MenuItem>
             <MenuItem key='2' style={{ padding: '0 8px' }}>
-              <Link to={URL_USER}>{nickname}</Link>
+              <Link to={URL_USER}>{info.nickname}</Link>
             </MenuItem>
             <MenuItem key='3' style={{ padding: '0 8px' }}>
-              <Link to={URL_LOGIN}>退出登录</Link>
+              <Link to={URL_LOGIN} onClick={() => (Cookies.get('token'))}>退出登录</Link>
             </MenuItem>
           </Menu>
         }

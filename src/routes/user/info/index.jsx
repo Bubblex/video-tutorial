@@ -57,6 +57,8 @@ class UserInfo extends React.Component {
       },
     } = this.props
 
+    console.log(this.props)
+
     return (
       <BasicLayout
         hasSider

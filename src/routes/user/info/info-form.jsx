@@ -10,6 +10,8 @@ import {
   Icon,
 } from 'antd'
 
+import Auth from '../../../utils/auth'
+
 const {
   Item: FormItem,
 } = Form
@@ -18,6 +20,26 @@ class InfoForm extends React.Component {
   handleCloseChangepedModal = () => {
     this.props.dispatch({ type: 'userinfo/closeChangepwdModal' })
     this.props.form.resetFields()
+  }
+
+  handleChangeInfoSubmit = () => {
+    const {
+      dispatch,
+      form: {
+        getFieldsValue,
+      },
+    } = this.props
+
+    const formValue = getFieldsValue()
+
+    dispatch({
+      type: 'userinfo/postChangeInfo',
+      payload: {
+        ...formValue,
+        token: Auth.getToken(),
+      },
+      message,
+    })
   }
 
   render() {
@@ -47,6 +69,7 @@ class InfoForm extends React.Component {
         title='修改个人资料'
         visible={isChangepwdModalDisplay}
         onCancel={this.handleCloseChangepedModal}
+        onOk={this.handleChangeInfoSubmit}
       >
         <Form>
           <FormItem
