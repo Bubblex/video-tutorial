@@ -13,7 +13,7 @@ class Home extends React.Component {
     this.props.dispatch({ type: 'home/openModal' })
   }
   closeModal = () => {
-    this.props.dispatch({ type: 'home/closeModal' });
+    this.props.dispatch({ type: 'home/closeModal' })
   }
   render() {
     console.log(this.props)

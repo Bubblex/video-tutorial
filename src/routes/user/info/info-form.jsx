@@ -5,9 +5,9 @@ import {
   Input,
   Button,
   message,
+  Modal,
   Upload,
   Icon,
-  InputNumber,
 } from 'antd'
 
 const {
@@ -15,6 +15,11 @@ const {
 } = Form
 
 class InfoForm extends React.Component {
+  handleCloseChangepedModal = () => {
+    this.props.dispatch({ type: 'userinfo/closeChangepwdModal' })
+    this.props.form.resetFields()
+  }
+
   render() {
     const formItemOptions = {
       labelCol: {
@@ -32,69 +37,70 @@ class InfoForm extends React.Component {
       nickname,
       summary,
       account,
+      isChangepwdModalDisplay,
+      date,
     } = this.props
 
-    console.log(this.props)
 
     return (
-      <Form>
-        <FormItem
-          {...formItemOptions}
-          label='账号'
-        >
-          {
-            getFieldDecorator('account', {
-              initialValue: account,
-            })(<Input disabled='true' />)
-          }
-        </FormItem>
-        <FormItem
-          {...formItemOptions}
-          label='昵称'
-        >
-          {
-            getFieldDecorator('nickname', {
-              initialValue: nickname,
-            })(<Input />)
-          }
-        </FormItem>
-        <FormItem
-          {...formItemOptions}
-          label='个人简介'
-        >
-          {
-            getFieldDecorator('summary', {
-              initialValue: summary,
-            })(<Input />)
-          }
-        </FormItem>
-        <FormItem
-          {...formItemOptions}
-          label='年龄'
-        >
-          {
-            getFieldDecorator('age')(<InputNumber style={{ width: '100%' }} />)
-          }
-        </FormItem>
-        <FormItem
-          {...formItemOptions}
-          label='邮箱'
-        >
-          {
-            getFieldDecorator('email')(<Input />)
-          }
-        </FormItem>
-        <FormItem
-          {...formItemOptions}
-          label='上传头像'
-        >
-          <Upload name='logo' action='/upload.do' listType='picture'>
-            <Button>
-              <Icon type='upload' /> 上传
-            </Button>
-          </Upload>
-        </FormItem>
-      </Form>
+      <Modal
+        title='修改个人资料'
+        visible={isChangepwdModalDisplay}
+        onCancel={this.handleCloseChangepedModal}
+      >
+        <Form>
+          <FormItem
+            {...formItemOptions}
+            label='账号'
+          >
+            {
+              getFieldDecorator('account', {
+                initialValue: account,
+              })(<Input disabled />)
+            }
+          </FormItem>
+          <FormItem
+            {...formItemOptions}
+            label='昵称'
+          >
+            {
+              getFieldDecorator('nickname', {
+                initialValue: nickname,
+              })(<Input />)
+            }
+          </FormItem>
+          <FormItem
+            {...formItemOptions}
+            label='签名'
+          >
+            {
+              getFieldDecorator('summary', {
+                initialValue: summary,
+              })(<Input type='textarea' />)
+            }
+          </FormItem>
+          <FormItem
+            {...formItemOptions}
+            label='注册时间'
+          >
+            {
+              getFieldDecorator('data', {
+                initialValue: date,
+              })(<Input disabled />)
+            }
+          </FormItem>
+          <FormItem
+            {...formItemOptions}
+            label='上传头像'
+          >
+            <Upload name='logo' action='/upload.do' listType='picture'>
+              <Button>
+                <Icon type='upload' /> 上传
+              </Button>
+            </Upload>
+          </FormItem>
+        </Form>
+      </Modal>
     )
   }
 }

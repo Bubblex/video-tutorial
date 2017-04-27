@@ -5,7 +5,6 @@ import {
   Row,
   Col,
   Button,
-  Modal,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -15,13 +14,6 @@ import InfoForm from './info-form'
 
 class UserInfo extends React.Component {
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      displayModal: false,
-    }
-  }
   componentDidMount() {
     const {
       dispatch,
@@ -34,6 +26,12 @@ class UserInfo extends React.Component {
       },
     })
   }
+
+  handleOpenChangepedModal = () => {
+    this.props.dispatch({ type: 'userinfo/openChangepwdModal' })
+  }
+
+
 
   render() {
     const {
@@ -54,7 +52,11 @@ class UserInfo extends React.Component {
 
     const {
       dispatch,
+      userinfo: {
+        isChangepwdModalDisplay,
+      },
     } = this.props
+
     return (
       <BasicLayout
         hasSider
@@ -67,21 +69,17 @@ class UserInfo extends React.Component {
         videos_num={videosNum}
         stars_num={starsNum}
       >
-        <Modal
-          title='修改个人资料'
-          visible={this.state.displayModal}
-          onCancel={() => { this.setState({ displayModal: false }) }}
-        >
-          <InfoForm
-            dispatch={dispatch}
-            nickname={nickname}
-            summary={summary}
-            account={account}
-          />
-        </Modal>
+        <InfoForm
+          dispatch={dispatch}
+          nickname={nickname}
+          summary={summary}
+          account={account}
+          date={date}
+          isChangepwdModalDisplay={isChangepwdModalDisplay}
+        />
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我的资料</h2>
         <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
-          <Col span={3} style={{ textAlign: 'right' }}>用户名：</Col>
+          <Col span={3} style={{ textAlign: 'right' }}>账号：</Col>
           <Col span={21}>{account}</Col>
         </Row>
         <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
@@ -89,16 +87,8 @@ class UserInfo extends React.Component {
           <Col span={21}>{nickname}</Col>
         </Row>
         <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
-          <Col span={3} style={{ textAlign: 'right' }}>年龄：</Col>
-          <Col span={21}>21</Col>
-        </Row>
-        <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
-          <Col span={3} style={{ textAlign: 'right' }}>邮箱：</Col>
-          <Col span={21}>example@email.com</Col>
-        </Row>
-        <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
-          <Col span={3} style={{ textAlign: 'right' }}>职业：</Col>
-          <Col span={21}>邮币大讲堂讲师</Col>
+          <Col span={3} style={{ textAlign: 'right' }}>签名：</Col>
+          <Col span={21}>{summary}</Col>
         </Row>
         <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
           <Col span={3} style={{ textAlign: 'right' }}>注册时间：</Col>
@@ -137,7 +127,15 @@ class UserInfo extends React.Component {
           }
         </Row>
         <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
-          <Col span={21} offset={3}><Button type='primary' size='large' onClick={() => { this.setState({ displayModal: true }) }}>修改资料</Button></Col>
+          <Col span={21} offset={3}>
+            <Button
+              type='primary'
+              size='large'
+              onClick={this.handleOpenChangepedModal}
+            >
+              修改资料
+            </Button>
+          </Col>
         </Row>
       </BasicLayout>
     )
