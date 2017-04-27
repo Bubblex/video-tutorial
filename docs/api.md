@@ -291,7 +291,9 @@
 
 **接口说明：** 以分页的形式查询某个用户的关注列表
 
-**接口地址：** /api/stars
+**接口地址：** /api
+
+/stars
 
 **请求类型：** POST
 
@@ -300,7 +302,7 @@
 | 名称       | 类型     | 必填   | 可选值  | 说明          |
 | :------- | :----- | :--- | :--- | :---------- |
 | id       | Number | 是    | -    | 用户 id       |
-| current  | Number | 否    | -    | 查询页数，默认为 1  |
+| page     | Number | 否    | -    | 查询页数，默认为 1  |
 | pageSize | Number | 否    | -    | 每页条数，默认为 10 |
 
 **响应参数：**
@@ -319,7 +321,7 @@
 | — total    | Number   | 总条数       |
 | — current  | Number   | 当前页数      |
 | — pageSize | Number   | 每页条数      |
-| list       | Object[] | 关注列表      |
+| list[]     | Object[] | 关注列表      |
 | — id       | String   | 关注的人的id   |
 | — nickname | String   | 关注的人的昵称   |
 | — avatar   | String   | 关注的人的头像地址 |
