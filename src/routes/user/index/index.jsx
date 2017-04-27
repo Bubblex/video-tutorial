@@ -1,23 +1,25 @@
 import React from 'react'
 import { connect } from 'dva'
 
-import Cookies from 'js-cookie'
-
 import BasicLayout from '../../../components/layout/basic'
 import UserData from '../../../components/user-data'
 
+import Auth from '../../../utils/auth'
+
 class UserInfo extends React.Component {
   render() {
-    console.log(Cookies.get('token'))
     const {
       login: {
         user: {
-          avatar,
-          nickname,
           summary,
         },
       },
     } = this.props
+
+    const {
+      avatar,
+      nickname,
+    } = Auth.getInfo('info')
 
     return (
       <BasicLayout

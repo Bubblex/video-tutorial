@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie'
 import { browserHistory } from 'dva/router'
 
+import Auth from '../utils/auth.js'
+
 import {
   userLogin,
 } from '../services/register'
@@ -20,10 +22,10 @@ export default {
     },
   },
   effects: {
-    *postLogin({ payload, message: messageComponent }, { call, put }) {
+    *postLogin({ payload, message }, { call, put }) {
       const {
         data: {
-          message,
+          errmsg,
           errcode,
           data,
         },
@@ -34,12 +36,13 @@ export default {
           type: 'saveUser',
           user: data.user,
         })
+        Auth.setInfo(data.user)
         Cookies.set('token', data.token)
-        messageComponent.success(message, 1.5, () => {
+        message.success(errmsg, 1.5, () => {
           browserHistory.push('/')
         })
       } else {
-        messageComponent.error(message)
+        message.error(errmsg)
       }
     },
   },

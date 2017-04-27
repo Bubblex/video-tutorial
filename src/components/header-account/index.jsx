@@ -19,6 +19,8 @@ import {
 
 import styles from './header-account.less'
 
+import Auth from '../../utils/auth'
+
 const { Item: MenuItem } = Menu
 
 /**
@@ -40,11 +42,13 @@ class HeaderAccount extends React.Component {
   }
   render() {
     const {
-      avatar,
-      username,
       status,
-      nickname,
     } = this.props
+
+    const {
+      avatar,
+      nickname,
+    } = Auth.getInfo('info')
 
     return (
       <div className={styles.headerAccount}>

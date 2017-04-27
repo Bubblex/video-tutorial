@@ -12,20 +12,20 @@ export default {
   reducers: {
   },
   effects: {
-    *postRegister({ payload, message: messageComponent }, { call }) {
+    *postRegister({ payload, message }, { call }) {
       const {
         data: {
-          message,
+          errmsg,
           errcode,
         },
       } = yield call(userRegister, payload)
 
       if (errcode === 1) {
-        messageComponent.success(message, 1.5, () => {
+        message.success(errmsg, 1.5, () => {
           browserHistory.push('/account/login')
         })
       } else {
-        messageComponent.error(message)
+        message.error(errmsg)
       }
     },
   },
