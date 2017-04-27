@@ -16,7 +16,6 @@ export default {
       const {
         data: {
           errcode,
-          errmsg,
           data,
         },
       } = yield call(userInfo, payload)

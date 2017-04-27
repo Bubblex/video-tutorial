@@ -6,7 +6,7 @@ import UserData from '../../../components/user-data'
 
 import Auth from '../../../utils/auth'
 
-class UserInfo extends React.Component {
+class UserIndex extends React.Component {
 
   componentDidMount() {
     const {
@@ -52,4 +52,4 @@ class UserInfo extends React.Component {
 
 export default connect((state) => {
   return state
-})(UserInfo)
+})(UserIndex)

@@ -53,7 +53,3 @@ export const API_ARTICLE_CANCEL = `${PREFIX}/article/cancel`
 
 // 3.3.6发布一篇文章
 export const API_ARTICLE_RELEASE = `${PREFIX}/article/release`
-
-
-
-

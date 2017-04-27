@@ -40,7 +40,6 @@ export default {
       } = yield call(userLogin, payload)
 
       if (errcode === 1) {
-        console.log(1)
         yield put({
           type: 'saveUser',
           user: data.user,
