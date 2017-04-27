@@ -26,6 +26,10 @@ class UserData extends React.Component {
       avatar,
       nickname,
       summary,
+      followers_num: followersNum,
+      articles_num: articlesNum,
+      videos_num: videosNum,
+      stars_num: starsNum,
     } = this.props
 
     return (
@@ -52,19 +56,19 @@ class UserData extends React.Component {
             <div className={styles.detail}>
               <Row>
                 <Col span={6}>
-                  <p className={styles.num}>1</p>
+                  <p className={styles.num}>{videosNum}</p>
                   <span className={styles.text}>视频教程</span>
                 </Col>
                 <Col span={6}>
-                  <p className={styles.num}>1</p>
+                  <p className={styles.num}>{articlesNum}</p>
                   <span className={styles.text}>文章资讯</span>
                 </Col>
                 <Col span={6}>
-                  <p className={styles.num}>1</p>
+                  <p className={styles.num}>{starsNum}</p>
                   <span className={styles.text}>关注</span>
                 </Col>
                 <Col span={6}>
-                  <p className={styles.num}>1</p>
+                  <p className={styles.num}>{followersNum}</p>
                   <span className={styles.text}>粉丝</span>
                 </Col>
               </Row>

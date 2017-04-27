@@ -7,18 +7,29 @@ import UserData from '../../../components/user-data'
 import Auth from '../../../utils/auth'
 
 class UserInfo extends React.Component {
-  render() {
+
+  componentDidMount() {
     const {
-      login: {
-        user: {
-          summary,
-        },
-      },
+      dispatch,
     } = this.props
 
+    dispatch({
+      type: 'userinfo/postUserInfo',
+      payload: {
+        token: Auth.getToken('token'),
+      },
+    })
+  }
+
+  render() {
     const {
       avatar,
       nickname,
+      summary,
+      followers_num: followersNum,
+      articles_num: articlesNum,
+      videos_num: videosNum,
+      stars_num: starsNum,
     } = Auth.getInfo('info')
 
     return (
@@ -28,6 +39,10 @@ class UserInfo extends React.Component {
         nickname={nickname}
         summary={summary}
         avatar={avatar}
+        followers_num={followersNum}
+        articles_num={articlesNum}
+        videos_num={videosNum}
+        stars_num={starsNum}
       >
         1
       </BasicLayout>

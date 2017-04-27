@@ -66,6 +66,10 @@ class BasicLayout extends React.Component {
       nickname,
       avatar,
       summary,
+      followers_num: followersNum,
+      articles_num: articlesNum,
+      videos_num: videosNum,
+      stars_num: starsNum,
     } = this.props
 
 
@@ -107,6 +111,10 @@ class BasicLayout extends React.Component {
               nickname={nickname}
               avatar={avatar}
               summary={summary}
+              followers_num={followersNum}
+              articles_num={articlesNum}
+              videos_num={videosNum}
+              stars_num={starsNum}
             />
           }
           <Container className={styles.contentContainer}>
