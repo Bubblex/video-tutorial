@@ -2,6 +2,7 @@ import { browserHistory } from 'dva/router'
 
 import {
   userRegister,
+  changePwd,
 } from '../services/register'
 
 
@@ -27,6 +28,10 @@ export default {
       } else {
         message.error(errmsg)
       }
+    },
+
+    *PostChangePwd({ payload, message }, { call }) {
+      yield call(changePwd, payload)
     },
   },
 }
