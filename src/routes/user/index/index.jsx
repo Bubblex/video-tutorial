@@ -6,6 +6,11 @@ import UserData from '../../../components/user-data'
 
 import Auth from '../../../utils/auth'
 
+import {
+  DEFAULT_AVATAR,
+  DEFAULT_SUMMARY,
+} from '../../../config'
+
 class UserIndex extends React.Component {
 
   componentDidMount() {
@@ -23,14 +28,17 @@ class UserIndex extends React.Component {
 
   render() {
     const {
-      avatar,
+      avatar: checkavatar,
       nickname,
-      summary,
+      summary: checksummary,
       followers_num: followersNum,
       articles_num: articlesNum,
       videos_num: videosNum,
       stars_num: starsNum,
     } = Auth.getInfo('info')
+
+    const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
+    const summary = checksummary === null ? DEFAULT_SUMMARY : checksummary
 
     return (
       <BasicLayout

@@ -1,7 +1,7 @@
 const PREFIX = '/api'
 
 // 1.1上传静态文件
-export const API_LOGIN1 = `${PREFIX}/login`
+export const API_UPLOAD = `${PREFIX}/login`
 
 // 2.1登录
 export const API_LOGIN = `${PREFIX}/account/login`

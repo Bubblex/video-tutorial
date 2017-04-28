@@ -12,6 +12,8 @@ import {
 
 import Auth from '../../../utils/auth'
 
+import API_UPLOAD from '../../../config/api'
+
 const {
   Item: FormItem,
 } = Form
@@ -116,7 +118,7 @@ class InfoForm extends React.Component {
             {...formItemOptions}
             label='上传头像'
           >
-            <Upload name='logo' action='/upload.do' listType='picture'>
+            <Upload name='file' action='http://video.app/api/upload' listType='picture'>
               <Button>
                 <Icon type='upload' /> 上传
               </Button>

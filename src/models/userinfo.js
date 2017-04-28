@@ -42,7 +42,7 @@ export default {
         Auth.setInfo(data)
       }
     },
-    *postChangeInfo({ payload, message }, { call }) {
+    *postChangeInfo({ payload, message }, { call, put }) {
       const {
         data: {
           errcode,
@@ -52,6 +52,9 @@ export default {
 
       if (errcode === 1) {
         Auth.setInfo(data)
+        yield put({
+          type: 'closeChangepwdModal',
+        })
       }
     },
   },

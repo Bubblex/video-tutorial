@@ -32,14 +32,12 @@ class UserData extends React.Component {
       stars_num: starsNum,
     } = this.props
 
-    const lastavatar = avatar === null ? DEFAULT_AVATAR : avatar
-
     return (
       <div className={styles.data}>
         <div className={styles.mask}>
           <div className={styles.content}>
             <div className={styles.avatar}>
-              <img src={lastavatar} alt={nickname} />
+              <img src={avatar} alt={nickname} />
             </div>
             <div className={styles.username}>
               {nickname}

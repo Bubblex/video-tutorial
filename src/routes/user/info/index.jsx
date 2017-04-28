@@ -12,6 +12,11 @@ import UserData from '../../../components/user-data'
 import Auth from '../../../utils/auth'
 import InfoForm from './info-form'
 
+import {
+  DEFAULT_AVATAR,
+  DEFAULT_SUMMARY,
+} from '../../../config'
+
 class UserInfo extends React.Component {
 
   componentDidMount() {
@@ -33,20 +38,21 @@ class UserInfo extends React.Component {
 
   render() {
     const {
-      avatar,
+      avatar: checkavatar,
       nickname,
-      summary,
+      summary: checksummary,
       account,
       role_name: roleName,
-      created_at: {
-        date,
-      },
+      created_at: createdAt,
       authentication,
       followers_num: followersNum,
       articles_num: articlesNum,
       videos_num: videosNum,
       stars_num: starsNum,
     } = Auth.getInfo('info')
+
+    const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
+    const summary = checksummary === null ? DEFAULT_SUMMARY : checksummary
 
     const {
       dispatch,
@@ -72,7 +78,7 @@ class UserInfo extends React.Component {
           nickname={nickname}
           summary={summary}
           account={account}
-          date={date}
+          date={createdAt}
           isChangepwdModalDisplay={isChangepwdModalDisplay}
         />
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我的资料</h2>
@@ -90,7 +96,7 @@ class UserInfo extends React.Component {
         </Row>
         <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
           <Col span={3} style={{ textAlign: 'right' }}>注册时间：</Col>
-          <Col span={21}>{date}</Col>
+          <Col span={21}>{createdAt}</Col>
         </Row>
         <Row gutter={16} style={{ marginBottom: 30, fontSize: 16 }}>
           <Col span={3} style={{ textAlign: 'right' }}>职位认证：</Col>
