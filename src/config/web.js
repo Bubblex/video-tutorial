@@ -16,9 +16,18 @@ export const URL_ADMIN_COMMENT_ARTICLE = '/admin/comment/article'
 
 export const URL_USER = '/user'
 
-export const URL_HOME = '/'
-
 export const URL_USER_INFO = '/user/info'
+
+export const URL_USER_VIDEO = '/user/video'
+
+export const URL_USER_ARTICLE = '/user/article'
+
+export const URL_USER_LIKE = '/user/like'
+
+export const URL_USER_COMMENT = '/user/comment'
+
+export const URL_USER_CHANGEPWD = '/user/changepwd'
+
 
 export const URL_ARTICLE_LIST = '/article/list'
 

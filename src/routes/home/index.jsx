@@ -32,6 +32,7 @@ class Home extends React.Component {
 
     return (
       <BasicLayout
+        hasFollow
         nickname={nickname}
         summary={summary}
         avatar={avatar}

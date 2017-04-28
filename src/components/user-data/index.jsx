@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'dva'
 
 import {
   Row,
@@ -32,6 +33,8 @@ class UserData extends React.Component {
       stars_num: starsNum,
     } = this.props
 
+    const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
+
     return (
       <div className={styles.data}>
         <div className={styles.mask}>
@@ -42,14 +45,18 @@ class UserData extends React.Component {
             <div className={styles.username}>
               {nickname}
             </div>
-            <div className={styles.follow}>
-              {/* 未关注 */}
-              <Button className={styles.followButton} size='large'><Icon type='heart-o' />关注TA</Button>
-              {/*
-                已关注关注
-                <Button className={styles.followButton} size='large'><Icon type='heart' />取消关注</Button>
-              */}
-            </div>
+            {
+              hasFollow === 1
+              &&
+              <div className={styles.follow}>
+                {/* 未关注 */}
+                <Button className={styles.followButton} size='large'><Icon type='heart-o' />关注TA</Button>
+                {/*
+                  已关注关注
+                  <Button className={styles.followButton} size='large'><Icon type='heart' />取消关注</Button>
+                */}
+              </div>
+            }
             <div className={styles.summary}>
               {summary}
             </div>
@@ -80,4 +87,6 @@ class UserData extends React.Component {
   }
 }
 
-export default UserData
+export default connect((state) => {
+  return state
+})(UserData)

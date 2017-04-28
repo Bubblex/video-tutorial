@@ -42,7 +42,6 @@ class UserIndex extends React.Component {
 
     return (
       <BasicLayout
-        hasSider
         contentBefore={UserData}
         nickname={nickname}
         summary={summary}

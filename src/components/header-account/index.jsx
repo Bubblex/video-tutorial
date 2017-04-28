@@ -9,7 +9,7 @@ import {
 import {
   URL_LOGIN,
   URL_REGISTER,
-  URL_USER,
+  URL_USER_INFO,
 } from '../../config/web'
 
 import {
@@ -82,7 +82,7 @@ class HeaderAccount extends React.Component {
               <img src={avatar} alt={info.nickname} className={styles.avatar} />
             </MenuItem>
             <MenuItem key='2' style={{ padding: '0 8px' }}>
-              <Link to={URL_USER}>{info.nickname}</Link>
+              <Link to={URL_USER_INFO}>{info.nickname}</Link>
             </MenuItem>
             <MenuItem key='3' style={{ padding: '0 8px' }}>
               <Link
