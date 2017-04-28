@@ -50,7 +50,7 @@ class HeaderAccount extends React.Component {
   render() {
     const info = Auth.getInfo()
     const status = info === null ? 1 : 2
-    const avatar = info.avatar === null ? DEFAULT_AVATAR : info.avatar
+    const avatar = (status === 1 || info.avatar === null) ? DEFAULT_AVATAR : info.avatar
 
     return (
       <div className={styles.headerAccount}>
