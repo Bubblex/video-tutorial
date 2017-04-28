@@ -31,8 +31,6 @@ class UserInfo extends React.Component {
     this.props.dispatch({ type: 'userinfo/openChangepwdModal' })
   }
 
-
-
   render() {
     const {
       avatar,
@@ -56,8 +54,6 @@ class UserInfo extends React.Component {
         isChangepwdModalDisplay,
       },
     } = this.props
-
-    console.log(this.props)
 
     return (
       <BasicLayout

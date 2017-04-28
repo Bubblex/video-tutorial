@@ -41,13 +41,16 @@ class HeaderAccount extends React.Component {
     avatar: DEFAULT_AVATAR,
     nickname: DEFAULT_USERNAME,
   }
-  render() {
-    // const {
-    //   status,
-    // } = this.props
 
+  handleExitLogin = () => {
+    Cookies.remove('token')
+    localStorage.removeItem('info')
+  }
+
+  render() {
     const info = Auth.getInfo()
     const status = info === null ? 1 : 2
+    const avatar = info.avatar === null ? DEFAULT_AVATAR : info.avatar
 
     return (
       <div className={styles.headerAccount}>
@@ -76,13 +79,18 @@ class HeaderAccount extends React.Component {
             style={{ lineHeight: '64px' }}
           >
             <MenuItem key='1' style={{ padding: '0 8px' }}>
-              <img src={info.avatar} alt={info.nickname} className={styles.avatar} />
+              <img src={avatar} alt={info.nickname} className={styles.avatar} />
             </MenuItem>
             <MenuItem key='2' style={{ padding: '0 8px' }}>
               <Link to={URL_USER}>{info.nickname}</Link>
             </MenuItem>
             <MenuItem key='3' style={{ padding: '0 8px' }}>
-              <Link to={URL_LOGIN} onClick={() => (Cookies.get('token'))}>退出登录</Link>
+              <Link
+                to={URL_LOGIN}
+                onClick={this.handleExitLogin}
+              >
+                退出登录
+              </Link>
             </MenuItem>
           </Menu>
         }
