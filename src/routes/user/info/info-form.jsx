@@ -12,10 +12,8 @@ import {
 
 import Auth from '../../../utils/auth'
 
-import API_UPLOAD from '../../../config/api'
-
 const {
-  Item: FormItem,
+  Item: FormItem, 
 } = Form
 
 class InfoForm extends React.Component {
@@ -39,6 +37,7 @@ class InfoForm extends React.Component {
       payload: {
         ...formValue,
         token: Auth.getToken(),
+        avatar: `http://video.app${formValue.avatar.fileList[0].response.data.file_path}`,
       },
       message,
     })
@@ -118,11 +117,17 @@ class InfoForm extends React.Component {
             {...formItemOptions}
             label='上传头像'
           >
-            <Upload name='file' action='http://video.app/api/upload' listType='picture'>
-              <Button>
-                <Icon type='upload' /> 上传
-              </Button>
-            </Upload>
+            {
+              getFieldDecorator('avatar')(
+                <Upload
+                  action='http://video.app/api/upload'
+                  listType='picture'
+                >
+                  <Button>
+                    <Icon type='upload' /> 上传
+                  </Button>
+                </Upload>)
+            }
           </FormItem>
         </Form>
       </Modal>
