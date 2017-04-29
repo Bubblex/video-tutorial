@@ -45,6 +45,20 @@ class UserData extends React.Component {
     }
   }
 
+  handleUnFollowSomeone = () => {
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'star/postUnFollowSomeone',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
+  }
+
   render() {
     const {
       avatar,
@@ -57,7 +71,7 @@ class UserData extends React.Component {
       isFollow,
     } = this.props
 
-    console.log(isFollow)
+    console.log(this.props)
 
     const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
 
@@ -76,7 +90,7 @@ class UserData extends React.Component {
               &&
               <div className={styles.follow}>
                 {
-                  isFollow === 1
+                  isFollow === 2
                   &&
                   <Button
                     className={styles.followButton}
@@ -88,9 +102,16 @@ class UserData extends React.Component {
                   </Button>
                 }
                 {
-                  isFollow === 2
+                  isFollow === 1
                   &&
-                  <Button className={styles.followButton} size='large'><Icon type='heart' />取消关注</Button>
+                  <Button
+                    className={styles.followButton}
+                    size='large'
+                    onClick={this.handleUnFollowSomeone}
+                  >
+                    <Icon type='heart' />
+                    取消关注
+                  </Button>
                 }
               </div>
             }

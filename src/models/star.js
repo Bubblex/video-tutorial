@@ -14,13 +14,31 @@ export default {
   effects: {
     *postFollowSomeone({ payload }, { call, put }) {
       const {
-        errcode,
-        errmsg,
+        data: {
+          errcode,
+          errmsg,
+        },
       } = yield call(userFollow, payload)
 
       if (errcode === 1) {
         yield put({
           type: 'userinfo/postAllUserInfo',
+          payload,
+        })
+      }
+    },
+    *postUnFollowSomeone({ payload }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(userUnfollow, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'userinfo/postAllUserInfo',
+          payload,
         })
       }
     },
