@@ -53,3 +53,18 @@ export const API_ARTICLE_CANCEL = `${PREFIX}/article/cancel`
 
 // 3.3.6发布一篇文章
 export const API_ARTICLE_RELEASE = `${PREFIX}/article/release`
+
+// 3.4.1视频列表
+export const API_VIDEO_LIST = `${PREFIX}/video/list`
+
+// 3.4.2 视频详情
+export const API_VIDEO_DETAIL = `${PREFIX}/video/detail`
+
+// 3.4.3 收藏视频
+export const API_VIDEO_COLLECT = `${PREFIX}/video/collect`
+
+// 3.4.4 取消收藏视频
+export const API_VIDEO_CANCEL = `${PREFIX}/video/cancel`
+
+// 3.4.5 发布 / 修改视频
+export const API_VIDEO_RELEASE = `${PREFIX}/video/release`

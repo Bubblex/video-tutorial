@@ -1,5 +1,6 @@
 import {
   userInfo,
+  userUserBasic,
 } from '../services/userinfo'
 
 import {
@@ -9,13 +10,13 @@ import {
 
 import Auth from '../utils/auth.js'
 
-
 export default {
   namespace: 'userinfo',
   state: {
     isChangepwdModalDisplay: false,
     isApplyFormDisplay: false,
     userBasicInfo: {},
+    alluserBasicInfo: {},
   },
   reducers: {
     openChangepwdModal(state) {
@@ -52,6 +53,13 @@ export default {
         userBasicInfo,
       }
     },
+
+    saveAllUserInfo(state, { alluserBasicInfo }) {
+      return {
+        ...state,
+        alluserBasicInfo,
+      }
+    },
   },
   effects: {
     *postUserInfo({ payload }, { call, put }) {
@@ -67,6 +75,10 @@ export default {
         yield put({
           type: 'closeChangepwdModal',
         })
+        yield put({
+          type: 'saveUserInfo',
+          userBasicInfo: data,
+        })
       }
     },
     *postChangeInfo({ payload, message }, { call, put }) {
@@ -80,8 +92,7 @@ export default {
       if (errcode === 1) {
         Auth.setInfo(data)
         yield put({
-          type: 'saveUserInfo',
-          userBasicInfo: data,
+          type: 'closeChangepwdModal',
         })
       }
     },
@@ -99,6 +110,21 @@ export default {
 
         yield put({
           type: 'postUserInfo',
+        })
+      }
+    },
+    *postAllUserInfo({ payload }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          data,
+        },
+      } = yield call(userUserBasic, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveAllUserInfo',
+          alluserBasicInfo: data,
         })
       }
     },

@@ -19,6 +19,7 @@ app.model(require('./models/register'))
 app.model(require('./models/user'))
 app.model(require('./models/login'))
 app.model(require('./models/userinfo'))
+app.model(require('./models/star'))
 
 // 4. Router
 app.router(require('./router'))

@@ -19,23 +19,29 @@ class UserIndex extends React.Component {
     } = this.props
 
     dispatch({
-      type: 'userinfo/postUserInfo',
+      type: 'userinfo/postAllUserInfo',
       payload: {
-        token: Auth.getToken('token'),
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
       },
     })
   }
 
   render() {
     const {
-      avatar: checkavatar,
-      nickname,
-      summary: checksummary,
-      followers_num: followersNum,
-      articles_num: articlesNum,
-      videos_num: videosNum,
-      stars_num: starsNum,
-    } = Auth.getInfo('info')
+      userinfo: {
+        alluserBasicInfo: {
+          avatar: checkavatar,
+          nickname,
+          summary: checksummary,
+          followers_num: followersNum,
+          articles_num: articlesNum,
+          videos_num: videosNum,
+          stars_num: starsNum,
+          is_follow: isFollow,
+        },
+      },
+    } = this.props
 
     const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
     const summary = checksummary === null ? DEFAULT_SUMMARY : checksummary
@@ -50,6 +56,7 @@ class UserIndex extends React.Component {
         articles_num={articlesNum}
         videos_num={videosNum}
         stars_num={starsNum}
+        isFollow={isFollow}
       >
         1
       </BasicLayout>

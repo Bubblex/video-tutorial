@@ -1,3 +1,5 @@
+import { browserHistory } from 'dva/router'
+
 import React from 'react'
 import { connect } from 'dva'
 
@@ -9,6 +11,8 @@ import {
 } from 'antd'
 
 import styles from './user-data.less'
+
+import Auth from '../../utils/auth'
 
 import {
   DEFAULT_AVATAR,
@@ -22,6 +26,25 @@ class UserData extends React.Component {
     nickname: DEFAULT_USERNAME,
     summary: DEFAULT_SUMMARY,
   }
+
+  handleFollowSomeone = () => {
+    const {
+      dispatch,
+    } = this.props
+
+    if (Auth.getToken() === undefined) {
+      browserHistory.push('/account/login')
+    } else {
+      dispatch({
+        type: 'star/postFollowSomeone',
+        payload: {
+          token: Auth.getToken(),
+          id: this.props.routing.locationBeforeTransitions.query.id,
+        },
+      })
+    }
+  }
+
   render() {
     const {
       avatar,
@@ -31,7 +54,10 @@ class UserData extends React.Component {
       articles_num: articlesNum,
       videos_num: videosNum,
       stars_num: starsNum,
+      isFollow,
     } = this.props
+
+    console.log(isFollow)
 
     const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
 
@@ -49,12 +75,23 @@ class UserData extends React.Component {
               hasFollow === 1
               &&
               <div className={styles.follow}>
-                {/* 未关注 */}
-                <Button className={styles.followButton} size='large'><Icon type='heart-o' />关注TA</Button>
-                {/*
-                  已关注关注
+                {
+                  isFollow === 1
+                  &&
+                  <Button
+                    className={styles.followButton}
+                    size='large'
+                    onClick={this.handleFollowSomeone}
+                  >
+                    <Icon type='heart-o' />
+                    关注TA
+                  </Button>
+                }
+                {
+                  isFollow === 2
+                  &&
                   <Button className={styles.followButton} size='large'><Icon type='heart' />取消关注</Button>
-                */}
+                }
               </div>
             }
             <div className={styles.summary}>
