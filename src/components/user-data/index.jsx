@@ -71,8 +71,6 @@ class UserData extends React.Component {
       isFollow,
     } = this.props
 
-    console.log(this.props)
-
     const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
 
     return (
@@ -122,19 +120,19 @@ class UserData extends React.Component {
               <Row>
                 <Col span={6}>
                   <p className={styles.num}>{videosNum}</p>
-                  <span className={styles.text}>视频教程</span>
+                  <a className={styles.text}>视频教程</a>
                 </Col>
                 <Col span={6}>
                   <p className={styles.num}>{articlesNum}</p>
-                  <span className={styles.text}>文章资讯</span>
+                  <a className={styles.text}>文章资讯</a>
                 </Col>
                 <Col span={6}>
                   <p className={styles.num}>{starsNum}</p>
-                  <span className={styles.text}>关注</span>
+                  <a className={styles.text}>关注</a>
                 </Col>
                 <Col span={6}>
                   <p className={styles.num}>{followersNum}</p>
-                  <span className={styles.text}>粉丝</span>
+                  <a className={styles.text}>粉丝</a>
                 </Col>
               </Row>
             </div>
