@@ -223,9 +223,10 @@
 
 **请求参数：**
 
-| 名称   | 类型     | 必填   | 可选值  | 说明    |
-| :--- | :----- | :--- | :--- | :---- |
-| id   | Number | 是    | -    | 用户 id |
+| 名称    | 类型     | 必填   | 可选值  | 说明    |
+| :---- | :----- | :--- | :--- | :---- |
+| id    | Number | 是    | -    | 用户 id |
+| token | String | 否    | -    | 用户标识  |
 
 **响应参数：**
 
@@ -237,24 +238,25 @@
 
 **返回数据说明：**
 
-| 名称            | 类型     | 说明                           |
-| :------------ | :----- | :--------------------------- |
-| **用户信息**      |        |                              |
-| id            | Number | 用户 id                        |
-| account       | String | 账号                           |
-| nickname      | String | 昵称                           |
-| avatar        | String | 头像图片地址                       |
-| summary       | String | 简介                           |
-| role_id       | Number | 账号角色 id 1: 普通用户 2: 讲师 3: 管理员 |
-| role_name     | String | 账号角色名称                       |
-| created_at    | String | 注册日期                         |
-| **用户状态**      |        |                              |
-| status        | Number | 账号状态 1: 正常 2: 禁用 3: 删除       |
-| **用户数据**      |        |                              |
-| followers_num | Number | 粉丝数                          |
-| articles_num  | Number | 文章数                          |
-| videos_num    | Number | 视频数                          |
-| stars_num     | Number | 关注数                          |
+| 名称            | 类型     | 说明                                      |
+| :------------ | :----- | :-------------------------------------- |
+| **用户信息**      |        |                                         |
+| id            | Number | 用户 id                                   |
+| account       | String | 账号                                      |
+| nickname      | String | 昵称                                      |
+| avatar        | String | 头像图片地址                                  |
+| summary       | String | 简介                                      |
+| role_id       | Number | 账号角色 id 1: 普通用户 2: 讲师 3: 管理员            |
+| role_name     | String | 账号角色名称                                  |
+| created_at    | String | 注册日期                                    |
+| **用户状态**      |        |                                         |
+| status        | Number | 账号状态 1: 正常 2: 禁用 3: 删除                  |
+| is_follow     | Number | 当传递 token 后会获取登录用户是否关注了该用户 1: 关注 2: 未关注 |
+| **用户数据**      |        |                                         |
+| followers_num | Number | 粉丝数                                     |
+| articles_num  | Number | 文章数                                     |
+| videos_num    | Number | 视频数                                     |
+| stars_num     | Number | 关注数                                     |
 
 #### 3.1.4 修改个人资料
 
@@ -699,27 +701,21 @@
 
 **返回数据说明：**
 
-| 名称           | 类型       | 说明                       |
-| :----------- | :------- | :----------------------- |
-| pagination   | Object   | 分页信息                     |
-| — total      | Number   | 总条数                      |
-| — current    | Number   | 当前页数                     |
-| — pageSize   | Number   | 每页条数                     |
-| list         | Object[] | 我关注的人列表                  |
-| — id         | Number   | 视频 id                    |
-| — title      | String   | 视频标题                     |
-| — cover      | String   | 视频封面图片地址                 |
-| — summary    | String   | 视频简介                     |
-| — author     | Object   | 视频作者基本信息                 |
-| — — id       | Number   | 视频作者 id                  |
-| — — nickname | String   | 视频作者昵称                   |
-| — — avatar   | String   | 视频作者头像a                  |
-| — author     | String   | 视频作者名称                   |
-| — play_num   | Number   | 播放量                      |
-| — video_url  | String   | 视频播放地址                   |
-| — status     | Number   | 视频状态 1: 正常 2: 已禁用 3: 已删除 |
-| — updated_at | String   | 视频修改日期                   |
-| — created_at | String   | 视频发布日期                   |
+| 名称           | 类型     | 说明                       |
+| :----------- | :----- | :----------------------- |
+| id           | Number | 视频 id                    |
+| title        | String | 视频标题                     |
+| cover        | String | 视频封面图片地址                 |
+| summary      | String | 视频简介                     |
+| author       | Object | 视频作者基本信息                 |
+| — id         | Number | 视频作者 id                  |
+| — nickname   | String | 视频作者昵称                   |
+| — avatar     | String | 视频作者头像a                  |
+| — play_num   | Number | 播放量                      |
+| — video_url  | String | 视频播放地址                   |
+| — status     | Number | 视频状态 1: 正常 2: 已禁用 3: 已删除 |
+| — updated_at | String | 视频修改日期                   |
+| — created_at | String | 视频发布日期                   |
 
 #### 3.3.3 收藏视频
 
@@ -804,7 +800,58 @@
 
 #### 3.4.1 消息列表
 
+
+
+**接口状态：** 待测试
+
+**接口说明：** 以分页的形式加载视频列表
+
+**接口地址：** /api/message/list
+
+**请求类型：** POST
+
+**请求参数：**
+
+| 名称       | 类型     | 必填   | 可选值  | 说明          |
+| :------- | :----- | :--- | :--- | :---------- |
+| token    | String | 是    | -    | 用户标识        |
+| page     | Number | 否    | -    | 查询页数，默认为 1  |
+| pageSize | Number | 否    | -    | 每页条数，默认为 10 |
+
+**响应参数：**
+
+| 名称      | 类型     | 成功      | 失败         | 说明   |
+| :------ | :----- | :------ | :--------- | :--- |
+| code    | String | 1       | 0, 100     | 状态码  |
+| message | String | 1: 查询成功 | 200: 没有该用户 | 返回信息 |
+| data    | Object | null    | null       | 返回数据 |
+
 #### 3.4.2 消息详情
+
+**接口状态：** 待测试
+
+**接口说明：** 以分页的形式加载视频列表
+
+**接口地址：** /api/video/list
+
+**请求类型：** POST
+
+**请求参数：**
+
+| 名称       | 类型     | 必填   | 可选值                         | 说明               |
+| :------- | :----- | :--- | :-------------------------- | :--------------- |
+| id       | Number | 否    | -                           | 用户 id，传递该参数则为    |
+| type     | Number | 否    | 1: 查询该用户发布的视频 2: 查询该用户收藏的视频 | 查询类型，默认查询用户发布的视频 |
+| page     | Number | 否    | -                           | 查询页数，默认为 1       |
+| pageSize | Number | 否    | -                           | 每页条数，默认为 10      |
+
+**响应参数：**
+
+| 名称      | 类型     | 成功      | 失败         | 说明   |
+| :------ | :----- | :------ | :--------- | :--- |
+| code    | String | 1       | 200        | 状态码  |
+| message | String | 1: 查询成功 | 200: 没有该用户 | 返回信息 |
+| data    | Object | null    | null       | 返回数据 |
 
 ### 3.5 评论
 
