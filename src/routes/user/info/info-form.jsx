@@ -13,7 +13,7 @@ import {
 import Auth from '../../../utils/auth'
 
 const {
-  Item: FormItem, 
+  Item: FormItem,
 } = Form
 
 class InfoForm extends React.Component {
