@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'dva'
+import { Link } from 'dva/router'
 
 import {
   Tabs,
   Row,
   Col,
+  Card,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -21,24 +23,31 @@ const { TabPane } = Tabs
 
 class UserIndex extends React.Component {
 
-  componentDidMount() {
-    const {
-      dispatch,
-    } = this.props
+  // componentDidMount() {
+  //   const {
+  //     dispatch,
+  //   } = this.props
 
-    dispatch({
-      type: 'userinfo/postAllUserInfo',
-      payload: {
-        token: Auth.getToken(),
-        id: this.props.routing.locationBeforeTransitions.query.id,
-      },
-    })
-  }
+  //   dispatch({
+  //     type: 'userinfo/postAllUserInfo',
+  //     payload: {
+  //       token: Auth.getToken(),
+  //       id: this.props.routing.locationBeforeTransitions.query.id,
+  //     },
+  //   })
+  // }
 
   renderUserFollersList = (key) => {
     const {
       dispatch,
     } = this.props
+
+    console.log(key)
+
+    dispatch({
+      type: 'star/changeActiveTabKey',
+      activeTabKey: key,
+    })
 
     if (parseInt(key) === 4) {
       dispatch({
@@ -64,6 +73,9 @@ class UserIndex extends React.Component {
           is_follow: isFollow,
         },
       },
+      star: {
+        activeTabKey,
+      },
     } = this.props
 
     const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
@@ -73,13 +85,23 @@ class UserIndex extends React.Component {
     ? null
     : this.props.star.userFollowersList.map((arr, index) => {
       return (
-        <div key={index}>
-          <p>{arr.nickname}</p>
-        </div>
+        <Col span={8} key={index}>
+          <Link to='/user' query={{ id: arr.id }}>
+            <Card style={{ width: '80%' }}>
+              <img
+                src={arr.avatar === null ? DEFAULT_AVATAR : arr.avatar}
+                alt={arr.nickname}
+                style={{ width: '100%', height: '240px,' }}
+              />
+              <p style={{ textAlign: 'center', marginTop: '20px' }}>{arr.nickname}</p>
+              <p style={{ textAlign: 'center', marginTop: '20px' }}>{arr.summary === null ? DEFAULT_SUMMARY : arr.summary}</p>
+            </Card>
+          </Link>
+        </Col>
       )
     })
 
-    console.log(renderFollowersList)
+    console.log(this.props.star)
 
     return (
       <BasicLayout
@@ -93,7 +115,7 @@ class UserIndex extends React.Component {
         stars_num={starsNum}
         isFollow={isFollow}
       >
-        <Tabs defaultActiveKey='1' onTabClick={this.renderUserFollersList}>
+        <Tabs activeKey={activeTabKey} onTabClick={this.renderUserFollersList}>
           <TabPane tab='视频教程' key='1'>
             Content of Tab Pane 1
           </TabPane>
@@ -109,8 +131,9 @@ class UserIndex extends React.Component {
             Content of Tab Pane 3
           </TabPane>
           <TabPane tab='粉丝' key='4'>
-            {renderFollowersList}
-            Content of Tab Pane 4
+            <Row>
+              {renderFollowersList}
+            </Row>
           </TabPane>
         </Tabs>
       </BasicLayout>

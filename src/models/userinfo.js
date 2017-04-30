@@ -129,4 +129,14 @@ export default {
       }
     },
   },
+  subscriptions: {
+    setup({ dispatch, history }) {
+      return history.listen(({ pathname, query }) => {
+        if (pathname === '/user') {
+          dispatch({ type: 'star/changeActiveTabKey', activeTabKey: '1' })
+          dispatch({ type: 'postAllUserInfo', payload: { token: Auth.getToken(), ...query } })
+        }
+      })
+    },
+  },
 }

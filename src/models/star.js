@@ -7,14 +7,21 @@ import {
 
 export default {
   namespace: 'star',
-  userFollowersList: [],
   state: {
+    userFollowersList: [],
+    activeTabKey: '1',
   },
   reducers: {
     saveUserFollersList(state, { userFollowersList }) {
       return {
         ...state,
         userFollowersList,
+      }
+    },
+    changeActiveTabKey(state, { activeTabKey }) {
+      return {
+        ...state,
+        activeTabKey,
       }
     },
   },
