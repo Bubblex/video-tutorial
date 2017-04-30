@@ -35,7 +35,26 @@ class ArticleList extends React.Component {
     username: DEFAULT_USERNAME,
   }
 
+  handleChangePage = (current) => {
+    const {
+      dispatch,
+    } = this.props
+    dispatch({
+      type: 'article/postArticleList',
+      payload: {
+        page: current,
+      },
+    })
+  }
+
   render() {
+    const {
+      article: {
+        articleDataList,
+        articleListPagination,
+      },
+    } = this.props
+
     const slickDatas = [{
       link: URL_ARTICLE_DETAIL,
       img: 'aaa.png',
@@ -53,42 +72,33 @@ class ArticleList extends React.Component {
       )
     })
 
-    const articleListDatas = [{
-      title: '文章标题',
-      article_summary: '摘要',
-      author: '作者',
-      time: '2017-1-1',
-      look_num: 333,
-      like_num: 111,
-      comment_num: 222,
-      link: URL_ARTICLE_DETAIL,
-    },
-    {
-      title: '文章标题',
-      article_summary: '摘要',
-      author: '作者',
-      time: '2017-1-1',
-      look_num: 333,
-      like_num: 111,
-      comment_num: 222,
-      link: URL_ARTICLE_DETAIL,
-    }]
-
-    const renderArtrcleList = articleListDatas.map((articleList, index) => {
+    const renderArtrcleList = articleDataList.map((arr, index) => {
       return (
-        <Link className={styles.item} to={articleList.link} key={index}>
-          <Card>
-            <h2> {articleList.title}</h2>
-            <p>{articleList.article_summary}</p>
-            <Row>
-              <Col span={5}><p>{articleList.author}</p></Col>
-              <Col span={5}><p>发布时间：{articleList.time}</p></Col>
-              <Col span={2} offset={8}><p><span>{articleList.look_num}</span> <Icon type='eye-o' /> </p></Col>
-              <Col span={2}><p><span>{articleList.like_num}</span> <Icon type='heart-o' /> </p></Col>
-              <Col span={2}><p><span>{articleList.comment_num}</span> <Icon type='message' /> </p></Col>
-            </Row>
-          </Card>
-        </Link>
+        <Card key={index} className={styles.item}>
+          <Row>
+            <Col span={5}>
+              <img src={arr.cover} alt={arr.title} style={{ width: '100%' }} />
+            </Col>
+            <Col span={16} offset={1}>
+              <h2> {arr.title}</h2>
+              <p style={{ margin: '10px 0' }}>{arr.summary}</p>
+              <Col span={10}>
+                <p>作者：{arr.author.nickname}</p>
+              </Col>
+              <Col span={12}>
+                <p>发布时间：{arr.created_at}</p>
+              </Col>
+            </Col>
+            {/* <Col span={2} offset={8}><p><span>{arr.look_num}</span> <Icon type='eye-o' /> </p></Col>
+            <Col span={2}><p><span>{arr.like_num}</span> <Icon type='heart-o' /> </p></Col>
+            <Col span={2}><p><span>{arr.comment_num}</span> <Icon type='message' /> </p></Col>*/}
+            <Col span={2}>
+              <Link to='/article/detail' query={{ id: arr.id }}>
+                查看详情
+              </Link>
+            </Col>
+          </Row>
+        </Card>
       )
     })
 
@@ -126,7 +136,12 @@ class ArticleList extends React.Component {
               <Tag color='#87d068'>最热资讯</Tag>
             </div>
             {renderArtrcleList}
-            <Pagination showQuickJumper defaultCurrent={2} total={500} style={{ float: 'right', margin: '20px' }} />
+            <Pagination
+              {...articleListPagination}
+              showQuickJumper
+              style={{ float: 'right', margin: '20px' }}
+              onChange={this.handleChangePage}
+            />
           </Col>
           <Col span={5} offset={1}>
             <Link to={URL_RELEASE_ARTICLE}>
@@ -149,4 +164,6 @@ class ArticleList extends React.Component {
   }
 }
 
-export default connect()(ArticleList)
+export default connect((state) => {
+  return state
+})(ArticleList)
