@@ -5,7 +5,6 @@ import { browserHistory } from 'dva/router'
 import './index.less'
 import '../node_modules/video-react/dist/video-react.css'
 
-
 // 1. Initialize
 const app = dva(
   // 它使用浏览器中的 History API 用于处理 URL，创建一个像example.com/some/path这样真实的 URL
@@ -23,6 +22,7 @@ app.model(require('./models/login'))
 app.model(require('./models/userinfo'))
 app.model(require('./models/star'))
 app.model(require('./models/article'))
+app.model(require('./models/admin'))
 
 // 4. Router
 app.router(require('./router'))

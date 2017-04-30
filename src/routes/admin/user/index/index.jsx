@@ -58,18 +58,10 @@ const USER_TABLE_COLUMNS = [
 
 const USER_TABLE_DATA = generateUserTableData(100)
 
-const breadcrumb = [
-  {
-    text: '用户管理',
-  },
-]
-
 class AdminArticleIndex extends React.Component {
   render() {
     return (
-      <AdminLayout breadcrumb={breadcrumb}>
-        <Table rowKey='id' columns={USER_TABLE_COLUMNS} pagination={{ pageSize: 5 }} dataSource={USER_TABLE_DATA} />
-      </AdminLayout>
+      <Table rowKey='id' columns={USER_TABLE_COLUMNS} pagination={{ pageSize: 5 }} dataSource={USER_TABLE_DATA} />
     )
   }
 }

@@ -58,18 +58,10 @@ const USER_TABLE_COLUMNS = [
 
 const USER_TABLE_DATA = generateUserTableData(100)
 
-const breadcrumb = [
-  {
-    text: '视频管理',
-  },
-]
-
 class AdminVideoIndex extends React.Component {
   render() {
     return (
-      <AdminLayout breadcrumb={breadcrumb}>
-        <Table rowKey='id' columns={USER_TABLE_COLUMNS} dataSource={USER_TABLE_DATA} />
-      </AdminLayout>
+      <Table rowKey='id' columns={USER_TABLE_COLUMNS} dataSource={USER_TABLE_DATA} />
     )
   }
 }

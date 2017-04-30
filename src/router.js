@@ -74,15 +74,11 @@ function RouterConfig({ history }) {
       <Route path='/account/register' component={AccountRegisterPage} />
 
       <Route path='/admin' component={AdminDashboard}>
-
+        <Route path='user' component={AdminUserIndexPage} />
+        <Route path='article' component={AdminArticleIndexPage} />
+        <Route path='video' component={AdminVideoIndexPage} />
       </Route>
 
-      {/* 用户管理*/}
-      <Route path='/admin/user' component={AdminUserIndexPage} />
-      {/* 文章管理*/}
-      <Route path='/admin/article' component={AdminArticleIndexPage} />
-      {/* 视频管理*/}
-      <Route path='/admin/video' component={AdminVideoIndexPage} />
       {/* 视频评论管理*/}
       <Route path='/admin/comment/video' component={AdminCommentVideoPage} />
       {/* 文章评论管理*/}
