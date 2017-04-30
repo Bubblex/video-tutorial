@@ -12,6 +12,7 @@ export default {
   state: {
     articleDataList: [],
     articleListPagination: [],
+    CheckArticleType: '',
   },
   reducers: {
     saveArticleList(state, { articleDataList }) {
@@ -24,6 +25,12 @@ export default {
       return {
         ...state,
         articleListPagination,
+      }
+    },
+    changeCheckedTag(state, { CheckArticleType }) {
+      return {
+        ...state,
+        CheckArticleType,
       }
     },
   },

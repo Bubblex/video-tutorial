@@ -29,6 +29,8 @@ import {
   DEFAULT_USERNAME,
 } from '../../../config'
 
+const { CheckableTag } = Tag
+
 class ArticleList extends React.Component {
   static defaultProps = {
     avatar: DEFAULT_AVATAR,
@@ -47,11 +49,30 @@ class ArticleList extends React.Component {
     })
   }
 
+  handleCheckArticleType = (articleType) => {
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'article/postArticleList',
+      payload: {
+        article_type: articleType,
+      },
+    })
+
+    dispatch({
+      type: 'article/changeCheckedTag',
+      CheckArticleType: articleType,
+    })
+  }
+
   render() {
     const {
       article: {
         articleDataList,
         articleListPagination,
+        CheckArticleType,
       },
     } = this.props
 
@@ -80,7 +101,24 @@ class ArticleList extends React.Component {
               <img src={arr.cover} alt={arr.title} style={{ width: '100%' }} />
             </Col>
             <Col span={16} offset={1}>
-              <h2> {arr.title}</h2>
+              <h2>
+                {
+                  arr.type_id === 1
+                  &&
+                  <Tag color='#f50'>邮票</Tag>
+                }
+                {
+                  arr.type_id === 2
+                  &&
+                  <Tag color='#2db7f5'>货币</Tag>
+                }
+                {
+                  arr.type_id === 3
+                  &&
+                  <Tag color='#87d068'>电话卡</Tag>
+                }
+                {arr.title}
+              </h2>
               <p style={{ margin: '10px 0' }}>{arr.summary}</p>
               <Col span={10}>
                 <p>作者：{arr.author.nickname}</p>
@@ -132,8 +170,10 @@ class ArticleList extends React.Component {
         <Row>
           <Col span={18}>
             <div style={{ marginTop: '20px' }}>
-              <Tag color='#f50'>最新资讯</Tag>
-              <Tag color='#87d068'>最热资讯</Tag>
+              <CheckableTag checked={CheckArticleType === 0} onChange={() => { this.handleCheckArticleType(0) }}>全部</CheckableTag >
+              <CheckableTag checked={CheckArticleType === 1} onChange={() => { this.handleCheckArticleType(1) }}>邮票</CheckableTag >
+              <CheckableTag checked={CheckArticleType === 2} onChange={() => { this.handleCheckArticleType(2) }}>货币</CheckableTag>
+              <CheckableTag checked={CheckArticleType === 3} onChange={() => { this.handleCheckArticleType(3) }}>电话卡</CheckableTag>
             </div>
             {renderArtrcleList}
             <Pagination
