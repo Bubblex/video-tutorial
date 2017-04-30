@@ -28,6 +28,8 @@ import AdminVideoIndexPage from './routes/admin/video/index/index'
 import AdminCommentVideoPage from './routes/admin/comment/video/index'
 import AdminCommentArticlePage from './routes/admin/comment/article/index'
 
+import AdminDashboard from './routes/admin/dashboard'
+
 import ExampleLogin from './routes/example/login'
 
 function RouterConfig({ history }) {
@@ -70,6 +72,10 @@ function RouterConfig({ history }) {
       <Route path='/account/login' component={AccountLoginPage} />
       {/* 注册*/}
       <Route path='/account/register' component={AccountRegisterPage} />
+
+      <Route path='/admin' component={AdminDashboard}>
+
+      </Route>
 
       {/* 用户管理*/}
       <Route path='/admin/user' component={AdminUserIndexPage} />
