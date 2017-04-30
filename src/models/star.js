@@ -9,6 +9,7 @@ export default {
   namespace: 'star',
   state: {
     userFollowersList: [],
+    userStarrsList: [],
     activeTabKey: '1',
   },
   reducers: {
@@ -16,6 +17,12 @@ export default {
       return {
         ...state,
         userFollowersList,
+      }
+    },
+    saveUserStarsList(state, { userStarrsList }) {
+      return {
+        ...state,
+        userStarrsList,
       }
     },
     changeActiveTabKey(state, { activeTabKey }) {
@@ -30,7 +37,6 @@ export default {
       const {
         data: {
           errcode,
-          errmsg,
         },
       } = yield call(userFollow, payload)
 
@@ -45,7 +51,6 @@ export default {
       const {
         data: {
           errcode,
-          errmsg,
         },
       } = yield call(userUnfollow, payload)
 
@@ -60,7 +65,6 @@ export default {
       const {
         data: {
           errcode,
-          errmsg,
           data: {
             list,
           },
@@ -71,6 +75,23 @@ export default {
         yield put({
           type: 'saveUserFollersList',
           userFollowersList: list,
+        })
+      }
+    },
+    *postUserStarsList({ payload }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          data: {
+            list,
+          },
+        },
+      } = yield call(userStars, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveUserStarsList',
+          userStarrsList: list,
         })
       }
     },

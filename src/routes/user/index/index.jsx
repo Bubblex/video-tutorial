@@ -57,6 +57,15 @@ class UserIndex extends React.Component {
         },
       })
     }
+
+    if (parseInt(key) === 3) {
+      dispatch({
+        type: 'star/postUserStarsList',
+        payload: {
+          id: this.props.routing.locationBeforeTransitions.query.id,
+        },
+      })
+    }
   }
 
   render() {
@@ -101,6 +110,26 @@ class UserIndex extends React.Component {
       )
     })
 
+    const renderStarsList = this.props.star.userStarrsList === undefined
+    ? null
+    : this.props.star.userStarrsList.map((arr, index) => {
+      return (
+        <Col span={8} key={index}>
+          <Link to='/user' query={{ id: arr.id }}>
+            <Card style={{ width: '80%' }}>
+              <img
+                src={arr.avatar === null ? DEFAULT_AVATAR : arr.avatar}
+                alt={arr.nickname}
+                style={{ width: '100%', height: '240px,' }}
+              />
+              <p style={{ textAlign: 'center', marginTop: '20px' }}>{arr.nickname}</p>
+              <p style={{ textAlign: 'center', marginTop: '20px' }}>{arr.summary === null ? DEFAULT_SUMMARY : arr.summary}</p>
+            </Card>
+          </Link>
+        </Col>
+      )
+    })
+
     console.log(this.props.star)
 
     return (
@@ -124,11 +153,8 @@ class UserIndex extends React.Component {
           </TabPane>
           <TabPane tab='关注' key='3'>
             <Row>
-              <Col span={8}>
-              aa
-              </Col>
+              {renderStarsList}
             </Row>
-            Content of Tab Pane 3
           </TabPane>
           <TabPane tab='粉丝' key='4'>
             <Row>
