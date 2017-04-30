@@ -23,7 +23,7 @@ class ReleaseArticle extends React.Component {
             <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
             <Breadcrumb.Item>发布资讯</Breadcrumb.Item>
           </Breadcrumb>
-          <ArticleForm />
+          <ArticleForm dispatch={this.props.dispatch} />
         </BasicLayout>
       </div>
     )

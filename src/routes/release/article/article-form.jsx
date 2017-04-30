@@ -1,5 +1,4 @@
 import React from 'react'
-import LzEditor from 'react-lz-editor'
 
 import {
   Form,
@@ -8,6 +7,7 @@ import {
   message,
   Upload,
   Icon,
+  Radio,
 } from 'antd'
 
 import Auth from '../../../utils/auth'
@@ -16,12 +16,35 @@ const {
   Item: FormItem,
 } = Form
 
+const {
+  Group: RadioGroup,
+} = Radio
 
 class ArticleForm extends React.Component {
-  onEditorStateChange = (contentState) => {
-    console.log(contentState)
-  }
+  handleReleaseArticleSubmit = (e) => {
+    e.preventDefault()
 
+    const {
+      dispatch,
+      form: {
+        getFieldsValue,
+      },
+    } = this.props
+
+    const formValue = getFieldsValue()
+
+    console.log(formValue)
+
+    dispatch({
+      type: 'article/postArticleRelease',
+      payload: {
+        ...formValue,
+        token: Auth.getToken(),
+        cover: `http://video.app${formValue.cover.fileList[0].response.data.file_path}`,
+      },
+      message,
+    })
+  }
   render() {
     const formItemOptions = {
       labelCol: {
@@ -39,13 +62,20 @@ class ArticleForm extends React.Component {
     } = this.props
 
     return (
-      <Form>
+      <Form onSubmit={this.handleReleaseArticleSubmit}>
         <FormItem
           {...formItemOptions}
           label='标题'
         >
           {
-            getFieldDecorator('title')(<Input />)
+            getFieldDecorator('title', {
+              rules: [
+                {
+                  required: true,
+                  message: '标题不能为空',
+                },
+              ],
+            })(<Input />)
           }
         </FormItem>
         <FormItem
@@ -53,7 +83,18 @@ class ArticleForm extends React.Component {
           label='分类'
         >
           {
-            getFieldDecorator('type_id')(<Input />)
+            getFieldDecorator('type_id', {
+              rules: [
+                {
+                  required: true,
+                  message: '分类不能为空',
+                },
+              ],
+            })(<RadioGroup>
+              <Radio value={1}>邮票</Radio>
+              <Radio value={2}>货币</Radio>
+              <Radio value={3}>电话卡</Radio>
+            </RadioGroup>)
           }
         </FormItem>
         <FormItem
@@ -61,7 +102,14 @@ class ArticleForm extends React.Component {
           label='封面图'
         >
           {
-            getFieldDecorator('cover')(
+            getFieldDecorator('cover', {
+              rules: [
+                {
+                  required: true,
+                  message: '封面图不能为空',
+                },
+              ],
+            })(
               <Upload
                 action='http://video.app/api/upload'
                 listType='picture'
@@ -77,7 +125,14 @@ class ArticleForm extends React.Component {
           label='简介'
         >
           {
-            getFieldDecorator('summary')(<Input type='textarea' />)
+            getFieldDecorator('summary', {
+              rules: [
+                {
+                  required: true,
+                  message: '简介不能为空',
+                },
+              ],
+            })(<Input type='textarea' />)
           }
         </FormItem>
         <FormItem
@@ -85,7 +140,14 @@ class ArticleForm extends React.Component {
           label='编辑内容'
         >
           {
-            getFieldDecorator('content')(<LzEditor />)
+            getFieldDecorator('content', {
+              rules: [
+                {
+                  required: true,
+                  message: '内容不能为空',
+                },
+              ],
+            })(<Input type='textarea' />)
           }
         </FormItem>
         <Button

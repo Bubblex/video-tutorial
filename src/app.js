@@ -20,6 +20,7 @@ app.model(require('./models/user'))
 app.model(require('./models/login'))
 app.model(require('./models/userinfo'))
 app.model(require('./models/star'))
+app.model(require('./models/article'))
 
 // 4. Router
 app.router(require('./router'))
