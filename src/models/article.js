@@ -7,12 +7,15 @@ import {
   articleRelease,
 } from '../services/article'
 
+import Auth from '../utils/auth.js'
+
 export default {
   namespace: 'article',
   state: {
     articleDataList: [],
     articleListPagination: [],
-    CheckArticleType: '',
+    CheckArticleType: 0,
+    articleDetails: [],
   },
   reducers: {
     saveArticleList(state, { articleDataList }) {
@@ -31,6 +34,12 @@ export default {
       return {
         ...state,
         CheckArticleType,
+      }
+    },
+    savaArticleDetail(state, { articleDetails }) {
+      return {
+        ...state,
+        articleDetails,
       }
     },
   },
@@ -71,12 +80,40 @@ export default {
         message.error(errmsg)
       }
     },
+    *postArticleDetail({ payload, message }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          data,
+        },
+      } = yield call(articleDetail, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'savaArticleDetail',
+          articleDetails: data,
+        })
+      }
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
         if (pathname === '/article/list') {
           dispatch({ type: 'postArticleList' })
+        }
+      })
+    },
+    articledetail({ dispatch, history }) {
+      return history.listen(({ pathname, query }) => {
+        if (pathname === '/article/detail') {
+          dispatch({
+            type: 'postArticleDetail',
+            payload: {
+              token: Auth.getToken(),
+              ...query,
+            },
+          })
         }
       })
     },

@@ -36,6 +36,9 @@ class ArticleDetail extends React.Component {
     const {
       avatar,
       username,
+      article: {
+        articleDetails,
+      },
     } = this.props
 
     return (
@@ -71,4 +74,6 @@ class ArticleDetail extends React.Component {
   }
 }
 
-export default connect()(ArticleDetail)
+export default connect((state) => {
+  return state
+})(ArticleDetail)
