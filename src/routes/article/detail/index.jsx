@@ -8,6 +8,7 @@ import {
   Tag,
   Button,
   Breadcrumb,
+  message,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -25,6 +26,8 @@ import {
   URL_ARTICLE_LIST,
 } from '../../../config/web'
 
+import Auth from '../../../utils/auth'
+
 const { CheckableTag } = Tag
 
 class ArticleDetail extends React.Component {
@@ -32,6 +35,40 @@ class ArticleDetail extends React.Component {
     avatar: DEFAULT_AVATAR,
     username: DEFAULT_USERNAME,
   }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired,
+  }
+
+  handleCollectArticle = (e) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+      location: {
+        pathname,
+        search,
+      },
+    } = this.props
+
+    const {
+      router: {
+        replace,
+      },
+    } = this.context
+
+    dispatch({
+      type: 'article/postCollectArticle',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+      message,
+      replace,
+      nextPathname: pathname + search,
+    })
+  }
+
   render() {
     const {
       username,
@@ -87,7 +124,7 @@ class ArticleDetail extends React.Component {
           }
         </div>
         <div>
-            {content}
+          {content}
         </div>
         <Row>
           <Col span={1} offset={23}>
@@ -97,7 +134,7 @@ class ArticleDetail extends React.Component {
         <div style={{ marginTop: '20px', marginBottom: '20px' }}>
           <UserCard avatar={avatar} username={username} />
         </div>
-        <Button type='primary' icon='heart-o' size='large'>收藏文章 | 111</Button>
+        <Button type='primary' icon='heart-o' size='large' onClick={this.handleCollectArticle}>收藏文章 | 111</Button>
         <div style={{ marginTop: '30px' }}>
           <h2 style={{ margin: '30px', paddingBottom: '10px', borderBottom: '1px solid rgb(204, 204, 204)' }}>8条评论</h2>
           <Comment />

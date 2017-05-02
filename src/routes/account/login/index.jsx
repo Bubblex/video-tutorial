@@ -14,13 +14,24 @@ import LOGO from '../../../assets/logo.png'
 import styles from './index.less'
 
 class Login extends React.Component {
+
   render() {
+    const {
+      dispatch,
+      location: {
+        state,
+      },
+    } = this.props
+
+    console.log(this.props)
+    const nextPathname = state === null ? '/' : state.nextPathname
+
     return (
       <div className={styles.login}>
         {/* <img src={BackGroungImg} className={styles.bg} alt='背景图' />*/}
         <Card className={styles.container}>
           <img src={LOGO} className={styles.logo} alt='背景图' />
-          <LoginForm dispatch={this.props.dispatch} />
+          <LoginForm dispatch={dispatch} nextPathname={nextPathname} />
           <Link to='/account/register'>注册</Link>
         </Card>
       </div>

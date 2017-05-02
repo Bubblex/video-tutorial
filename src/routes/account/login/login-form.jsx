@@ -14,6 +14,7 @@ const {
 } = Form
 
 class LoginForm extends React.Component {
+
   handleRegisterSubmit = (e) => {
     e.preventDefault()
 
@@ -23,6 +24,7 @@ class LoginForm extends React.Component {
         getFieldsValue,
         validateFields,
       },
+      nextPathname,
     } = this.props
 
     validateFields((err) => {
@@ -36,6 +38,7 @@ class LoginForm extends React.Component {
             password: md5(formValue.password),
           },
           message,
+          nextPathname,
         })
       }
     })
@@ -47,6 +50,7 @@ class LoginForm extends React.Component {
         getFieldDecorator,
       },
     } = this.props
+
 
     return (
       <div>

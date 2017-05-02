@@ -5,6 +5,7 @@ import LoginForm from './login-form'
 
 class ExampleLogin extends React.Component {
   render() {
+    console.log(this.props)
     return (
       <div>
         <LoginForm dispatch={this.props.dispatch} />

@@ -22,7 +22,7 @@ export default {
     },
   },
   effects: {
-    *postLogin({ payload, message }, { call, put }) {
+    *postLogin({ payload, message, nextPathname }, { call, put }) {
       const {
         data: {
           errmsg,
@@ -39,7 +39,7 @@ export default {
         Auth.setInfo(data.user)
         Cookies.set('token', data.token)
         message.success(errmsg, 1.5, () => {
-          browserHistory.push('/')
+          browserHistory.push(nextPathname)
         })
       } else {
         message.error(errmsg)

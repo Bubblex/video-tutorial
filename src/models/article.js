@@ -1,3 +1,5 @@
+import { browserHistory } from 'dva/router'
+
 import {
   articleType,
   articleList,
@@ -97,6 +99,39 @@ export default {
         })
       }
     },
+    *postCollectArticle({ payload, message, replace, nextPathname }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(articleCollect, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'postArticleDetail',
+        })
+        message.success(errmsg)
+      } else if (errcode === 100) {
+        message.error(errmsg, 1.5, () => {
+          // browserHistory.pushState(history,'/account/login')
+          replace({
+            pathname: '/account/login',
+            state: {
+              nextPathname,
+            },
+          })
+        })
+      }
+    },
+    // *postCancelCollectArticle({ payload, message}) {
+    //   const {
+    //     data: {
+    //       errcode,
+    //       errmag,
+    //     }
+    //   } = 
+    // },
   },
   subscriptions: {
     setup({ dispatch, history }) {
