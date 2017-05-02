@@ -15,7 +15,9 @@ export default {
     articleDataList: [],
     articleListPagination: [],
     CheckArticleType: 0,
-    articleDetails: [],
+    articleDetails: {
+      author: {},
+    },
   },
   reducers: {
     saveArticleList(state, { articleDataList }) {

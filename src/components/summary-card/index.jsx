@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'dva/router'
 
 import {
   Row,
@@ -16,36 +17,43 @@ import {
 class SummaryCard extends React.Component {
   static defaultProps = {
     avatar: DEFAULT_AVATAR,
-    username: DEFAULT_USERNAME,
+    nickname: DEFAULT_USERNAME,
   }
 
   render() {
     const {
-      avatar,
-      username,
+      avatar: avatarcheck,
+      title,
+      createdAt,
+      readNum,
+      summary,
+      id,
+      nickname,
     } = this.props
+
+    const avatar = avatarcheck === null ? DEFAULT_AVATAR : avatarcheck
 
     return (
       <div>
-        <h2 style={{ marginBottom: '15px' }}>视频教程标题</h2>
+        <h2 style={{ marginBottom: '15px' }}>{title}</h2>
         <Row>
           <Col span={2}>
-            <img src={avatar} alt={username} className={styles.avatar} />
+            <img src={avatar} alt={nickname} className={styles.avatar} />
           </Col>
           <Col span={22}>
-            <div style={{ marginBottom: '10px' }}>发布人：{username}
+            <div style={{ marginBottom: '10px' }}>发布人：
+              <Link to='/user' query={{ id: id }}>{nickname}</Link>
               <Tag color='#87d068' style={{ marginLeft: '20px' }}>认证讲师</Tag>
-              <Tag color='#f50' style={{ marginLeft: '10px' }}>关注</Tag>
             </div>
             <div>
-              <span >发布时间：2017-2-2</span>
-              <span style={{ marginLeft: '20px' }}>阅读：111</span>
+              <span >发布时间：{createdAt}</span>
+              <span style={{ marginLeft: '20px' }}>阅读：{readNum}</span>
               <span style={{ marginLeft: '20px' }}>评论：111</span>
               <span style={{ marginLeft: '20px' }}>收藏：111</span>
             </div>
           </Col>
         </Row>
-        <p style={{ margin: '20px' }}>简介摘要简介摘要简介摘要简介摘要简介摘要简介摘要简介摘要简介摘要</p>
+        <p style={{ margin: '20px' }}>{summary}</p>
       </div>
     )
   }

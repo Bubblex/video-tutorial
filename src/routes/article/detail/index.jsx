@@ -34,10 +34,21 @@ class ArticleDetail extends React.Component {
   }
   render() {
     const {
-      avatar,
       username,
       article: {
-        articleDetails,
+        articleDetails: {
+          title,
+          type_id: typeId,
+          created_at: createdAt,
+          read_num: readNum,
+          summary,
+          content,
+          author: {
+            id,
+            nickname,
+            avatar,
+          },
+        },
       },
     } = this.props
 
@@ -46,14 +57,37 @@ class ArticleDetail extends React.Component {
         <Breadcrumb separator='>' style={{ marginBottom: '15px' }}>
           <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
           <Breadcrumb.Item><Link to={URL_ARTICLE_LIST}>文章资讯</Link></Breadcrumb.Item>
-          <Breadcrumb.Item>文章名称</Breadcrumb.Item>
+          <Breadcrumb.Item>{title}</Breadcrumb.Item>
         </Breadcrumb>
-        <SummaryCard avatar={avatar} username={username} />
+        <SummaryCard
+          username={username}
+          title={title}
+          createdAt={createdAt}
+          readNum={readNum}
+          summary={summary}
+          id={id}
+          nickname={nickname}
+          avatar={avatar}
+        />
         <div style={{ margin: '10px 0' }}>
-          <Tag color='pink' style={{ marginLeft: '20px' }}>所属分类</Tag>
+          {
+            typeId === 1
+            &&
+            <Tag color='#f50' style={{ marginLeft: '20px' }}>邮票</Tag>
+          }
+          {
+            typeId === 2
+            &&
+            <Tag color='#2db7f5' style={{ marginLeft: '20px' }}>货币</Tag>
+          }
+          {
+            typeId === 3
+            &&
+            <Tag color='#87d068' style={{ marginLeft: '20px' }}>电话卡</Tag>
+          }
         </div>
         <div>
-            文章详情
+            {content}
         </div>
         <Row>
           <Col span={1} offset={23}>
