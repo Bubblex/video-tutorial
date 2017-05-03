@@ -68,7 +68,11 @@ class AdminArticleIndex extends React.Component {
           return (
             <span>
               <a style={{ marginRight: 8 }} onClick={() => { this.viewUserDetail(index) }}>查看</a>
-              <a style={{ marginRight: 8 }} onClick={() => { this.disableUser(text, data.status === 1 ? 2 : 1, index) }}>{data.status === 1 ? '禁用' : '启用'}</a>
+              {
+                data.role_id !== 3
+                &&
+                <a style={{ marginRight: 8 }} onClick={() => { this.disableUser(text, data.status === 1 ? 2 : 1, index) }}>{data.status === 1 ? '禁用' : '启用'}</a>
+              }
             </span>
           )
         },
