@@ -69,6 +69,23 @@ class ArticleDetail extends React.Component {
     })
   }
 
+  handleCancelCollectArticle = (e) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'article/postCancelCollectArticle',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+      message,
+    })
+  }
+
   render() {
     const {
       username,
@@ -135,6 +152,7 @@ class ArticleDetail extends React.Component {
           <UserCard avatar={avatar} username={username} />
         </div>
         <Button type='primary' icon='heart-o' size='large' onClick={this.handleCollectArticle}>收藏文章 | 111</Button>
+        <Button type='primary' icon='heart-o' size='large' onClick={this.handleCancelCollectArticle}>取消收藏文章 | 111</Button>
         <div style={{ marginTop: '30px' }}>
           <h2 style={{ margin: '30px', paddingBottom: '10px', borderBottom: '1px solid rgb(204, 204, 204)' }}>8条评论</h2>
           <Comment />

@@ -124,14 +124,23 @@ export default {
         })
       }
     },
-    // *postCancelCollectArticle({ payload, message}) {
-    //   const {
-    //     data: {
-    //       errcode,
-    //       errmag,
-    //     }
-    //   } = 
-    // },
+    *postCancelCollectArticle({ payload, message }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(articleCancel, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'postArticleDetail',
+        })
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
+      }
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
