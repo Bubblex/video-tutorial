@@ -68,3 +68,12 @@ export const API_VIDEO_CANCEL = `${PREFIX}/video/cancel`
 
 // 3.4.5 发布 / 修改视频
 export const API_VIDEO_RELEASE = `${PREFIX}/video/release`
+
+// 4.1.1 管理员登录
+export const API_ADMIN_LOGIN = `${PREFIX}/admin/login`
+
+// 4.1.2 获取用户列表
+export const API_ADMIN_FETCH_USER_LIST = `${PREFIX}/admin/user/list`
+
+// 4.1.3 禁用用户账户
+export const API_ADMIN_DISABLE_USER = `${PREFIX}/admin/user/disable`

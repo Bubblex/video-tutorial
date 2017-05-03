@@ -27,7 +27,7 @@ import AdminArticleIndexPage from './routes/admin/article/index/index'
 import AdminVideoIndexPage from './routes/admin/video/index/index'
 import AdminCommentVideoPage from './routes/admin/comment/video/index'
 import AdminCommentArticlePage from './routes/admin/comment/article/index'
-
+import AdminLogin from './routes/admin/login'
 import AdminDashboard from './routes/admin/dashboard'
 
 import ExampleLogin from './routes/example/login'
@@ -78,6 +78,8 @@ function RouterConfig({ history }) {
         <Route path='article' component={AdminArticleIndexPage} />
         <Route path='video' component={AdminVideoIndexPage} />
       </Route>
+
+      <Route path='/admin/login' component={AdminLogin} />
 
       {/* 视频评论管理*/}
       <Route path='/admin/comment/video' component={AdminCommentVideoPage} />
