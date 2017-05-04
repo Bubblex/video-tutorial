@@ -12,6 +12,8 @@ import {
   adminLogin,
   fetchUserList,
   disableUser,
+  fetchArticleList,
+  disableArticle,
 } from '../services/admin'
 
 export default {
@@ -28,6 +30,7 @@ export default {
     isDisplayUserDetailModal: false,
 
     articleList: [],
+    articlePagination: {},
     articleOptions: {},
 
     videoList: [],
@@ -110,6 +113,24 @@ export default {
         userOptions: options,
       }
     },
+
+    saveArticleList(state, { list, pagination }) {
+      return {
+        ...state,
+        articleList: list,
+        articlePagination: pagination,
+      }
+    },
+
+    updateArticleStatus(state, { index, status }) {
+      const immute = state.articleList.slice()
+      immute[index].status = status
+
+      return {
+        ...state,
+        articleList: immute,
+      }
+    },
   },
   effects: {
     *adminLogin({ payload, message }, { call, put }) {
@@ -177,6 +198,45 @@ export default {
         message.error(errmsg)
       }
     },
+
+    *fetchArticleList({ payload, message }, { call, put }) {
+      const {
+        data: {
+          data,
+          errcode,
+          errmsg,
+        },
+      } = yield call(fetchArticleList, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveArticleList',
+          ...data,
+        })
+      } else {
+        message.error(errmsg)
+      }
+    },
+
+    *disableArticle({ payload, message, index }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(disableArticle, payload)
+
+      if (errcode === 1) {
+        message.success(errmsg)
+        yield put({
+          type: 'updateArticleStatus',
+          index,
+          status: payload.disable,
+        })
+      } else {
+        message.error(errmsg)
+      }
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -192,6 +252,13 @@ export default {
           })
         } else if (pathname === URL_ADMIN_ARTICLE) {
           dispatch({ type: 'selectMenu', key: '2' })
+          dispatch({
+            type: 'fetchArticleList',
+            payload: {
+              ...params,
+              token: adminAuth.getToken(),
+            },
+          })
         } else if (pathname === URL_ADMIN_VIDEO) {
           dispatch({ type: 'selectMenu', key: '3' })
         }

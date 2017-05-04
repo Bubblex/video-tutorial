@@ -79,8 +79,8 @@ class AdminArticleIndex extends React.Component {
       },
     ]
 
-    this.labelSpan = 6
-    this.wrapperSpan = 18
+    this.labelSpan = 8
+    this.wrapperSpan = 16
     this.gutter = 16
   }
   disableUser(id, disable, index) {

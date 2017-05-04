@@ -5,6 +5,8 @@ import {
   API_ADMIN_LOGIN,
   API_ADMIN_FETCH_USER_LIST,
   API_ADMIN_DISABLE_USER,
+  API_ADMIN_FETCH_ARTICLE_LIST,
+  API_ADMIN_DISABLE_ARTICLE,
 } from '../config/api'
 
 
@@ -43,6 +45,33 @@ export async function fetchUserList(params) {
  */
 export async function disableUser(params) {
   return request(`${API_ADMIN_DISABLE_USER}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+/**
+ * 获取文章列表
+ *
+ * @export
+ * @param {any} params
+ * @returns
+ */
+export async function fetchArticleList(params) {
+  return request(`${API_ADMIN_FETCH_ARTICLE_LIST}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+
+/**
+ * 启用 / 禁用文章
+ *
+ * @export
+ * @param {any} params
+ * @returns
+ */
+export async function disableArticle(params) {
+  return request(`${API_ADMIN_DISABLE_ARTICLE}?${qs.stringify(params)}`, {
     method: 'POST',
   })
 }

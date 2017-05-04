@@ -77,3 +77,9 @@ export const API_ADMIN_FETCH_USER_LIST = `${PREFIX}/admin/user/list`
 
 // 4.1.3 禁用用户账户
 export const API_ADMIN_DISABLE_USER = `${PREFIX}/admin/user/disable`
+
+// 4.1.4 获取文章列表
+export const API_ADMIN_FETCH_ARTICLE_LIST = `${PREFIX}/admin/article/list`
+
+// 4.1.5 启用 / 禁用文章
+export const API_ADMIN_DISABLE_ARTICLE = `${PREFIX}/admin/article/disable`
