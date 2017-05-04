@@ -50,10 +50,20 @@ class RegisterForm extends React.Component {
       },
     } = this.props
 
+    const formItemOptions = {
+      labelCol: {
+        span: 6,
+      },
+      wrapperCol: {
+        span: 14,
+      },
+    }
+
     return (
       <div>
         <Form onSubmit={this.handleRegisterSubmit}>
           <FormItem
+            {...formItemOptions}
             label='账户'
           >
             {
@@ -80,6 +90,7 @@ class RegisterForm extends React.Component {
             }
           </FormItem>
           <FormItem
+            {...formItemOptions}
             label='昵称'
           >
             {
@@ -98,6 +109,7 @@ class RegisterForm extends React.Component {
             }
           </FormItem >
           <FormItem
+            {...formItemOptions}
             label='密码'
           >
             {
@@ -120,6 +132,7 @@ class RegisterForm extends React.Component {
             }
           </FormItem >
           <FormItem
+            {...formItemOptions}
             label='确认密码'
           >
             {
@@ -138,7 +151,7 @@ class RegisterForm extends React.Component {
               })(<Input type='password' />)
             }
           </FormItem >
-          <Button type='primary' htmlType='submit' size='large'>注册</Button>
+          <Button type='primary' htmlType='submit' size='large' style={{ width: '67%', marginBottom: '10px' }}>注册</Button>
         </Form>
       </div>
     )

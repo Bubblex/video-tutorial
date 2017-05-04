@@ -61,7 +61,6 @@ class ApplyForm extends React.Component {
       isApplyFormDisplay,
     } = this.props
 
-
     return (
       <Modal
         title='申请讲师认证'
