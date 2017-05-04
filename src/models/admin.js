@@ -14,6 +14,8 @@ import {
   disableUser,
   fetchArticleList,
   disableArticle,
+  fetchVideoList,
+  disableVideo,
 } from '../services/admin'
 
 export default {
@@ -39,7 +41,12 @@ export default {
     isDisplayArticleDetailModal: false,
 
     videoList: [],
+    videoPagination: {},
     videoOptions: {},
+    videoDetail: {
+      video_author: {},
+    },
+    isDisplayVideoDetailModal: false,
 
     adminInfo: {},
   },
@@ -127,6 +134,13 @@ export default {
       }
     },
 
+    saveArticleOptions(state, { options }) {
+      return {
+        ...state,
+        articleOptions: options,
+      }
+    },
+
     updateArticleStatus(state, { index, status }) {
       const immute = state.articleList.slice()
       immute[index].status = status
@@ -149,6 +163,31 @@ export default {
       return {
         ...state,
         isDisplayArticleDetailModal: false,
+      }
+    },
+
+    saveVideoList(state, { list, pagination }) {
+      return {
+        ...state,
+        videoList: list,
+        videoPagination: pagination,
+      }
+    },
+
+    saveVideoOptions(state, { options }) {
+      return {
+        ...state,
+        videoOptions: options,
+      }
+    },
+
+    updateVideoStatus(state, { index, status }) {
+      const immute = state.videoList.slice()
+      immute[index].status = status
+
+      return {
+        ...state,
+        videoList: immute,
       }
     },
   },
@@ -233,6 +272,12 @@ export default {
           type: 'saveArticleList',
           ...data,
         })
+        yield put({
+          type: 'saveArticleOptions',
+          options: {
+            filter: payload.filter,
+          },
+        })
       } else {
         message.error(errmsg)
       }
@@ -250,6 +295,51 @@ export default {
         message.success(errmsg)
         yield put({
           type: 'updateArticleStatus',
+          index,
+          status: payload.disable,
+        })
+      } else {
+        message.error(errmsg)
+      }
+    },
+
+    *fetchVideoList({ payload, message }, { call, put }) {
+      const {
+        data: {
+          data,
+          errcode,
+          errmsg,
+        },
+      } = yield call(fetchVideoList, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveVideoList',
+          ...data,
+        })
+        yield put({
+          type: 'saveVideoOptions',
+          options: {
+            filter: payload.filter,
+          },
+        })
+      } else {
+        message.error(errmsg)
+      }
+    },
+
+    *disableVideo({ payload, message, index }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(disableUser, payload)
+
+      if (errcode === 1) {
+        message.success(errmsg)
+        yield put({
+          type: 'updateVideoStatus',
           index,
           status: payload.disable,
         })
@@ -281,6 +371,13 @@ export default {
           })
         } else if (pathname === URL_ADMIN_VIDEO) {
           dispatch({ type: 'selectMenu', key: '3' })
+          dispatch({
+            type: 'fetchVideoList',
+            payload: {
+              ...params,
+              token: adminAuth.getToken(),
+            },
+          })
         }
       })
     },

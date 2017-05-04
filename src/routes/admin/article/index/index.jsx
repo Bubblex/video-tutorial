@@ -102,6 +102,7 @@ class AdminArticleIndex extends React.Component {
         token: adminAuth.getToken(),
         ...data,
       },
+      message,
     })
   }
   handlePageChange = (page) => {
@@ -119,6 +120,7 @@ class AdminArticleIndex extends React.Component {
         token: adminAuth.getToken(),
         page,
       },
+      message,
     })
   }
   openArticleDetailModal = (index) => {
@@ -194,7 +196,7 @@ class AdminArticleIndex extends React.Component {
               作者：
             </Col>
             <Col span={this.wrapperSpan}>
-              <span>{nickname}</span>
+              <span style={{ marginBottom: 5 }}>{nickname}</span>
             </Col>
           </Row>
           <Row gutter={this.gutter} className={styles.line}>
