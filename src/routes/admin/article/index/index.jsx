@@ -95,6 +95,23 @@ class AdminArticleIndex extends React.Component {
       },
     })
   }
+  handlePageChange = (page) => {
+    const {
+      dispatch,
+      admin: {
+        articleOptions,
+      },
+    } = this.props
+
+    dispatch({
+      type: 'admin/fetchArticleList',
+      payload: {
+        ...articleOptions,
+        token: adminAuth.getToken(),
+        page,
+      },
+    })
+  }
   render() {
     const {
       admin: {
@@ -109,7 +126,10 @@ class AdminArticleIndex extends React.Component {
         <Table
           rowKey='id'
           columns={this.USER_TABLE_COLUMNS}
-          pagination={articlePagination}
+          pagination={{
+            ...articlePagination,
+            onChange: this.handlePageChange,
+          }}
           dataSource={articleList}
         />
       </div>
