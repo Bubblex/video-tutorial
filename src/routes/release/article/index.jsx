@@ -16,6 +16,13 @@ import {
 class ReleaseArticle extends React.Component {
 
   render() {
+    const {
+      article: {
+        articleContent,
+      },
+      dispatch,
+    } = this.props
+
     return (
       <div>
         <BasicLayout>
@@ -23,11 +30,13 @@ class ReleaseArticle extends React.Component {
             <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
             <Breadcrumb.Item>发布资讯</Breadcrumb.Item>
           </Breadcrumb>
-          <ArticleForm dispatch={this.props.dispatch} />
+          <ArticleForm dispatch={dispatch} articleContent={articleContent} />
         </BasicLayout>
       </div>
     )
   }
 }
 
-export default connect()(ReleaseArticle)
+export default connect((state) => {
+  return state
+})(ReleaseArticle)

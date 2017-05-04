@@ -140,9 +140,7 @@ class ArticleDetail extends React.Component {
             <Tag color='#87d068' style={{ marginLeft: '20px' }}>电话卡</Tag>
           }
         </div>
-        <div>
-          {content}
-        </div>
+        <div dangerouslySetInnerHTML={{ __html: content }} />
         <Row>
           <Col span={1} offset={23}>
             <CheckableTag color='#f50' style={{ marginTop: '10px' }}>投诉</CheckableTag>

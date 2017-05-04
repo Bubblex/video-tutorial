@@ -20,6 +20,7 @@ export default {
     articleDetails: {
       author: {},
     },
+    articleContent: '',
   },
   reducers: {
     saveArticleList(state, { articleDataList }) {
@@ -46,6 +47,12 @@ export default {
         articleDetails,
       }
     },
+    saveArticleContent(state, { articleContent }) {
+      return {
+        ...state,
+        articleContent,
+      }
+    },
   },
   effects: {
     *postArticleRelease({ payload, message }, { call }) {
@@ -57,7 +64,9 @@ export default {
       } = yield call(articleRelease, payload)
 
       if (errcode === 1) {
-        message.success(errmsg)
+        message.success(errmsg, 1.5, () => {
+          browserHistory.push('/article/list')
+        })
       } else {
         message.error(errmsg)
       }

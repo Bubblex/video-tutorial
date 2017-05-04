@@ -22,8 +22,15 @@ const {
 } = Radio
 
 class ArticleForm extends React.Component {
-  getArticleContent = () => {
-    console.log(this)
+  getArticleContent = (content) => {
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'article/saveArticleContent',
+      articleContent: content,
+    })
   }
 
   handleReleaseArticleSubmit = (e) => {
@@ -34,16 +41,16 @@ class ArticleForm extends React.Component {
       form: {
         getFieldsValue,
       },
+      articleContent,
     } = this.props
 
     const formValue = getFieldsValue()
-
-    console.log(formValue)
 
     dispatch({
       type: 'article/postArticleRelease',
       payload: {
         ...formValue,
+        content: articleContent,
         token: Auth.getToken(),
         cover: `http://video.app${formValue.cover.fileList[0].response.data.file_path}`,
       },
@@ -154,7 +161,7 @@ class ArticleForm extends React.Component {
                   message: '内容不能为空',
                 },
               ],
-            })(<LzEditor cbReceiver={this.getArticleContent} />)
+            })(<LzEditor cbReceiver={this.getArticleContent} video={false} />)
           }
         </FormItem>
         <Button
