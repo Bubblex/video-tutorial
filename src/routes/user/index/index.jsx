@@ -7,10 +7,13 @@ import {
   Row,
   Col,
   Card,
+  Tag,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
 import UserData from '../../../components/user-data'
+
+import styles from '../../article/list/index.less'
 
 import Auth from '../../../utils/auth'
 
@@ -50,6 +53,15 @@ class UserIndex extends React.Component {
         },
       })
     }
+
+    if (parseInt(key) === 2) {
+      dispatch({
+        type: 'article/postArticleList',
+        payload: {
+          id: this.props.routing.locationBeforeTransitions.query.id,
+        },
+      })
+    }
   }
 
   render() {
@@ -72,6 +84,9 @@ class UserIndex extends React.Component {
       location: {
         pathname,
         search,
+      },
+      article: {
+        articleDataList,
       },
     } = this.props
 
@@ -119,6 +134,55 @@ class UserIndex extends React.Component {
       )
     })
 
+    const renderArticleList = articleDataList === undefined
+    ? null
+    : articleDataList.map((arr, index) => {
+      return (
+        <Card key={index} className={styles.item}>
+          <Row>
+            <Col span={5}>
+              <img src={arr.cover} alt={arr.title} style={{ width: '100%' }} />
+            </Col>
+            <Col span={16} offset={1}>
+              <h2>
+                {
+                  arr.type_id === 1
+                  &&
+                  <Tag color='#f50'>邮票</Tag>
+                }
+                {
+                  arr.type_id === 2
+                  &&
+                  <Tag color='#2db7f5'>货币</Tag>
+                }
+                {
+                  arr.type_id === 3
+                  &&
+                  <Tag color='#87d068'>电话卡</Tag>
+                }
+                {arr.title}
+              </h2>
+              <p style={{ margin: '10px 0' }}>{arr.summary}</p>
+              <Col span={10}>
+                <p>作者：{arr.author.nickname}</p>
+              </Col>
+              <Col span={12}>
+                <p>发布时间：{arr.created_at}</p>
+              </Col>
+            </Col>
+            {/* <Col span={2} offset={8}><p><span>{arr.look_num}</span> <Icon type='eye-o' /> </p></Col>
+            <Col span={2}><p><span>{arr.like_num}</span> <Icon type='heart-o' /> </p></Col>
+            <Col span={2}><p><span>{arr.comment_num}</span> <Icon type='message' /> </p></Col>*/}
+            <Col span={2}>
+              <Link to='/article/detail' query={{ id: arr.id }}>
+                查看详情
+              </Link>
+            </Col>
+          </Row>
+        </Card>
+      )
+    })
+
     return (
       <BasicLayout
         contentBefore={UserData}
@@ -137,7 +201,7 @@ class UserIndex extends React.Component {
             Content of Tab Pane 1
           </TabPane>
           <TabPane tab='文章资讯' key='2'>
-            Content of Tab Pane 2
+            {renderArticleList}
           </TabPane>
           <TabPane tab='关注' key='3'>
             <Row>
