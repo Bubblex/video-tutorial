@@ -83,6 +83,7 @@ class UserArticle extends React.Component {
       articles_num: articlesNum,
       videos_num: videosNum,
       stars_num: starsNum,
+      authentication,
     } = Auth.getInfo('info')
 
     const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
@@ -155,6 +156,7 @@ class UserArticle extends React.Component {
         videos_num={videosNum}
         stars_num={starsNum}
         account={account}
+        authenticate={authentication}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我发布的视频教程</h2>
         <div style={{ marginTop: '20px' }}>

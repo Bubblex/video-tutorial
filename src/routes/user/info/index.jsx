@@ -46,10 +46,8 @@ class UserInfo extends React.Component {
       avatar: checkavatar,
       nickname,
       summary: checksummary,
-      account,
       role_name: roleName,
       created_at: createdAt,
-      authentication,
       followers_num: followersNum,
       articles_num: articlesNum,
       videos_num: videosNum,
@@ -64,6 +62,10 @@ class UserInfo extends React.Component {
       userinfo: {
         isChangepwdModalDisplay,
         isApplyFormDisplay,
+        userBasicInfo: {
+          authentication,
+          account,
+        },
       },
     } = this.props
 
@@ -78,6 +80,8 @@ class UserInfo extends React.Component {
         articles_num={articlesNum}
         videos_num={videosNum}
         stars_num={starsNum}
+        account={account}
+        authenticate={authentication}
       >
         <InfoForm
           dispatch={dispatch}

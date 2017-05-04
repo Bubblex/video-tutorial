@@ -29,6 +29,7 @@ class SummaryCard extends React.Component {
       summary,
       id,
       nickname,
+      roleId,
     } = this.props
 
     const avatar = avatarcheck === null ? DEFAULT_AVATAR : avatarcheck
@@ -43,7 +44,11 @@ class SummaryCard extends React.Component {
           <Col span={22}>
             <div style={{ marginBottom: '10px' }}>发布人：
               <Link to='/user' query={{ id }}>{nickname}</Link>
-              <Tag color='#87d068' style={{ marginLeft: '20px' }}>认证讲师</Tag>
+              {
+                roleId === 2
+                &&
+                <Tag color='#87d068' style={{ marginLeft: '20px' }}>认证讲师</Tag>
+              }
             </div>
             <div>
               <span >发布时间：{createdAt}</span>

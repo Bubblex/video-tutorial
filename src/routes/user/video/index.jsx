@@ -35,6 +35,7 @@ class UserVideo extends React.Component {
       articles_num: articlesNum,
       videos_num: videosNum,
       stars_num: starsNum,
+      authentication,
     } = Auth.getInfo('info')
 
     const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
@@ -52,6 +53,7 @@ class UserVideo extends React.Component {
         videos_num={videosNum}
         stars_num={starsNum}
         account={account}
+        authenticate={authentication}
       >
         我的视频
       </BasicLayout>

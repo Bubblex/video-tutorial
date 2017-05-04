@@ -74,7 +74,26 @@ class ApplyForm extends React.Component {
             label='身份证号'
           >
             {
-              getFieldDecorator('card_number')(<Input />)
+              getFieldDecorator('card_number', {
+                rules: [
+                  {
+                    required: true,
+                    message: '身份证号不能为空',
+                  },
+                  {
+                    min: 18,
+                    message: '长度不正确，不足18个数字',
+                  },
+                  {
+                    max: 18,
+                    message: '长度不正确，超过18个数字',
+                  },
+                  {
+                    pattern: /^[0-9_]+$/,
+                    message: '格式不正确',
+                  },
+                ],
+              })(<Input />)
             }
           </FormItem>
           <FormItem

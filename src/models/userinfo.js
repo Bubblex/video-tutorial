@@ -104,17 +104,22 @@ export default {
       const {
         data: {
           errcode,
+          errmsg,
         },
       } = yield call(userApplyLecturer, payload)
 
       if (errcode === 1) {
+        message.success(errmsg)
         yield put({
           type: 'closeApplyFormModal',
         })
 
         yield put({
           type: 'postUserInfo',
+          payload,
         })
+      } else {
+        message.error(errmsg)
       }
     },
     *postAllUserInfo({ payload, message }, { call, put }) {

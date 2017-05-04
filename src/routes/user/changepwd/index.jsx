@@ -36,6 +36,7 @@ class UserLike extends React.Component {
       articles_num: articlesNum,
       videos_num: videosNum,
       stars_num: starsNum,
+      authentication,
     } = Auth.getInfo('info')
 
     const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
@@ -57,6 +58,7 @@ class UserLike extends React.Component {
         videos_num={videosNum}
         stars_num={starsNum}
         account={account}
+        authenticate={authentication}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>修改密码</h2>
         <ChangepwdForm dispatch={dispatch} />

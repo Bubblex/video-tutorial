@@ -106,6 +106,10 @@ class ArticleDetail extends React.Component {
       },
     } = this.props
 
+    const roleId = 1
+
+    console.log(roleId)
+
     return (
       <BasicLayout >
         <Breadcrumb separator='>' style={{ marginBottom: '15px' }}>
@@ -122,6 +126,7 @@ class ArticleDetail extends React.Component {
           id={id}
           nickname={nickname}
           avatar={avatar}
+          roleId={roleId}
         />
         <div style={{ margin: '10px 0' }}>
           {
