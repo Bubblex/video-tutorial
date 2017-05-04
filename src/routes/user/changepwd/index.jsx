@@ -3,17 +3,68 @@ import { connect } from 'dva'
 
 import ChangepwdForm from './changepwd-form'
 
+import BasicLayout from '../../../components/layout/basic'
+import UserData from '../../../components/user-data'
+import Auth from '../../../utils/auth'
+
+import {
+  DEFAULT_AVATAR,
+  DEFAULT_SUMMARY,
+} from '../../../config'
+
 class UserLike extends React.Component {
-  render() {
+  componentDidMount() {
     const {
       dispatch,
     } = this.props
+
+    dispatch({
+      type: 'userinfo/postUserInfo',
+      payload: {
+        token: Auth.getToken('token'),
+      },
+    })
+  }
+
+  render() {
+    const {
+      avatar: checkavatar,
+      nickname,
+      summary: checksummary,
+      account,
+      followers_num: followersNum,
+      articles_num: articlesNum,
+      videos_num: videosNum,
+      stars_num: starsNum,
+    } = Auth.getInfo('info')
+
+    const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
+    const summary = checksummary === null ? DEFAULT_SUMMARY : checksummary
+
+    const {
+      dispatch,
+    } = this.props
+
     return (
-      <div>修改密码
+      <BasicLayout
+        hasSider
+        contentBefore={UserData}
+        nickname={nickname}
+        summary={summary}
+        avatar={avatar}
+        followers_num={followersNum}
+        articles_num={articlesNum}
+        videos_num={videosNum}
+        stars_num={starsNum}
+        account={account}
+      >
+        修改密码
         <ChangepwdForm dispatch={dispatch} />
-      </div>
+      </BasicLayout>
     )
   }
 }
 
-export default connect()(UserLike)
+export default connect((state) => {
+  return state
+})(UserLike)

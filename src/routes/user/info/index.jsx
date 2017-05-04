@@ -59,9 +59,6 @@ class UserInfo extends React.Component {
     const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
     const summary = checksummary === null ? DEFAULT_SUMMARY : checksummary
 
-    console.log(this.props)
-    console.log(Auth.getInfo('info'))
-
     const {
       dispatch,
       userinfo: {

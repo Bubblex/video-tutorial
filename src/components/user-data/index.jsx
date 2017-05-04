@@ -81,6 +81,7 @@ class UserData extends React.Component {
       videos_num: videosNum,
       stars_num: starsNum,
       isFollow,
+      account,
     } = this.props
 
     const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
@@ -94,6 +95,7 @@ class UserData extends React.Component {
             </div>
             <div className={styles.username}>
               {nickname}
+              <p style={{ fontSize: '15px' }}>ID  : {account}</p>
             </div>
             {
               hasFollow === 1

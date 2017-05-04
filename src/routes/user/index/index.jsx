@@ -76,6 +76,7 @@ class UserIndex extends React.Component {
           videos_num: videosNum,
           stars_num: starsNum,
           is_follow: isFollow,
+          account,
         },
       },
       star: {
@@ -195,6 +196,7 @@ class UserIndex extends React.Component {
         stars_num={starsNum}
         isFollow={isFollow}
         nextPathname={nextPathname}
+        account={account}
       >
         <Tabs activeKey={activeTabKey} onTabClick={this.renderUserFollersList}>
           <TabPane tab='视频教程' key='1'>

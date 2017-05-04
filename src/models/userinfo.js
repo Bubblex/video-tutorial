@@ -149,5 +149,17 @@ export default {
         }
       })
     },
+    userarticlelist({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/user/article') {
+          dispatch({
+            type: 'article/postArticleList',
+            payload: {
+              id: Auth.getInfo().id,
+            },
+          })
+        }
+      })
+    },
   },
 }
