@@ -1,4 +1,5 @@
 import { browserHistory } from 'dva/router'
+import Cookies from 'js-cookie'
 
 import {
   userRegister,
@@ -31,7 +32,22 @@ export default {
     },
 
     *PostChangePwd({ payload, message }, { call }) {
-      yield call(changePwd, payload)
+      const {
+        data: {
+          errmsg,
+          errcode,
+        },
+      } = yield call(changePwd, payload)
+
+      if (errcode === 1) {
+        Cookies.remove('token')
+        localStorage.removeItem('info')
+        message.success(errmsg, 1.5, () => {
+          browserHistory.push('/account/login')
+        })
+      } else {
+        message.error(errmsg)
+      }
     },
   },
 }

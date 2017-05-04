@@ -58,7 +58,7 @@ class UserLike extends React.Component {
         stars_num={starsNum}
         account={account}
       >
-        修改密码
+        <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>修改密码</h2>
         <ChangepwdForm dispatch={dispatch} />
       </BasicLayout>
     )

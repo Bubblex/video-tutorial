@@ -51,10 +51,20 @@ class ChangepwdForm extends React.Component {
         getFieldDecorator,
       },
     } = this.props
+
+    const formItemOptions = {
+      labelCol: {
+        span: 6,
+      },
+      wrapperCol: {
+        span: 14,
+      },
+    }
     return (
       <div>
         <Form onSubmit={this.handleChangepwdSubmit}>
           <FormItem
+            {...formItemOptions}
             label='旧密码'
           >
             {
@@ -77,6 +87,7 @@ class ChangepwdForm extends React.Component {
             }
           </FormItem>
           <FormItem
+            {...formItemOptions}
             label='新密码'
           >
             {
@@ -99,6 +110,7 @@ class ChangepwdForm extends React.Component {
             }
           </FormItem>
           <FormItem
+            {...formItemOptions}
             label='确认新密码'
           >
             {
@@ -120,7 +132,14 @@ class ChangepwdForm extends React.Component {
               })(<Input type='password' />)
             }
           </FormItem>
-          <Button type='primary' htmlType='submit' size='large'>确认修改</Button>
+          <Button
+            type='primary'
+            htmlType='submit'
+            size='large'
+            style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block', width: '20%' }}
+          >
+            确认修改
+          </Button>
         </Form>
       </div>
     )
