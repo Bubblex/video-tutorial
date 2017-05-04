@@ -7,6 +7,8 @@ import {
   API_ADMIN_DISABLE_USER,
   API_ADMIN_FETCH_ARTICLE_LIST,
   API_ADMIN_DISABLE_ARTICLE,
+  API_ADMIN_FETCH_VIDEO_LIST,
+  API_ADMIN_DISABLE_VIDEO,
 } from '../config/api'
 
 
@@ -72,6 +74,32 @@ export async function fetchArticleList(params) {
  */
 export async function disableArticle(params) {
   return request(`${API_ADMIN_DISABLE_ARTICLE}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+/**
+ * 获取视频列表
+ *
+ * @export
+ * @param {any} params
+ * @returns
+ */
+export async function fetchVideoList(params) {
+  return request(`${API_ADMIN_FETCH_VIDEO_LIST}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+/**
+ * 禁用 / 启用视频
+ *
+ * @export
+ * @param {any} params
+ * @returns
+ */
+export async function disableVideo(params) {
+  return request(`${API_ADMIN_DISABLE_VIDEO}?${qs.stringify(params)}`, {
     method: 'POST',
   })
 }

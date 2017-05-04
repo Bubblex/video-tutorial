@@ -83,3 +83,9 @@ export const API_ADMIN_FETCH_ARTICLE_LIST = `${PREFIX}/admin/article/list`
 
 // 4.1.5 启用 / 禁用文章
 export const API_ADMIN_DISABLE_ARTICLE = `${PREFIX}/admin/article/disable`
+
+// 4.1.6 获取视频列表
+export const API_ADMIN_FETCH_VIDEO_LIST = `${PREFIX}/admin/video/list`
+
+// 4.1.7 启用 / 禁用视频
+export const API_ADMIN_DISABLE_VIDEO = `${PREFIX}/admin/video/disable`
