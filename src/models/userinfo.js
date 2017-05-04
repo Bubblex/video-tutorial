@@ -1,4 +1,8 @@
 import {
+  message,
+} from 'antd'
+
+import {
   userInfo,
   userUserBasic,
 } from '../services/userinfo'
@@ -113,11 +117,12 @@ export default {
         })
       }
     },
-    *postAllUserInfo({ payload }, { call, put }) {
+    *postAllUserInfo({ payload, message }, { call, put }) {
       const {
         data: {
           errcode,
           data,
+          errmsg,
         },
       } = yield call(userUserBasic, payload)
 
@@ -126,6 +131,8 @@ export default {
           type: 'saveAllUserInfo',
           alluserBasicInfo: data,
         })
+      } else {
+        message.error(errmsg)
       }
     },
   },
@@ -134,7 +141,11 @@ export default {
       return history.listen(({ pathname, query }) => {
         if (pathname === '/user') {
           dispatch({ type: 'star/changeActiveTabKey', activeTabKey: '1' })
-          dispatch({ type: 'postAllUserInfo', payload: { token: Auth.getToken(), ...query } })
+          dispatch({
+            type: 'postAllUserInfo',
+            payload: { token: Auth.getToken(), ...query },
+            message,
+          })
         }
       })
     },

@@ -42,7 +42,7 @@ class SummaryCard extends React.Component {
           </Col>
           <Col span={22}>
             <div style={{ marginBottom: '10px' }}>发布人：
-              <Link to='/user' query={{ id: id }}>{nickname}</Link>
+              <Link to='/user' query={{ id }}>{nickname}</Link>
               <Tag color='#87d068' style={{ marginLeft: '20px' }}>认证讲师</Tag>
             </div>
             <div>
