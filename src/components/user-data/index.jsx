@@ -8,6 +8,7 @@ import {
   Col,
   Icon,
   Button,
+  message,
 } from 'antd'
 
 import styles from './user-data.less'
@@ -27,22 +28,32 @@ class UserData extends React.Component {
     summary: DEFAULT_SUMMARY,
   }
 
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired,
+  }
+
   handleFollowSomeone = () => {
     const {
       dispatch,
+      nextPathname,
     } = this.props
 
-    if (Auth.getToken() === undefined) {
-      browserHistory.push('/account/login')
-    } else {
-      dispatch({
-        type: 'star/postFollowSomeone',
-        payload: {
-          token: Auth.getToken(),
-          id: this.props.routing.locationBeforeTransitions.query.id,
-        },
-      })
-    }
+    const {
+      router: {
+        replace,
+      },
+    } = this.context
+
+    dispatch({
+      type: 'star/postFollowSomeone',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+      message,
+      replace,
+      nextPathname,
+    })
   }
 
   handleUnFollowSomeone = () => {
@@ -56,6 +67,7 @@ class UserData extends React.Component {
         token: Auth.getToken(),
         id: this.props.routing.locationBeforeTransitions.query.id,
       },
+      message,
     })
   }
 

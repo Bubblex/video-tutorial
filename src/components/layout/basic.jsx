@@ -71,6 +71,7 @@ class BasicLayout extends React.Component {
       videos_num: videosNum,
       stars_num: starsNum,
       isFollow,
+      nextPathname,
     } = this.props
 
     return (
@@ -116,6 +117,7 @@ class BasicLayout extends React.Component {
               videos_num={videosNum}
               stars_num={starsNum}
               isFollow={isFollow}
+              nextPathname={nextPathname}
             />
           }
           <Container className={styles.contentContainer}>

@@ -33,10 +33,11 @@ export default {
     },
   },
   effects: {
-    *postFollowSomeone({ payload }, { call, put }) {
+    *postFollowSomeone({ payload, message, replace, nextPathname }, { call, put }) {
       const {
         data: {
           errcode,
+          errmsg,
         },
       } = yield call(userFollow, payload)
 
@@ -45,12 +46,23 @@ export default {
           type: 'userinfo/postAllUserInfo',
           payload,
         })
+        message.success(errmsg)
+      } else if (errcode === 100) {
+        message.error(errmsg, 1.5, () => {
+          replace({
+            pathname: '/account/login',
+            state: {
+              nextPathname,
+            },
+          })
+        })
       }
     },
-    *postUnFollowSomeone({ payload }, { call, put }) {
+    *postUnFollowSomeone({ payload, message }, { call, put }) {
       const {
         data: {
           errcode,
+          errmsg,
         },
       } = yield call(userUnfollow, payload)
 
@@ -59,6 +71,9 @@ export default {
           type: 'userinfo/postAllUserInfo',
           payload,
         })
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
       }
     },
     *postUserFollersList({ payload }, { call, put }) {

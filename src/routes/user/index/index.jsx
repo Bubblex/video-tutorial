@@ -23,26 +23,10 @@ const { TabPane } = Tabs
 
 class UserIndex extends React.Component {
 
-  // componentDidMount() {
-  //   const {
-  //     dispatch,
-  //   } = this.props
-
-  //   dispatch({
-  //     type: 'userinfo/postAllUserInfo',
-  //     payload: {
-  //       token: Auth.getToken(),
-  //       id: this.props.routing.locationBeforeTransitions.query.id,
-  //     },
-  //   })
-  // }
-
   renderUserFollersList = (key) => {
     const {
       dispatch,
     } = this.props
-
-    console.log(key)
 
     dispatch({
       type: 'star/changeActiveTabKey',
@@ -85,10 +69,15 @@ class UserIndex extends React.Component {
       star: {
         activeTabKey,
       },
+      location: {
+        pathname,
+        search,
+      },
     } = this.props
 
     const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
     const summary = checksummary === null ? DEFAULT_SUMMARY : checksummary
+    const nextPathname = pathname + search
 
     const renderFollowersList = this.props.star.userFollowersList === undefined
     ? null
@@ -130,8 +119,6 @@ class UserIndex extends React.Component {
       )
     })
 
-    console.log(this.props.star)
-
     return (
       <BasicLayout
         contentBefore={UserData}
@@ -143,6 +130,7 @@ class UserIndex extends React.Component {
         videos_num={videosNum}
         stars_num={starsNum}
         isFollow={isFollow}
+        nextPathname={nextPathname}
       >
         <Tabs activeKey={activeTabKey} onTabClick={this.renderUserFollersList}>
           <TabPane tab='视频教程' key='1'>

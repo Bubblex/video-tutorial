@@ -1,4 +1,5 @@
 import React from 'react'
+import LzEditor from 'react-lz-editor'
 
 import {
   Form,
@@ -21,6 +22,10 @@ const {
 } = Radio
 
 class ArticleForm extends React.Component {
+  getArticleContent = () => {
+    console.log(this)
+  }
+
   handleReleaseArticleSubmit = (e) => {
     e.preventDefault()
 
@@ -90,6 +95,8 @@ class ArticleForm extends React.Component {
                   message: '分类不能为空',
                 },
               ],
+              initialValue: 1,
+              valuePropName: 'checked',
             })(<RadioGroup>
               <Radio value={1}>邮票</Radio>
               <Radio value={2}>货币</Radio>
@@ -147,7 +154,7 @@ class ArticleForm extends React.Component {
                   message: '内容不能为空',
                 },
               ],
-            })(<Input type='textarea' />)
+            })(<LzEditor cbReceiver={this.getArticleContent} />)
           }
         </FormItem>
         <Button
