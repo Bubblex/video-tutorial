@@ -40,11 +40,15 @@ class ArticleList extends React.Component {
   handleChangePage = (current) => {
     const {
       dispatch,
+      article: {
+        CheckArticleType,
+      },
     } = this.props
     dispatch({
       type: 'article/postArticleList',
       payload: {
         page: current,
+        article_type: CheckArticleType,
       },
     })
   }

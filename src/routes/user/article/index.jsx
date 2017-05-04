@@ -21,6 +21,8 @@ import {
 
 import styles from '../../article/list/index.less'
 
+const { CheckableTag } = Tag
+
 class UserArticle extends React.Component {
   componentDidMount() {
     const {
@@ -38,12 +40,36 @@ class UserArticle extends React.Component {
   handleChangePage = (current) => {
     const {
       dispatch,
+      article: {
+        CheckArticleType,
+      },
     } = this.props
     dispatch({
       type: 'article/postArticleList',
       payload: {
         page: current,
+        id: Auth.getInfo().id,
+        article_type: CheckArticleType,
       },
+    })
+  }
+
+  handleCheckArticleType = (articleType) => {
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'article/postArticleList',
+      payload: {
+        article_type: articleType,
+        id: Auth.getInfo().id,
+      },
+    })
+
+    dispatch({
+      type: 'article/changeCheckedTag',
+      CheckArticleType: articleType,
     })
   }
 
@@ -66,6 +92,7 @@ class UserArticle extends React.Component {
       article: {
         articleDataList,
         articleListPagination,
+        CheckArticleType,
       },
     } = this.props
 
@@ -129,6 +156,13 @@ class UserArticle extends React.Component {
         stars_num={starsNum}
         account={account}
       >
+        <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我发布的视频教程</h2>
+        <div style={{ marginTop: '20px' }}>
+          <CheckableTag checked={CheckArticleType === 0} onChange={() => { this.handleCheckArticleType(0) }}>全部</CheckableTag >
+          <CheckableTag checked={CheckArticleType === 1} onChange={() => { this.handleCheckArticleType(1) }}>邮票</CheckableTag >
+          <CheckableTag checked={CheckArticleType === 2} onChange={() => { this.handleCheckArticleType(2) }}>货币</CheckableTag>
+          <CheckableTag checked={CheckArticleType === 3} onChange={() => { this.handleCheckArticleType(3) }}>电话卡</CheckableTag>
+        </div>
         {renderArticleDataList}
         <Pagination
           {...articleListPagination}
