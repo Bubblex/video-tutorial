@@ -32,6 +32,11 @@ export default {
     articleList: [],
     articlePagination: {},
     articleOptions: {},
+    articleDetail: {
+      type: {},
+      article_author: {},
+    },
+    isDisplayArticleDetailModal: false,
 
     videoList: [],
     videoOptions: {},
@@ -129,6 +134,21 @@ export default {
       return {
         ...state,
         articleList: immute,
+      }
+    },
+
+    openArticleDetailModal(state, { index }) {
+      return {
+        ...state,
+        articleDetail: state.articleList[index],
+        isDisplayArticleDetailModal: true,
+      }
+    },
+
+    closeArticleDetailModal(state) {
+      return {
+        ...state,
+        isDisplayArticleDetailModal: false,
       }
     },
   },

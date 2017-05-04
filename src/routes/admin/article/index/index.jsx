@@ -2,13 +2,18 @@ import React from 'react'
 import { connect } from 'dva'
 
 import {
+  Row,
+  Col,
   Table,
+  Modal,
   message,
 } from 'antd'
 
 import FilterForm from './filter'
 
 import adminAuth from '../../../../utils/adminAuth'
+
+import styles from './article.less'
 
 class AdminArticleIndex extends React.Component {
   constructor(props) {
@@ -66,13 +71,17 @@ class AdminArticleIndex extends React.Component {
         render: (text, row, index) => {
           return (
             <span>
-              <a style={{ marginRight: 8 }}>查看</a>
+              <a style={{ marginRight: 8 }} onClick={() => { this.openArticleDetailModal(index) }}>查看</a>
               <a style={{ marginRight: 8 }} onClick={() => { this.handleDisable(text, row.status === 1 ? 2 : 1, index) }}>{row.status === 1 ? '禁用' : '启用'}</a>
             </span>
           )
         },
       },
     ]
+
+    this.labelSpan = 8
+    this.wrapperSpan = 16
+    this.gutter = 16
   }
   handleDisable = (id, disable, index) => {
     this.props.dispatch({
@@ -112,11 +121,37 @@ class AdminArticleIndex extends React.Component {
       },
     })
   }
+  openArticleDetailModal = (index) => {
+    this.props.dispatch({
+      type: 'admin/openArticleDetailModal',
+      index,
+    })
+  }
+  closeArticleDetailModal = () => {
+    this.props.dispatch({ type: 'admin/closeArticleDetailModal' })
+  }
   render() {
     const {
       admin: {
         articleList,
         articlePagination,
+        articleDetail: {
+          id,
+          title,
+          cover,
+          article_author: {
+            nickname,
+          },
+          type: {
+            type_name: typeName,
+          },
+          summary,
+          content,
+          read_num: readNum,
+          created_at: createdAt,
+          status,
+        },
+        isDisplayArticleDetailModal,
       },
     } = this.props
 
@@ -132,6 +167,96 @@ class AdminArticleIndex extends React.Component {
           }}
           dataSource={articleList}
         />
+        <Modal
+          title={title}
+          visible={isDisplayArticleDetailModal}
+          onCancel={this.closeArticleDetailModal}
+          onOk={this.closeArticleDetailModal}
+        >
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              编号：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{id}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              标题：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{title}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              作者：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{nickname}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              类型：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{typeName}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              阅读量：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{readNum}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              状态：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>
+                {status === 1 && '正常'}
+                {status === 2 && '已禁用'}
+              </span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              发布时间：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{createdAt}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              封面图：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <img src={cover} alt={title} className={styles.cover} />
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              简介：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{summary}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              内容：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{content}</span>
+            </Col>
+          </Row>
+        </Modal>
       </div>
     )
   }
