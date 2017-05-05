@@ -83,6 +83,7 @@ class UserData extends React.Component {
       isFollow,
       account,
       authenticate,
+      roleId,
     } = this.props
 
     const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
@@ -95,6 +96,11 @@ class UserData extends React.Component {
               <img src={avatar} alt={nickname} />
               {
                 authenticate === 4
+                &&
+                <p className={styles.lecturer}>认证讲师</p>
+              }
+              {
+                roleId === 2
                 &&
                 <p className={styles.lecturer}>认证讲师</p>
               }

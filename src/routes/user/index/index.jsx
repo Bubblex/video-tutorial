@@ -77,7 +77,7 @@ class UserIndex extends React.Component {
           stars_num: starsNum,
           is_follow: isFollow,
           account,
-          authentication,
+          role_id: roleId,
         },
       },
       star: {
@@ -198,7 +198,7 @@ class UserIndex extends React.Component {
         isFollow={isFollow}
         nextPathname={nextPathname}
         account={account}
-        authenticate={authentication}
+        roleId={roleId}
       >
         <Tabs activeKey={activeTabKey} onTabClick={this.renderUserFollersList}>
           <TabPane tab='视频教程' key='1'>

@@ -73,7 +73,7 @@ class BasicLayout extends React.Component {
       isFollow,
       nextPathname,
       account,
-      authenticate,
+      roleId,
     } = this.props
 
     return (
@@ -121,7 +121,7 @@ class BasicLayout extends React.Component {
               isFollow={isFollow}
               nextPathname={nextPathname}
               account={account}
-              authenticate={authenticate}
+              roleId={roleId}
             />
           }
           <Container className={styles.contentContainer}>
