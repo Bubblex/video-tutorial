@@ -96,6 +96,47 @@ export default {
         message.error(errmsg)
       }
     },
+    *postCollectVideo({ payload, message, replace, nextPathname }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(videoCollect, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'postVideoDetail',
+        })
+        message.success(errmsg)
+      } else if (errcode === 100) {
+        message.error(errmsg, 1.5, () => {
+          replace({
+            pathname: '/account/login',
+            state: {
+              nextPathname,
+            },
+          })
+        })
+      }
+    },
+    *postCancelCollectVideo({ payload, message }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(videoCancel, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'postVideoDetail',
+        })
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
+      }
+    },
   },
   subscriptions: {
     videolist({ dispatch, history }) {

@@ -8,6 +8,7 @@ import {
   Col,
   Tag,
   Button,
+  message,
   Breadcrumb,
 } from 'antd'
 
@@ -25,6 +26,7 @@ import {
   URL_HOME,
   URL_VIDEO_LIST,
 } from '../../../config/web'
+import Auth from '../../../utils/auth'
 
 const { CheckableTag } = Tag
 
@@ -33,6 +35,57 @@ class VideoDetail extends React.Component {
     avatar: DEFAULT_AVATAR,
     username: DEFAULT_USERNAME,
   }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired,
+  }
+
+  handleCollectVideo = (e) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+      location: {
+        pathname,
+        search,
+      },
+    } = this.props
+
+    const {
+      router: {
+        replace,
+      },
+    } = this.context
+
+    dispatch({
+      type: 'video/postCollectVideo',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+      message,
+      replace,
+      nextPathname: pathname + search,
+    })
+  }
+
+  handleCancelCollectVideo = (e) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'video/postCancelCollectVideo',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+      message,
+    })
+  }
+
   render() {
     const {
       username,
@@ -80,7 +133,8 @@ class VideoDetail extends React.Component {
         <div style={{ marginTop: '20px', marginBottom: '20px' }}>
           <UserCard avatar={avatar} username={nickname} />
         </div>
-        <Button type='primary' icon='heart-o' size='large'>收藏视频 | 111</Button>
+        <Button type='primary' icon='heart-o' size='large' onClick={this.handleCollectVideo}>收藏视频 | 111</Button>
+        <Button type='primary' icon='heart-o' size='large' onClick={this.handleCancelCollectVideo}>取消收藏 | 111</Button>
         <div style={{ marginTop: '30px' }}>
           <h2 style={{ margin: '30px', paddingBottom: '10px', borderBottom: '1px solid rgb(204, 204, 204)' }}>8条评论</h2>
           <Comment />
