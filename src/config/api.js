@@ -95,3 +95,9 @@ export const API_ADMIN_FETCH_USER_CERTIFICATION_LIST = `${PREFIX}/admin/user/cer
 
 // 4.1.9 认证用户
 export const API_ADMIN_USER_CERTIFICATION = `${PREFIX}/admin/user/certification`
+
+// 4.1.10 获取视频待审核列表
+export const API_ADMIN_FETCH_VIDEO_REVIEW_LIST = `${PREFIX}/admin/video/review/list`
+
+// 4.1.11 审核视频
+export const API_ADMIN_VIDEO_REVIEW = `${PREFIX}/admin/video/review`

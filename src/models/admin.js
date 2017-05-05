@@ -20,6 +20,8 @@ import {
   disableVideo,
   fetchUserCertificationList,
   userCertification,
+  fetchVideoReviewList,
+  videoReview,
 } from '../services/admin'
 
 export default {
@@ -59,6 +61,14 @@ export default {
       video_author: {},
     },
     isDisplayVideoDetailModal: false,
+
+    videoReviewList: [],
+    videoReviewPagination: {},
+    videoReviewOptions: {},
+    videoReviewDetail: {
+      video_author: {},
+    },
+    isDisplayVideoReviewDetailModal: false,
 
     adminInfo: {},
     isDisplayCertificationConfirmModal: false,
@@ -262,6 +272,35 @@ export default {
         isDisplayCertificationConfirmModal: false,
       }
     },
+
+    saveVideoReviewList(state, { list, pagination }) {
+      return {
+        ...state,
+        videoReviewList: list,
+        videoReviewPagination: pagination,
+      }
+    },
+
+    saveVideoReviewOptions(state, { options }) {
+      return {
+        ...state,
+        videoReviewOptions: options,
+      }
+    },
+
+    openVideoReviewDetailModal(state) {
+      return {
+        ...state,
+        isDisplayVideoReviewConfirmModal: true,
+      }
+    },
+
+    closeVideoReviewConfirmModal(state) {
+      return {
+        ...state,
+        isDisplayVideoReviewConfirmModal: false,
+      }
+    },
   },
   effects: {
     *adminLogin({ payload, message }, { call, put }) {
@@ -438,6 +477,47 @@ export default {
       }
     },
 
+    *fetchVideoReviewList({ payload, message }, { call, put }) {
+      const {
+        data: {
+          data,
+          errcode,
+          errmsg,
+        },
+      } = yield call(fetchVideoReviewList, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveVideoReviewList',
+          ...data,
+        })
+        yield put({
+          type: 'saveVideoReviewOptions',
+          options: {
+            filter: payload.filter,
+          },
+        })
+      } else {
+        message.error(errmsg)
+      }
+    },
+
+    *reviewVideo({ payload, message, success = () => {} }, { call }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(videoReview, payload)
+
+      if (errcode === 1) {
+        success()
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
+      }
+    },
+
     *disableVideo({ payload, message, index }, { call, put }) {
       const {
         data: {
@@ -499,6 +579,13 @@ export default {
           })
         } else if (pathname === URL_ADMIN_VIDEO_REVIEW) {
           dispatch({ type: 'selectMenu', key: '5' })
+          dispatch({
+            type: 'fetchVideoReviewList',
+            payload: {
+              ...params,
+              token: adminAuth.getToken(),
+            },
+          })
         }
       })
     },

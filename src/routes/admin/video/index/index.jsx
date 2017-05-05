@@ -53,7 +53,8 @@ class AdminVideoIndex extends React.Component {
         dataIndex: 'status',
         key: 'status',
         render(text) {
-          return text === 1 ? '正常' : '已禁用'
+          const map = ['正常', '已禁用', '已删除', '待审核', '审核失败']
+          return map[text - 1]
         },
       },
       {
