@@ -190,5 +190,17 @@ export default {
         }
       })
     },
+    userLikeArticle({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/user/like') {
+          dispatch({
+            type: 'article/postArticleList',
+            payload: {
+              id: Auth.getInfo().id,
+            },
+          })
+        }
+      })
+    },
   },
 }
