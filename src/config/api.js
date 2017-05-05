@@ -89,3 +89,15 @@ export const API_ADMIN_FETCH_VIDEO_LIST = `${PREFIX}/admin/video/list`
 
 // 4.1.7 启用 / 禁用视频
 export const API_ADMIN_DISABLE_VIDEO = `${PREFIX}/admin/video/disable`
+
+// 4.1.8 获取待认证用户
+export const API_ADMIN_FETCH_USER_CERTIFICATION_LIST = `${PREFIX}/admin/user/certification/list`
+
+// 4.1.9 认证用户
+export const API_ADMIN_USER_CERTIFICATION = `${PREFIX}/admin/user/certification`
+
+// 4.1.10 获取视频待审核列表
+export const API_ADMIN_FETCH_VIDEO_REVIEW_LIST = `${PREFIX}/admin/video/review/list`
+
+// 4.1.11 审核视频
+export const API_ADMIN_VIDEO_REVIEW = `${PREFIX}/admin/video/review`

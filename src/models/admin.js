@@ -6,6 +6,8 @@ import {
   URL_ADMIN_USER,
   URL_ADMIN_ARTICLE,
   URL_ADMIN_VIDEO,
+  URL_ADMIN_USER_CERTIFICATION,
+  URL_ADMIN_VIDEO_REVIEW,
 } from '../config/web'
 
 import {
@@ -16,6 +18,10 @@ import {
   disableArticle,
   fetchVideoList,
   disableVideo,
+  fetchUserCertificationList,
+  userCertification,
+  fetchVideoReviewList,
+  videoReview,
 } from '../services/admin'
 
 export default {
@@ -30,6 +36,14 @@ export default {
       role: {},
     },
     isDisplayUserDetailModal: false,
+
+    userCertificationList: [],
+    userCertificationPagination: {},
+    userCertificationOptions: {},
+    userCertificationDetail: {
+      role: {},
+    },
+    isDisplayUserCertificationDetailModal: false,
 
     articleList: [],
     articlePagination: {},
@@ -48,7 +62,16 @@ export default {
     },
     isDisplayVideoDetailModal: false,
 
+    videoReviewList: [],
+    videoReviewPagination: {},
+    videoReviewOptions: {},
+    videoReviewDetail: {
+      video_author: {},
+    },
+    isDisplayVideoReviewDetailModal: false,
+
     adminInfo: {},
+    isDisplayCertificationConfirmModal: false,
   },
   reducers: {
     /**
@@ -126,6 +149,36 @@ export default {
       }
     },
 
+    saveUserCertificationList(state, { list, pagination }) {
+      return {
+        ...state,
+        userCertificationList: list,
+        userCertificationPagination: pagination,
+      }
+    },
+
+    saveUserCertificationOptions(state, { options }) {
+      return {
+        ...state,
+        userCertificationOptions: options,
+      }
+    },
+
+    saveUserCertificationDetailByIndex(state, { index }) {
+      return {
+        ...state,
+        userCertificationDetail: state.userCertificationList[index],
+        isDisplayUserCertificationDetailModal: true,
+      }
+    },
+
+    clearUserCertificationDetail(state) {
+      return {
+        ...state,
+        isDisplayUserCertificationDetailModal: false,
+      }
+    },
+
     saveArticleList(state, { list, pagination }) {
       return {
         ...state,
@@ -190,6 +243,64 @@ export default {
         videoList: immute,
       }
     },
+
+    openVideoDetailModal(state, { index }) {
+      return {
+        ...state,
+        videoDetail: state.videoList[index],
+        isDisplayVideoDetailModal: true,
+      }
+    },
+
+    closeVideoDetailModal(state) {
+      return {
+        ...state,
+        isDisplayVideoDetailModal: false,
+      }
+    },
+
+    openCertificationConfirmModal(state) {
+      return {
+        ...state,
+        isDisplayCertificationConfirmModal: true,
+      }
+    },
+
+    closeCertificationConfirmModal(state) {
+      return {
+        ...state,
+        isDisplayCertificationConfirmModal: false,
+      }
+    },
+
+    saveVideoReviewList(state, { list, pagination }) {
+      return {
+        ...state,
+        videoReviewList: list,
+        videoReviewPagination: pagination,
+      }
+    },
+
+    saveVideoReviewOptions(state, { options }) {
+      return {
+        ...state,
+        videoReviewOptions: options,
+      }
+    },
+
+    openVideoReviewDetailModal(state) {
+      return {
+        ...state,
+        isDisplayVideoReviewConfirmModal: true,
+      }
+    },
+
+    closeVideoReviewConfirmModal(state) {
+      return {
+        ...state,
+        isDisplayVideoReviewConfirmModal: false,
+      }
+    },
   },
   effects: {
     *adminLogin({ payload, message }, { call, put }) {
@@ -235,6 +346,44 @@ export default {
             filter: payload.filter,
           },
         })
+      }
+    },
+
+    *fetchUserCertificationList({ payload }, { call, put }) {
+      const {
+        data: {
+          data,
+          errcode,
+        },
+      } = yield call(fetchUserCertificationList, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveUserCertificationList',
+          ...data,
+        })
+        yield put({
+          type: 'saveUserCertificationOptions',
+          options: {
+            filter: payload.filter,
+          },
+        })
+      }
+    },
+
+    *userCertification({ payload, message, success = () => {} }, { call }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(userCertification, payload)
+
+      if (errcode === 1) {
+        success()
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
       }
     },
 
@@ -328,13 +477,54 @@ export default {
       }
     },
 
+    *fetchVideoReviewList({ payload, message }, { call, put }) {
+      const {
+        data: {
+          data,
+          errcode,
+          errmsg,
+        },
+      } = yield call(fetchVideoReviewList, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveVideoReviewList',
+          ...data,
+        })
+        yield put({
+          type: 'saveVideoReviewOptions',
+          options: {
+            filter: payload.filter,
+          },
+        })
+      } else {
+        message.error(errmsg)
+      }
+    },
+
+    *reviewVideo({ payload, message, success = () => {} }, { call }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(videoReview, payload)
+
+      if (errcode === 1) {
+        success()
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
+      }
+    },
+
     *disableVideo({ payload, message, index }, { call, put }) {
       const {
         data: {
           errcode,
           errmsg,
         },
-      } = yield call(disableUser, payload)
+      } = yield call(disableVideo, payload)
 
       if (errcode === 1) {
         message.success(errmsg)
@@ -373,6 +563,24 @@ export default {
           dispatch({ type: 'selectMenu', key: '3' })
           dispatch({
             type: 'fetchVideoList',
+            payload: {
+              ...params,
+              token: adminAuth.getToken(),
+            },
+          })
+        } else if (pathname === URL_ADMIN_USER_CERTIFICATION) {
+          dispatch({ type: 'selectMenu', key: '4' })
+          dispatch({
+            type: 'fetchUserCertificationList',
+            payload: {
+              ...params,
+              token: adminAuth.getToken(),
+            },
+          })
+        } else if (pathname === URL_ADMIN_VIDEO_REVIEW) {
+          dispatch({ type: 'selectMenu', key: '5' })
+          dispatch({
+            type: 'fetchVideoReviewList',
             payload: {
               ...params,
               token: adminAuth.getToken(),

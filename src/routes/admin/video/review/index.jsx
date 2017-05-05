@@ -10,6 +10,7 @@ import {
 } from 'antd'
 
 import FilterForm from './filter'
+import ReviewForm from './confirm'
 
 import adminAuth from '../../../../utils/adminAuth'
 
@@ -65,7 +66,8 @@ class AdminVideoIndex extends React.Component {
           return (
             <span>
               <a style={{ marginRight: 8 }} onClick={() => { this.openVideoDetailModal(index) }}>查看</a>
-              <a style={{ marginRight: 8 }} onClick={() => { this.handleDisable(text, row.status === 1 ? 2 : 1, index) }}>{row.status === 1 ? '禁用' : '启用'}</a>
+              <a style={{ marginRight: 8 }} onClick={() => { this.reviewVideo(text, 1) }}>通过</a>
+              <a style={{ marginRight: 8 }} onClick={() => { this.reviewVideo(text, 5) }}>不通过</a>
             </span>
           )
         },
@@ -75,6 +77,62 @@ class AdminVideoIndex extends React.Component {
     this.labelSpan = 8
     this.wrapperSpan = 16
     this.gutter = 16
+  }
+  reviewVideo = (id, result) => {
+    const {
+      dispatch,
+    } = this.props
+
+    if (result === 1) {
+      dispatch({
+        type: 'admin/reviewVideo',
+        payload: {
+          id,
+          result,
+          token: adminAuth.getToken(),
+        },
+        message,
+        success: this.reloadReviewVideoList,
+      })
+    } else {
+      this.id = id
+      this.result = result
+      dispatch({ type: 'admin/openVideoReviewDetailModal' })
+    }
+  }
+  closeVideoReviewConfirmModal = () => {
+    this.props.dispatch({ type: 'admin/closeVideoReviewConfirmModal' })
+  }
+  reviewVideoNo = (data) => {
+    this.props.dispatch({
+      type: 'admin/reviewVideo',
+      payload: {
+        id: this.id,
+        result: this.result,
+        token: adminAuth.getToken(),
+        ...data,
+      },
+      message,
+      success: this.reloadReviewVideoList,
+    })
+  }
+  reloadReviewVideoList = () => {
+    const {
+      dispatch,
+      admin: {
+        videoReviewOptions,
+        videoReviewPagination,
+      },
+    } = this.props
+
+    dispatch({
+      type: 'admin/fetchVideoReviewList',
+      payload: {
+        ...videoReviewOptions,
+        ...videoReviewPagination,
+        token: adminAuth.getToken(),
+      },
+    })
   }
   openVideoDetailModal = (index) => {
     this.props.dispatch({
@@ -106,7 +164,7 @@ class AdminVideoIndex extends React.Component {
     } = this.props
 
     dispatch({
-      type: 'admin/fetchVideoList',
+      type: 'admin/fetchVideoReviewList',
       payload: {
         ...videoOptions,
         page,
@@ -117,7 +175,7 @@ class AdminVideoIndex extends React.Component {
   }
   handleFilterSubmit = (data) => {
     this.props.dispatch({
-      type: 'admin/fetchVideoList',
+      type: 'admin/fetchVideoReviewList',
       payload: {
         ...data,
         token: adminAuth.getToken(),
@@ -128,9 +186,9 @@ class AdminVideoIndex extends React.Component {
   render() {
     const {
       admin: {
-        videoList,
-        videoPagination,
-        videoDetail: {
+        videoReviewList,
+        videoReviewPagination,
+        videoReviewDetail: {
           id,
           title,
           cover,
@@ -143,25 +201,31 @@ class AdminVideoIndex extends React.Component {
           created_at: createdAt,
           status,
         },
-        isDisplayVideoDetailModal,
+        isDisplayVideoReviewDetailModal,
+        isDisplayVideoReviewConfirmModal,
       },
     } = this.props
 
     return (
       <div>
+        <ReviewForm
+          visible={isDisplayVideoReviewConfirmModal}
+          onCancel={this.closeVideoReviewConfirmModal}
+          onOk={this.reviewVideoNo}
+        />
         <FilterForm onSubmit={this.handleFilterSubmit} />
         <Table
           rowKey='id'
           columns={this.USER_TABLE_COLUMNS}
-          dataSource={videoList}
+          dataSource={videoReviewList}
           pagination={{
-            ...videoPagination,
+            ...videoReviewPagination,
             onChange: this.handlePageChange,
           }}
         />
         <Modal
           title={title}
-          visible={isDisplayVideoDetailModal}
+          visible={isDisplayVideoReviewDetailModal}
           onCancel={this.closeVideoDetailModal}
           onOk={this.closeVideoDetailModal}
         >

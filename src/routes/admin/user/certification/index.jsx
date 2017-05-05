@@ -10,6 +10,7 @@ import {
 } from 'antd'
 
 import FilterForm from './filter'
+import ConfirmForm from './confirm'
 
 import adminAuth from '../../../../utils/adminAuth'
 
@@ -40,22 +41,6 @@ class AdminArticleIndex extends React.Component {
         key: 'nickname',
       },
       {
-        title: '用户角色',
-        dataIndex: 'role',
-        key: 'role',
-        render(text) {
-          return text.role_name
-        },
-      },
-      {
-        title: '用户状态',
-        dataIndex: 'status',
-        key: 'status',
-        render(text) {
-          return text === 1 ? '正常' : '已禁用'
-        },
-      },
-      {
         title: '注册时间',
         dataIndex: 'created_at',
         key: 'created_at',
@@ -68,11 +53,8 @@ class AdminArticleIndex extends React.Component {
           return (
             <span>
               <a style={{ marginRight: 8 }} onClick={() => { this.viewUserDetail(index) }}>查看</a>
-              {
-                data.role_id !== 3
-                &&
-                <a style={{ marginRight: 8 }} onClick={() => { this.disableUser(text, data.status === 1 ? 2 : 1, index) }}>{data.status === 1 ? '禁用' : '启用'}</a>
-              }
+              <a style={{ marginRight: 8 }} onClick={() => { this.handleCertification(text, 4) }}>通过</a>
+              <a style={{ marginRight: 8 }} onClick={() => { this.handleCertification(text, 3) }}>不通过</a>
             </span>
           )
         },
@@ -83,30 +65,76 @@ class AdminArticleIndex extends React.Component {
     this.wrapperSpan = 16
     this.gutter = 16
   }
-  disableUser = (id, disable, index) => {
+  handleCertification = (id, result) => {
+    const {
+      dispatch,
+    } = this.props
+
+    if (result === 4) {
+      dispatch({
+        type: 'admin/userCertification',
+        payload: {
+          id,
+          result,
+          token: adminAuth.getToken(),
+        },
+        message,
+        success: this.reloadUserCertificationList,
+      })
+    } else {
+      this.id = id
+      this.result = result
+      dispatch({ type: 'admin/openCertificationConfirmModal' })
+    }
+  }
+  handleCertificationNo = (data) => {
     this.props.dispatch({
-      type: 'admin/disableUser',
+      type: 'admin/userCertification',
       payload: {
-        id,
-        disable,
+        id: this.id,
+        result: this.result,
+        token: adminAuth.getToken(),
+        ...data,
+      },
+      message,
+      success: this.reloadUserCertificationList,
+    })
+  }
+  closeCertificationConfirmModal = () => {
+    this.props.dispatch({
+      type: 'admin/closeCertificationConfirmModal',
+    })
+  }
+  reloadUserCertificationList = () => {
+    const {
+      dispatch,
+      admin: {
+        userCertificationPagination,
+        userCertificationOptions,
+      },
+    } = this.props
+
+    dispatch({
+      type: 'admin/fetchUserCertificationList',
+      payload: {
+        ...userCertificationOptions,
+        ...userCertificationPagination,
         token: adminAuth.getToken(),
       },
-      index,
-      message,
     })
   }
   viewUserDetail = (index) => {
     this.props.dispatch({
-      type: 'admin/saveUserDetailByIndex',
+      type: 'admin/saveUserCertificationDetailByIndex',
       index,
     })
   }
   closeUserDetailModal = () => {
-    this.props.dispatch({ type: 'admin/clearUserDetail' })
+    this.props.dispatch({ type: 'admin/clearUserCertificationDetail' })
   }
   handleFilterSubmit = (data) => {
     this.props.dispatch({
-      type: 'admin/fetchUserList',
+      type: 'admin/fetchUserCertificationList',
       payload: {
         token: adminAuth.getToken(),
         ...data,
@@ -122,7 +150,7 @@ class AdminArticleIndex extends React.Component {
     } = this.props
 
     dispatch({
-      type: 'admin/fetchUserList',
+      type: 'admin/fetchUserCertificationList',
       payload: {
         ...userOptions,
         token: adminAuth.getToken(),
@@ -133,31 +161,33 @@ class AdminArticleIndex extends React.Component {
   render() {
     const {
       admin: {
-        userList,
-        userPagination,
-        isDisplayUserDetailModal,
-        userDetail: {
+        userCertificationList,
+        userCertificationPagination,
+        isDisplayUserCertificationDetailModal,
+        isDisplayCertificationConfirmModal,
+        userCertificationDetail: {
           account,
           nickname,
           avatar,
-          role: {
-            role_name: roleName,
-          },
           summary,
           created_at: createdAt,
           card_number: cardNumber,
           card_front_image: cardFrontImage,
           card_back_image: cardBackImage,
-          authentication,
         },
       },
     } = this.props
 
     return (
       <div>
+        <ConfirmForm
+          visible={isDisplayCertificationConfirmModal}
+          onCancel={this.closeCertificationConfirmModal}
+          onOk={this.handleCertificationNo}
+        />
         <Modal
           title={`用户 ${nickname} 的详细资料`}
-          visible={isDisplayUserDetailModal}
+          visible={isDisplayUserCertificationDetailModal}
           onOk={this.closeUserDetailModal}
           onCancel={this.closeUserDetailModal}
         >
@@ -185,14 +215,6 @@ class AdminArticleIndex extends React.Component {
               <span>{nickname}</span>
             </Col>
           </Row>
-          <Row gutter={this.gutter} className={styles.line}>
-            <Col span={this.labelSpan} className={styles.label}>
-              角色：
-            </Col>
-            <Col span={this.wrapperSpan}>
-              <span>{roleName}</span>
-            </Col>
-          </Row>
           {
             summary
             &&
@@ -202,30 +224,6 @@ class AdminArticleIndex extends React.Component {
               </Col>
               <Col span={this.wrapperSpan}>
                 <span>{summary}</span>
-              </Col>
-            </Row>
-          }
-          <Row gutter={this.gutter} className={styles.line}>
-            <Col span={this.labelSpan} className={styles.label}>
-              账户状态：
-            </Col>
-            <Col span={this.wrapperSpan}>
-              <span>{status === 1 ? '正常' : '已禁用'}</span>
-            </Col>
-          </Row>
-          {
-            authentication > 1
-            &&
-            <Row gutter={this.gutter} className={styles.line}>
-              <Col span={this.labelSpan} className={styles.label}>
-                讲师认证状态
-              </Col>
-              <Col span={this.wrapperSpan}>
-                <span>
-                  {authentication === 2 && '认证中'}
-                  {authentication === 3 && '认证失败'}
-                  {authentication === 4 && '认证成功'}
-                </span>
               </Col>
             </Row>
           }
@@ -281,10 +279,10 @@ class AdminArticleIndex extends React.Component {
           rowKey='id'
           columns={this.USER_TABLE_COLUMNS}
           pagination={{
-            ...userPagination,
+            ...userCertificationPagination,
             onChange: this.handleChangePage,
           }}
-          dataSource={userList}
+          dataSource={userCertificationList}
         />
       </div>
     )
