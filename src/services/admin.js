@@ -9,6 +9,8 @@ import {
   API_ADMIN_DISABLE_ARTICLE,
   API_ADMIN_FETCH_VIDEO_LIST,
   API_ADMIN_DISABLE_VIDEO,
+  API_ADMIN_FETCH_USER_CERTIFICATION_LIST,
+  API_ADMIN_USER_CERTIFICATION,
 } from '../config/api'
 
 
@@ -100,6 +102,32 @@ export async function fetchVideoList(params) {
  */
 export async function disableVideo(params) {
   return request(`${API_ADMIN_DISABLE_VIDEO}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+/**
+ * 获取待审核的用户
+ *
+ * @export
+ * @param {any} params
+ * @returns
+ */
+export async function fetchUserCertificationList(params) {
+  return request(`${API_ADMIN_FETCH_USER_CERTIFICATION_LIST}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+/**
+ * 审核用户
+ *
+ * @export
+ * @param {any} params
+ * @returns
+ */
+export async function userCertification(params) {
+  return request(`${API_ADMIN_USER_CERTIFICATION}?${qs.stringify(params)}`, {
     method: 'POST',
   })
 }

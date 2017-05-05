@@ -2,13 +2,18 @@ import React from 'react'
 import { connect } from 'dva'
 
 import {
+  Row,
+  Col,
   Table,
+  Modal,
   message,
 } from 'antd'
 
 import FilterForm from './filter'
 
 import adminAuth from '../../../../utils/adminAuth'
+
+import styles from './video.less'
 
 class AdminVideoIndex extends React.Component {
   constructor(props) {
@@ -58,13 +63,26 @@ class AdminVideoIndex extends React.Component {
         render: (text, row, index) => {
           return (
             <span>
-              <a style={{ marginRight: 8 }} onClick={() => { this.openArticleDetailModal(index) }}>查看</a>
+              <a style={{ marginRight: 8 }} onClick={() => { this.openVideoDetailModal(index) }}>查看</a>
               <a style={{ marginRight: 8 }} onClick={() => { this.handleDisable(text, row.status === 1 ? 2 : 1, index) }}>{row.status === 1 ? '禁用' : '启用'}</a>
             </span>
           )
         },
       },
     ]
+
+    this.labelSpan = 8
+    this.wrapperSpan = 16
+    this.gutter = 16
+  }
+  openVideoDetailModal = (index) => {
+    this.props.dispatch({
+      type: 'admin/openVideoDetailModal',
+      index,
+    })
+  }
+  closeVideoDetailModal = () => {
+    this.props.dispatch({ type: 'admin/closeVideoDetailModal' })
   }
   handleDisable(id, disable, index) {
     this.props.dispatch({
@@ -111,6 +129,20 @@ class AdminVideoIndex extends React.Component {
       admin: {
         videoList,
         videoPagination,
+        videoDetail: {
+          id,
+          title,
+          cover,
+          video_author: {
+            nickname,
+          },
+          summary,
+          video_url: videoUrl,
+          play_num: playNum,
+          created_at: createdAt,
+          status,
+        },
+        isDisplayVideoDetailModal,
       },
     } = this.props
 
@@ -126,6 +158,88 @@ class AdminVideoIndex extends React.Component {
             onChange: this.handlePageChange,
           }}
         />
+        <Modal
+          title={title}
+          visible={isDisplayVideoDetailModal}
+          onCancel={this.closeVideoDetailModal}
+          onOk={this.closeVideoDetailModal}
+        >
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              编号：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{id}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              标题：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{title}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              作者：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span style={{ marginBottom: 5 }}>{nickname}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              播放数：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{playNum}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              状态：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>
+                {status === 1 && '正常'}
+                {status === 2 && '已禁用'}
+              </span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              发布时间：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{createdAt}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              封面图：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <img src={cover} alt={title} className={styles.cover} />
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              简介：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{summary}</span>
+            </Col>
+          </Row>
+          <Row gutter={this.gutter} className={styles.line}>
+            <Col span={this.labelSpan} className={styles.label}>
+              视频：
+            </Col>
+            <Col span={this.wrapperSpan}>
+              <span>{videoUrl}</span>
+            </Col>
+          </Row>
+        </Modal>
       </div>
     )
   }

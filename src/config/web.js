@@ -14,6 +14,10 @@ export const URL_ADMIN_COMMENT_VIDEO = '/admin/comment/video'
 
 export const URL_ADMIN_COMMENT_ARTICLE = '/admin/comment/article'
 
+export const URL_ADMIN_USER_CERTIFICATION = '/admin/user/certification'
+
+export const URL_ADMIN_VIDEO_REVIEW = '/admin/video/review'
+
 export const URL_USER = '/user'
 
 export const URL_USER_INFO = '/user/info'

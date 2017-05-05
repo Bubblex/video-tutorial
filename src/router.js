@@ -32,6 +32,8 @@ import AdminCommentVideoPage from './routes/admin/comment/video/index'
 import AdminCommentArticlePage from './routes/admin/comment/article/index'
 import AdminLogin from './routes/admin/login'
 import AdminDashboard from './routes/admin/dashboard'
+import AdminCertification from './routes/admin/user/certification'
+import AdminVideoReview from './routes/admin/video/review'
 
 import ExampleLogin from './routes/example/login'
 
@@ -86,6 +88,8 @@ function RouterConfig({ history }) {
         <Route path='user' component={AdminUserIndexPage} />
         <Route path='article' component={AdminArticleIndexPage} />
         <Route path='video' component={AdminVideoIndexPage} />
+        <Route path='user/certification' component={AdminCertification} />
+        <Route path='video/review' component={AdminVideoReview} />
       </Route>
 
       <Route path='/admin/login' component={AdminLogin} />

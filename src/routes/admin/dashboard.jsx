@@ -19,6 +19,8 @@ import {
   URL_ADMIN_USER,
   URL_ADMIN_ARTICLE,
   URL_ADMIN_VIDEO,
+  URL_ADMIN_USER_CERTIFICATION,
+  URL_ADMIN_VIDEO_REVIEW,
 } from '../../config/web'
 
 import styles from './dashboard.less'
@@ -63,12 +65,19 @@ class AdminDashboard extends React.Component {
               <MenuItem key='3'>
                 <Link to={URL_ADMIN_VIDEO}><Icon type='video-camera' />视频管理</Link>
               </MenuItem>
+              <MenuItem key='4'>
+                <Link to={URL_ADMIN_USER_CERTIFICATION}><Icon type='solution' />讲师认证</Link>
+              </MenuItem>
+              <MenuItem key='5'>
+                <Link to={URL_ADMIN_VIDEO_REVIEW}><Icon type='clock-circle-o' />视频审核</Link>
+              </MenuItem>
             </Menu>
           </div>
         </Sider>
         <Layout>
           <Header>
             <div style={{ float: 'right' }}>
+              1
             </div>
           </Header>
           <Layout className={classNames(styles.content)}>
