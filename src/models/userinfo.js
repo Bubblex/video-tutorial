@@ -202,5 +202,17 @@ export default {
         }
       })
     },
+    uservideolist({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/user/video') {
+          dispatch({
+            type: 'video/postVideoList',
+            payload: {
+              id: Auth.getInfo().id,
+            },
+          })
+        }
+      })
+    },
   },
 }

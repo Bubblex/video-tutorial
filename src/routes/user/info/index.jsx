@@ -65,6 +65,7 @@ class UserInfo extends React.Component {
         userBasicInfo: {
           authentication,
           account,
+          role_id: roleId,
         },
       },
     } = this.props
@@ -82,6 +83,7 @@ class UserInfo extends React.Component {
         stars_num={starsNum}
         account={account}
         authenticate={authentication}
+        roleId={roleId}
       >
         <InfoForm
           dispatch={dispatch}

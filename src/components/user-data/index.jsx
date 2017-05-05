@@ -95,11 +95,6 @@ class UserData extends React.Component {
             <div className={styles.avatar}>
               <img src={avatar} alt={nickname} />
               {
-                authenticate === 4
-                &&
-                <p className={styles.lecturer}>认证讲师</p>
-              }
-              {
                 roleId === 2
                 &&
                 <p className={styles.lecturer}>认证讲师</p>
