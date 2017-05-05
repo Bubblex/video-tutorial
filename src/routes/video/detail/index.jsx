@@ -35,8 +35,21 @@ class VideoDetail extends React.Component {
   }
   render() {
     const {
-      avatar,
       username,
+      video: {
+        videoDetails: {
+          title,
+          summary,
+          created_at: createdAt,
+          video_url: videoUrl,
+          play_num: readNum,
+          author: {
+            avatar,
+            nickname,
+            id,
+          },
+        },
+      },
     } = this.props
 
     return (
@@ -46,9 +59,18 @@ class VideoDetail extends React.Component {
           <Breadcrumb.Item><Link to={URL_VIDEO_LIST}>视频教程</Link></Breadcrumb.Item>
           <Breadcrumb.Item>视频教程</Breadcrumb.Item>
         </Breadcrumb>
-        <SummaryCard avatar={avatar} username={username} />
+        <SummaryCard
+          username={username}
+          title={title}
+          avatar={avatar}
+          readNum={readNum}
+          id={id}
+          summary={summary}
+          createdAt={createdAt}
+          nickname={nickname}
+        />
         <Player>
-          <source src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' />
+          <source src={videoUrl} />
         </Player>
         <Row>
           <Col span={1} offset={23}>
@@ -56,7 +78,7 @@ class VideoDetail extends React.Component {
           </Col>
         </Row>
         <div style={{ marginTop: '20px', marginBottom: '20px' }}>
-          <UserCard avatar={avatar} username={username} />
+          <UserCard avatar={avatar} username={nickname} />
         </div>
         <Button type='primary' icon='heart-o' size='large'>收藏视频 | 111</Button>
         <div style={{ marginTop: '30px' }}>
@@ -69,4 +91,6 @@ class VideoDetail extends React.Component {
   }
 }
 
-export default connect()(VideoDetail)
+export default connect((state) => {
+  return state
+})(VideoDetail)

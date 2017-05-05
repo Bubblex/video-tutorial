@@ -108,8 +108,6 @@ class ArticleDetail extends React.Component {
 
     const roleId = 1
 
-    console.log(roleId)
-
     return (
       <BasicLayout >
         <Breadcrumb separator='>' style={{ marginBottom: '15px' }}>

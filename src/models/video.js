@@ -15,6 +15,9 @@ export default {
   state: {
     videoDataList: [],
     videoListPagination: [],
+    videoDetails: {
+      author: {},
+    },
   },
   reducers: {
     saveVideoList(state, { videoDataList }) {
@@ -27,6 +30,12 @@ export default {
       return {
         ...state,
         videoListPagination,
+      }
+    },
+    savaVideoDetail(state, { videoDetails }) {
+      return {
+        ...state,
+        videoDetails,
       }
     },
   },
@@ -69,12 +78,43 @@ export default {
         message.error(errmsg)
       }
     },
+    *postVideoDetail({ payload, message }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+          data,
+        },
+      } = yield call(videoDetail, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'savaVideoDetail',
+          videoDetails: data,
+        })
+      } else {
+        message.error(errmsg)
+      }
+    },
   },
   subscriptions: {
     videolist({ dispatch, history }) {
       return history.listen(({ pathname }) => {
         if (pathname === '/video/list') {
           dispatch({ type: 'postVideoList' })
+        }
+      })
+    },
+    videodetail({ dispatch, history }) {
+      return history.listen(({ pathname, query }) => {
+        if (pathname === '/video/detail') {
+          dispatch({
+            type: 'postVideoDetail',
+            payload: {
+              token: Auth.getToken(),
+              ...query,
+            },
+          })
         }
       })
     },
