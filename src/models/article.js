@@ -1,7 +1,6 @@
 import { browserHistory } from 'dva/router'
 
 import {
-  articleType,
   articleList,
   articleDetail,
   articleCollect,
