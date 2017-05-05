@@ -51,6 +51,7 @@ class UserLike extends React.Component {
         page: current,
         article_type: CheckArticleType,
         id: Auth.getInfo().id,
+        type: 2,
       },
     })
   }
@@ -65,6 +66,7 @@ class UserLike extends React.Component {
       payload: {
         article_type: articleType,
         id: Auth.getInfo().id,
+        type: 2,
       },
     })
 

@@ -201,6 +201,7 @@ export default {
             type: 'article/postArticleList',
             payload: {
               id: Auth.getInfo().id,
+              type: 2,
             },
           })
         }
@@ -213,6 +214,19 @@ export default {
             type: 'video/postVideoList',
             payload: {
               id: Auth.getInfo().id,
+            },
+          })
+        }
+      })
+    },
+    userlikevideolist({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/user/likevideo') {
+          dispatch({
+            type: 'video/postVideoList',
+            payload: {
+              id: Auth.getInfo().id,
+              type: 2,
             },
           })
         }
