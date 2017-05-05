@@ -8,6 +8,8 @@ import {
   Col,
   Card,
   Tag,
+  Icon,
+  Pagination,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -62,6 +64,41 @@ class UserIndex extends React.Component {
         },
       })
     }
+
+    if (parseInt(key) === 1) {
+      dispatch({
+        type: 'video/postVideoList',
+        payload: {
+          id: this.props.routing.locationBeforeTransitions.query.id,
+        },
+      })
+    }
+  }
+
+  handleVideoChangePage = (current) => {
+    const {
+      dispatch,
+    } = this.props
+    dispatch({
+      type: 'video/postVideoList',
+      payload: {
+        page: current,
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
+  }
+
+  handleArticleChangePage = (current) => {
+    const {
+      dispatch,
+    } = this.props
+    dispatch({
+      type: 'article/postArticleList',
+      payload: {
+        page: current,
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
   }
 
   render() {
@@ -89,6 +126,11 @@ class UserIndex extends React.Component {
       },
       article: {
         articleDataList,
+        articleListPagination,
+      },
+      video: {
+        videoDataList,
+        videoListPagination,
       },
     } = this.props
 
@@ -185,6 +227,38 @@ class UserIndex extends React.Component {
       )
     })
 
+    const renderVideoList = videoDataList.map((arr, index) => {
+      return (
+        <Card key={index} className={styles.item}>
+          <Row>
+            <Col span={5}>
+              <img src={arr.cover} alt={arr.title} style={{ width: '100%' }} />
+            </Col>
+            <Col span={16} offset={1}>
+              <h2>
+                {arr.title}
+              </h2>
+              <p style={{ margin: '10px 0' }}>{arr.summary}</p>
+              <Col span={10}>
+                <p>作者：{arr.author.nickname}</p>
+              </Col>
+              <Col span={12}>
+                <p>发布时间：{arr.created_at}</p>
+              </Col>
+              <Col span={2}><p><span>{arr.play_num}</span> <Icon type='eye-o' /></p></Col>
+            </Col>
+            {/* <Col span={2}><p><span>{arr.like_num}</span> <Icon type='heart-o' /> </p></Col>
+            <Col span={2}><p><span>{arr.comment_num}</span> <Icon type='message' /> </p></Col>*/}
+            <Col span={2}>
+              <Link to='/video/detail' query={{ id: arr.id }}>
+                查看详情
+              </Link>
+            </Col>
+          </Row>
+        </Card>
+      )
+    })
+
     return (
       <BasicLayout
         contentBefore={UserData}
@@ -202,10 +276,22 @@ class UserIndex extends React.Component {
       >
         <Tabs activeKey={activeTabKey} onTabClick={this.renderUserFollersList}>
           <TabPane tab='视频教程' key='1'>
-            Content of Tab Pane 1
+            {renderVideoList}
+            <Pagination
+              {...videoListPagination}
+              showQuickJumper
+              style={{ float: 'right', margin: '20px' }}
+              onChange={this.handleVideoChangePage}
+            />
           </TabPane>
           <TabPane tab='文章资讯' key='2'>
             {renderArticleList}
+            <Pagination
+              {...articleListPagination}
+              showQuickJumper
+              style={{ float: 'right', margin: '20px' }}
+              onChange={this.handleArticleChangePage}
+            />
           </TabPane>
           <TabPane tab='关注' key='3'>
             <Row>

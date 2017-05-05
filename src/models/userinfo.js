@@ -151,6 +151,10 @@ export default {
             payload: { token: Auth.getToken(), ...query },
             message,
           })
+          dispatch({
+            type: 'video/postVideoList',
+            payload: { token: Auth.getToken(), ...query },
+          })
         }
       })
     },
