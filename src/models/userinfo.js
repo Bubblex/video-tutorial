@@ -166,5 +166,29 @@ export default {
         }
       })
     },
+    userstar({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/user/star') {
+          dispatch({
+            type: 'star/postUserStarsList',
+            payload: {
+              id: Auth.getInfo().id,
+            },
+          })
+        }
+      })
+    },
+    userFollow({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/user/follow') {
+          dispatch({
+            type: 'star/postUserFollersList',
+            payload: {
+              id: Auth.getInfo().id,
+            },
+          })
+        }
+      })
+    },
   },
 }

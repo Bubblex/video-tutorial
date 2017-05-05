@@ -26,7 +26,11 @@ export const URL_USER_LIKE = '/user/like'
 
 export const URL_USER_COMMENT = '/user/comment'
 
+export const URL_USER_FOLLOW = '/user/follow'
+
 export const URL_USER_CHANGEPWD = '/user/changepwd'
+
+export const URL_USER_STAR = '/user/star'
 
 
 export const URL_ARTICLE_LIST = '/article/list'

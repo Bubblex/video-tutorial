@@ -15,7 +15,8 @@ import {
   URL_USER_VIDEO,
   URL_USER_ARTICLE,
   URL_USER_LIKE,
-  URL_USER_COMMENT,
+  URL_USER_FOLLOW,
+  URL_USER_STAR,
   URL_USER_CHANGEPWD,
 } from '../../config/web'
 
@@ -29,28 +30,28 @@ class SideBar extends React.Component {
         mode='inline'
         theme='dark'
       >
-        <MenuItem key='2'>
+        <MenuItem key='1'>
           <Link to={URL_USER_VIDEO}><Icon type='video-camera' />我的视频</Link>
         </MenuItem>
-        <MenuItem key='3'>
+        <MenuItem key='2'>
           <Link to={URL_USER_ARTICLE}><Icon type='file-text' />我的文章</Link>
         </MenuItem>
         {/* <MenuItem key='4'>
           <Link to={URL_USER_COMMENT}><Icon type='message' />我的评论</Link>
         </MenuItem>*/}
+        <MenuItem key='3'>
+          <Link to={URL_USER_STAR}><Icon type='heart-o' />我的关注</Link>
+        </MenuItem>
+        <MenuItem key='4'>
+          <Link to={URL_USER_FOLLOW}><Icon type='heart-o' />我的粉丝</Link>
+        </MenuItem>
         <MenuItem key='5'>
-          <Link to={URL_USER_LIKE}><Icon type='heart-o' />我的关注</Link>
-        </MenuItem>
-        <MenuItem key='6'>
-          <Link to={URL_USER_LIKE}><Icon type='heart-o' />我的粉丝</Link>
-        </MenuItem>
-        <MenuItem key='1'>
           <Link to={URL_USER_INFO}><Icon type='user' />我的资料</Link>
         </MenuItem>
-        <MenuItem key='7'>
+        <MenuItem key='6'>
           <Link to={URL_USER_LIKE}><Icon type='heart-o' />我的收藏</Link>
         </MenuItem>
-        <MenuItem key='8'>
+        <MenuItem key='7'>
           <Link to={URL_USER_CHANGEPWD}><Icon type='lock' />修改密码</Link>
         </MenuItem>
       </Menu>

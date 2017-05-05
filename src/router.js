@@ -12,6 +12,8 @@ import UserArticlePage from './routes/user/article/index'
 import UserLikePage from './routes/user/like/index'
 import UserCommentPage from './routes/user/comment/index'
 import UserChangepwd from './routes/user/changepwd/index'
+import UserFollow from './routes/user/follow/index'
+import UserStar from './routes/user/star/index'
 
 import ReleaseVideoPage from './routes/release/video/index'
 import ReleaseArticlePage from './routes/release/article/index'
@@ -48,6 +50,10 @@ function RouterConfig({ history }) {
       <Route path='/user/article' component={UserArticlePage} />
       {/* 我的收藏*/}
       <Route path='/user/like' component={UserLikePage} />
+      {/* 我的关注*/}
+      <Route path='/user/star' component={UserStar} />
+      {/* 我的粉丝*/}
+      <Route path='/user/follow' component={UserFollow} />
       {/* 我的评论*/}
       <Route path='/user/comment' component={UserCommentPage} />
       {/* 修改密码*/}

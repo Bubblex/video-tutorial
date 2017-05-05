@@ -85,8 +85,6 @@ class UserData extends React.Component {
       authenticate,
     } = this.props
 
-    console.log(authenticate)
-
     const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
 
     return (
