@@ -9,6 +9,8 @@ import {
   Layout,
 } from 'antd'
 
+import HeaderAccount from '../../components/admin-header-account'
+
 import {
   WEBSITE_TITLE,
   WEBSITE_LOGO,
@@ -77,7 +79,7 @@ class AdminDashboard extends React.Component {
         <Layout>
           <Header>
             <div style={{ float: 'right' }}>
-              1
+              <HeaderAccount />
             </div>
           </Header>
           <Layout className={classNames(styles.content)}>

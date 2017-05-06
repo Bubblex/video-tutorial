@@ -6,6 +6,8 @@ export const URL_HOME = '/'
 
 export const URL_ADMIN = '/admin'
 
+export const URL_ADMIN_LOGIN = '/admin/login'
+
 export const URL_ADMIN_USER = '/admin/user'
 
 export const URL_ADMIN_ARTICLE = '/admin/article'

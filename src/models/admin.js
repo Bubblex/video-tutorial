@@ -1,5 +1,9 @@
 import { browserHistory } from 'dva/router'
 
+import {
+  message as globalMessage,
+} from 'antd'
+
 import adminAuth from '../utils/adminAuth'
 
 import {
@@ -317,7 +321,7 @@ export default {
           browserHistory.push('/admin/user')
         })
         adminAuth.setToken(data.token)
-        adminAuth.setInfo(data)
+        adminAuth.setInfo(data.user)
         yield put({
           type: 'saveAdminInfo',
           info: data,
@@ -332,6 +336,7 @@ export default {
         data: {
           data,
           errcode,
+          errmsg,
         },
       } = yield call(fetchUserList, payload)
 
@@ -346,6 +351,10 @@ export default {
             filter: payload.filter,
           },
         })
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
+        })
       }
     },
 
@@ -354,6 +363,7 @@ export default {
         data: {
           data,
           errcode,
+          errmsg,
         },
       } = yield call(fetchUserCertificationList, payload)
 
@@ -367,6 +377,10 @@ export default {
           options: {
             filter: payload.filter,
           },
+        })
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
         })
       }
     },
@@ -382,6 +396,10 @@ export default {
       if (errcode === 1) {
         success()
         message.success(errmsg)
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
+        })
       } else {
         message.error(errmsg)
       }
@@ -401,6 +419,10 @@ export default {
           index,
           type: 'updateUserStatus',
           status: payload.disable,
+        })
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
         })
       } else {
         message.error(errmsg)
@@ -427,6 +449,10 @@ export default {
             filter: payload.filter,
           },
         })
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
+        })
       } else {
         message.error(errmsg)
       }
@@ -446,6 +472,10 @@ export default {
           type: 'updateArticleStatus',
           index,
           status: payload.disable,
+        })
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
         })
       } else {
         message.error(errmsg)
@@ -472,6 +502,10 @@ export default {
             filter: payload.filter,
           },
         })
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
+        })
       } else {
         message.error(errmsg)
       }
@@ -497,6 +531,10 @@ export default {
             filter: payload.filter,
           },
         })
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
+        })
       } else {
         message.error(errmsg)
       }
@@ -513,6 +551,10 @@ export default {
       if (errcode === 1) {
         success()
         message.success(errmsg)
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
+        })
       } else {
         message.error(errmsg)
       }
@@ -532,6 +574,10 @@ export default {
           type: 'updateVideoStatus',
           index,
           status: payload.disable,
+        })
+      } else if (errcode === 100) {
+        globalMessage.error(errmsg, 1.5, () => {
+          browserHistory.push('/admin/login')
         })
       } else {
         message.error(errmsg)
