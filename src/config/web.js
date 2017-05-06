@@ -40,6 +40,8 @@ export const URL_USER_CHANGEPWD = '/user/changepwd'
 
 export const URL_USER_STAR = '/user/star'
 
+export const URL_USER_MESSAGE = '/user/message'
+
 
 export const URL_ARTICLE_LIST = '/article/list'
 

@@ -42,7 +42,7 @@ class UserCard extends React.Component {
             </p>
           </Col>
           <Col span={4}>
-            <Button size='large'>关注</Button>
+            <Button size='large'>个人主页</Button>
           </Col>
         </Row>
         <p style={{ marginTop: '8px', borderTop: '1px solid #ccc', padding: '10px' }}>简介简介简介简介简介简介</p>

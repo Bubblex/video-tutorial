@@ -15,6 +15,7 @@ import UserCommentPage from './routes/user/comment/index'
 import UserChangepwd from './routes/user/changepwd/index'
 import UserFollow from './routes/user/follow/index'
 import UserStar from './routes/user/star/index'
+import UserMessage from './routes/user/message/index'
 
 import ReleaseVideoPage from './routes/release/video/index'
 import ReleaseArticlePage from './routes/release/article/index'
@@ -63,6 +64,8 @@ function RouterConfig({ history }) {
       <Route path='/user/comment' component={UserCommentPage} />
       {/* 修改密码*/}
       <Route path='/user/changepwd' component={UserChangepwd} />
+      {/* 我的消息*/}
+      <Route path='/user/message' component={UserMessage} />
 
       {/* 发布视频*/}
       <Route path='/release/video' component={ReleaseVideoPage} />

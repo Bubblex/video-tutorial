@@ -12,6 +12,12 @@ import {
   userApplyLecturer,
 } from '../services/user'
 
+import {
+  messageList,
+  messageRead,
+  messageDelete,
+} from '../services/message'
+
 import Auth from '../utils/auth.js'
 
 export default {
@@ -21,6 +27,9 @@ export default {
     isApplyFormDisplay: false,
     userBasicInfo: {},
     alluserBasicInfo: {},
+    userMessageList: [],
+    isMessageDetailModalPlay: false,
+    showMessageDetail: {},
   },
   reducers: {
     openChangepwdModal(state) {
@@ -62,6 +71,34 @@ export default {
       return {
         ...state,
         alluserBasicInfo,
+      }
+    },
+
+    saveUserMessageList(state, { userMessageList }) {
+      return {
+        ...state,
+        userMessageList,
+      }
+    },
+
+    openMessageDetailModal(state) {
+      return {
+        ...state,
+        isMessageDetailModalPlay: true,
+      }
+    },
+
+    closeMessageDetailModal(state) {
+      return {
+        ...state,
+        isMessageDetailModalPlay: false,
+      }
+    },
+
+    saveShowMessageDetail(state, {showMessageDetail}) {
+      return {
+        ...state,
+        showMessageDetail,
       }
     },
   },
@@ -135,6 +172,24 @@ export default {
         yield put({
           type: 'saveAllUserInfo',
           alluserBasicInfo: data,
+        })
+      } else {
+        message.error(errmsg)
+      }
+    },
+    *postUserMessageList({ payload, message }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          data,
+          errmsg,
+        },
+      } = yield call(messageList, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveUserMessageList',
+          userMessageList: data.list,
         })
       } else {
         message.error(errmsg)
@@ -227,6 +282,18 @@ export default {
             payload: {
               id: Auth.getInfo().id,
               type: 2,
+            },
+          })
+        }
+      })
+    },
+    usermessagelist({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/user/message') {
+          dispatch({
+            type: 'postUserMessageList',
+            payload: {
+              token: Auth.getToken(),
             },
           })
         }

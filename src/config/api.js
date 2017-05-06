@@ -69,6 +69,15 @@ export const API_VIDEO_CANCEL = `${PREFIX}/video/cancel`
 // 3.4.5 发布 / 修改视频
 export const API_VIDEO_RELEASE = `${PREFIX}/video/release`
 
+// 3.5.1 消息列表
+export const API_MESSAGE_LIST = `${PREFIX}/message/list`
+
+// 3.5.2 阅读消息
+export const API_MESSAGE_READ = `${PREFIX}/message/read`
+
+// 3.5.3 删除消息
+export const API_MESSAGE_DELETE = `${PREFIX}/message/delete`
+
 // 4.1.1 管理员登录
 export const API_ADMIN_LOGIN = `${PREFIX}/admin/login`
 
