@@ -7,9 +7,8 @@ import {
 } from 'antd'
 
 import {
-  URL_LOGIN,
+  URL_ADMIN_LOGIN,
   URL_REGISTER,
-  URL_USER_INFO,
 } from '../../config/web'
 
 import {
@@ -63,10 +62,7 @@ class HeaderAccount extends React.Component {
             style={{ lineHeight: '64px' }}
           >
             <MenuItem key='1' style={{ padding: '0 8px' }}>
-              <Link to={URL_LOGIN}>登录</Link>
-            </MenuItem>
-            <MenuItem key='2' style={{ padding: '0 8px' }}>
-              <Link to={URL_REGISTER}>注册</Link>
+              <Link to={URL_ADMIN_LOGIN}>登录</Link>
             </MenuItem>
           </Menu>
         }
@@ -80,13 +76,11 @@ class HeaderAccount extends React.Component {
           >
             <MenuItem key='1' style={{ padding: '0 8px' }}>
               <img src={avatar} alt={info.nickname} className={styles.avatar} />
-            </MenuItem>
-            <MenuItem key='2' style={{ padding: '0 8px' }}>
-              <Link to={URL_USER_INFO}>{info.nickname}</Link>
+              <span>{info.nickname}</span>
             </MenuItem>
             <MenuItem key='3' style={{ padding: '0 8px' }}>
               <Link
-                to={URL_LOGIN}
+                to={URL_ADMIN_LOGIN}
                 onClick={this.handleExitLogin}
               >
                 退出登录

@@ -317,7 +317,7 @@ export default {
           browserHistory.push('/admin/user')
         })
         adminAuth.setToken(data.token)
-        adminAuth.setInfo(data)
+        adminAuth.setInfo(data.user)
         yield put({
           type: 'saveAdminInfo',
           info: data,
