@@ -8,6 +8,7 @@ import {
   Modal,
   message,
 } from 'antd'
+import { Player } from 'video-react'
 
 import FilterForm from './filter'
 
@@ -237,7 +238,9 @@ class AdminVideoIndex extends React.Component {
               视频：
             </Col>
             <Col span={this.wrapperSpan}>
-              <span>{videoUrl}</span>
+              <Player>
+                <source src={videoUrl} />
+              </Player>
             </Col>
           </Row>
         </Modal>
