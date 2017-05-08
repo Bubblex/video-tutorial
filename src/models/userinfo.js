@@ -30,6 +30,7 @@ export default {
     userMessageList: [],
     isMessageDetailModalPlay: false,
     showMessageDetail: {},
+    userMessageListPagination: [],
   },
   reducers: {
     openChangepwdModal(state) {
@@ -74,10 +75,11 @@ export default {
       }
     },
 
-    saveUserMessageList(state, { userMessageList }) {
+    saveUserMessageList(state, { userMessageList, userMessageListPagination }) {
       return {
         ...state,
         userMessageList,
+        userMessageListPagination,
       }
     },
 
@@ -95,7 +97,7 @@ export default {
       }
     },
 
-    saveShowMessageDetail(state, {showMessageDetail}) {
+    saveShowMessageDetail(state, { showMessageDetail }) {
       return {
         ...state,
         showMessageDetail,
@@ -177,7 +179,7 @@ export default {
         message.error(errmsg)
       }
     },
-    *postUserMessageList({ payload, message }, { call, put }) {
+    *postUserMessageList({ payload }, { call, put }) {
       const {
         data: {
           errcode,
@@ -190,10 +192,14 @@ export default {
         yield put({
           type: 'saveUserMessageList',
           userMessageList: data.list,
+          userMessageListPagination: data.pagination,
         })
       } else {
         message.error(errmsg)
       }
+    },
+    *postReadMessage({ payload }, { call }) {
+      yield call(messageRead, payload)
     },
   },
   subscriptions: {

@@ -7,6 +7,7 @@ import {
   Card,
   Row,
   Modal,
+  Pagination,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -50,6 +51,14 @@ class UserMessage extends React.Component {
       type: 'userinfo/saveShowMessageDetail',
       showMessageDetail: userMessageList[index],
     })
+
+    dispatch({
+      type: 'userinfo/postReadMessage',
+      payload: {
+        id: userMessageList[index].id,
+        token: Auth.getToken('token'),
+      },
+    })
   }
 
   closeMessageDetailModal = (e) => {
@@ -61,6 +70,13 @@ class UserMessage extends React.Component {
 
     dispatch({
       type: 'userinfo/closeMessageDetailModal',
+    })
+
+    dispatch({
+      type: 'userinfo/postUserMessageList',
+      payload: {
+        token: Auth.getToken(),
+      },
     })
   }
 
@@ -88,6 +104,7 @@ class UserMessage extends React.Component {
           title,
           content,
         },
+        userMessageListPagination,
       },
     } = this.props
 
@@ -97,11 +114,33 @@ class UserMessage extends React.Component {
       return (
         <Card key={index} style={{ marginBottom: '20px' }}>
           <Row style={{ marginBottom: '10px' }}>
-            <Col span={20}><p>系统通知：{arr.title}</p></Col>
+            <Col span={20}>
+              {
+                arr.status === 1
+                &&
+                <p style={{ color: 'red' }}>系统通知：{arr.title}</p>
+              }
+              {
+                arr.status === 2
+                &&
+                <p>系统通知：{arr.title}</p>
+              }
+            </Col>
             <Col span={4}><a onClick={(e) => { this.showMessageDetailModal(e, index) }}>查看详情</a></Col>
           </Row>
           <Row>
-            <Col span={20}><p>时间：{arr.created_at}</p></Col>
+            <Col span={20}>
+              {
+                arr.status === 1
+                &&
+                <p style={{ color: 'red' }}>时间：{arr.created_at}</p>
+              }
+              {
+                arr.status === 2
+                &&
+                <p>时间：{arr.created_at}</p>
+              }
+            </Col>
             <Col span={4}><a>删除</a></Col>
           </Row>
         </Card>
@@ -124,6 +163,12 @@ class UserMessage extends React.Component {
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我收到的信息</h2>
         {renderMessageList}
+        <Pagination
+          {...userMessageListPagination}
+          showQuickJumper
+          style={{ float: 'right', margin: '20px' }}
+          onChange={this.handleChangePage}
+        />
         <Modal
           title={title}
           visible={isMessageDetailModalPlay}
