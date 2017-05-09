@@ -66,6 +66,14 @@ class UserStar extends React.Component {
       )
     })
 
+    const {
+      userinfo: {
+        userBasicInfo: {
+          role_id: roleId,
+        },
+      },
+    } = this.props
+
     return (
       <BasicLayout
         hasSider
@@ -79,6 +87,7 @@ class UserStar extends React.Component {
         stars_num={starsNum}
         account={account}
         authenticate={authentication}
+        roleId={roleId}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我的关注</h2>
         {renderStarsList}

@@ -201,6 +201,23 @@ export default {
     *postReadMessage({ payload }, { call }) {
       yield call(messageRead, payload)
     },
+    *postDeleteMessage({ payload }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(messageDelete, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'postUserMessageList',
+          payload: {
+            token: Auth.getToken(),
+          },
+        })
+      }
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {

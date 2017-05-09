@@ -8,6 +8,7 @@ import {
   Row,
   Modal,
   Pagination,
+  Popconfirm,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -61,6 +62,25 @@ class UserMessage extends React.Component {
     })
   }
 
+  handleDeleteMessage = (e, index) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+      userinfo: {
+        userMessageList,
+      },
+    } = this.props
+
+    dispatch({
+      type: 'userinfo/postDeleteMessage',
+      payload: {
+        id: userMessageList[index].id,
+        token: Auth.getToken('token'),
+      },
+    })
+  }
+
   closeMessageDetailModal = (e) => {
     e.preventDefault()
 
@@ -105,6 +125,9 @@ class UserMessage extends React.Component {
           content,
         },
         userMessageListPagination,
+        userBasicInfo: {
+          role_id: roleId,
+        },
       },
     } = this.props
 
@@ -141,7 +164,16 @@ class UserMessage extends React.Component {
                 <p>时间：{arr.created_at}</p>
               }
             </Col>
-            <Col span={4}><a>删除</a></Col>
+            <Col span={4}>
+              <Popconfirm
+                title='确定删除该条信息'
+                onConfirm={(e) => { this.handleDeleteMessage(e, index) }}
+                okText='是'
+                cancelText='否'
+              >
+                <a href='javascript:'>删除</a>
+              </Popconfirm>
+            </Col>
           </Row>
         </Card>
       )
@@ -160,6 +192,7 @@ class UserMessage extends React.Component {
         stars_num={starsNum}
         account={account}
         authenticate={authentication}
+        roleId={roleId}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我收到的信息</h2>
         {renderMessageList}

@@ -69,6 +69,11 @@ class UserVideo extends React.Component {
         videoDataList,
         videoListPagination,
       },
+      userinfo: {
+        userBasicInfo: {
+          role_id: roleId,
+        },
+      },
     } = this.props
 
     const renderVideoList = videoDataList.map((arr, index) => {
@@ -116,6 +121,7 @@ class UserVideo extends React.Component {
         stars_num={starsNum}
         account={account}
         authenticate={authentication}
+        roleId={roleId}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我发布的视频教程</h2>
         {renderVideoList}

@@ -95,6 +95,11 @@ class UserArticle extends React.Component {
         articleListPagination,
         CheckArticleType,
       },
+      userinfo: {
+        userBasicInfo: {
+          role_id: roleId,
+        },
+      },
     } = this.props
 
     const renderArticleDataList = articleDataList.map((arr, index) => {
@@ -157,6 +162,7 @@ class UserArticle extends React.Component {
         stars_num={starsNum}
         account={account}
         authenticate={authentication}
+        roleId={roleId}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我发布的视频教程</h2>
         <div style={{ marginTop: '20px' }}>

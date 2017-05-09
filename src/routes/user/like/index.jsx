@@ -98,6 +98,11 @@ class UserLike extends React.Component {
         articleListPagination,
         CheckArticleType,
       },
+      userinfo: {
+        userBasicInfo: {
+          role_id: roleId,
+        },
+      },
     } = this.props
 
     const renderArtrcleList = articleDataList.map((arr, index) => {
@@ -160,6 +165,7 @@ class UserLike extends React.Component {
         stars_num={starsNum}
         account={account}
         authenticate={authentication}
+        roleId={roleId}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我收藏的文章资讯</h2>
         <div style={{ marginTop: '20px' }}>

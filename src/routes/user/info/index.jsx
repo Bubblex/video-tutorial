@@ -52,6 +52,7 @@ class UserInfo extends React.Component {
       articles_num: articlesNum,
       videos_num: videosNum,
       stars_num: starsNum,
+      account,
     } = Auth.getInfo('info')
 
     const avatar = checkavatar === null ? DEFAULT_AVATAR : checkavatar
@@ -64,7 +65,6 @@ class UserInfo extends React.Component {
         isApplyFormDisplay,
         userBasicInfo: {
           authentication,
-          account,
           role_id: roleId,
         },
       },

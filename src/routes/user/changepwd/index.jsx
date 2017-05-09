@@ -44,6 +44,11 @@ class UserLike extends React.Component {
 
     const {
       dispatch,
+      userinfo: {
+        userBasicInfo: {
+          role_id: roleId,
+        },
+      },
     } = this.props
 
     return (
@@ -59,6 +64,7 @@ class UserLike extends React.Component {
         stars_num={starsNum}
         account={account}
         authenticate={authentication}
+        roleId={roleId}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>修改密码</h2>
         <ChangepwdForm dispatch={dispatch} />
