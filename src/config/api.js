@@ -57,6 +57,9 @@ export const API_ARTICLE_RELEASE = `${PREFIX}/article/release`
 // 3.3.7删除一篇文章
 export const API_ARTICLE_DELETE = `${PREFIX}/article/delete`
 
+// 3.3.8 文章发布数推荐用户
+export const API_USER_RECOMMEND = `${PREFIX}/user/recommend`
+
 // 3.4.1视频列表
 export const API_VIDEO_LIST = `${PREFIX}/video/list`
 
@@ -74,6 +77,9 @@ export const API_VIDEO_RELEASE = `${PREFIX}/video/release`
 
 // 3.4.6 删除一条视频
 export const API_VIDEO_DELETE = `${PREFIX}/video/delete`
+
+// 3.4.7 视频发布数推荐讲师
+export const API_USER_RECOMMEND_CERTIFICATION = `${PREFIX}/user/recommend/certification`
 
 // 3.5.1 消息列表
 export const API_MESSAGE_LIST = `${PREFIX}/message/list`

@@ -9,6 +9,7 @@ import {
   API_ARTICLE_CANCEL,
   API_ARTICLE_RELEASE,
   API_ARTICLE_DELETE,
+  API_USER_RECOMMEND,
 } from '../config/api'
 
 // 3.3.1获取文章分类
@@ -59,3 +60,11 @@ export async function articleDelete(params) {
     method: 'POST',
   })
 }
+
+// 3.3.8 文章发布数推荐用户
+export async function userRecommend(params) {
+  return request(`${API_USER_RECOMMEND}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+

@@ -7,6 +7,7 @@ import {
   videoCancel,
   videoRelease,
   videoDelete,
+  userCommendCertification,
 } from '../services/video'
 
 import Auth from '../utils/auth.js'

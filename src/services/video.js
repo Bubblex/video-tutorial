@@ -8,6 +8,7 @@ import {
   API_VIDEO_CANCEL,
   API_VIDEO_RELEASE,
   API_VIDEO_DELETE,
+  API_USER_RECOMMEND_CERTIFICATION,
 } from '../config/api'
 
 // 3.4.1视频列表
@@ -48,6 +49,13 @@ export async function videoRelease(params) {
 // 3.4.6 删除一条视频
 export async function videoDelete(params) {
   return request(`${API_VIDEO_DELETE}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+// 3.4.7 视频发布数推荐讲师
+export async function userCommendCertification(params) {
+  return request(`${API_USER_RECOMMEND_CERTIFICATION}?${qs.stringify(params)}`, {
     method: 'POST',
   })
 }

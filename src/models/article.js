@@ -7,6 +7,7 @@ import {
   articleCancel,
   articleRelease,
   articleDelete,
+  userRecommend,
 } from '../services/article'
 
 import Auth from '../utils/auth.js'
@@ -21,6 +22,7 @@ export default {
       article_author: {},
     },
     articleContent: '',
+    userRecommendList: [],
   },
   reducers: {
     saveArticleList(state, { articleDataList }) {
@@ -51,6 +53,12 @@ export default {
       return {
         ...state,
         articleContent,
+      }
+    },
+    saveUserCommend(state, { userRecommendList }) {
+      return {
+        ...state,
+        userRecommendList,
       }
     },
   },
@@ -165,12 +173,28 @@ export default {
         message.error(errmsg)
       }
     },
+    *postUserRecommend({ payload }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          data,
+        },
+      } = yield call(userRecommend, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveUserCommend',
+          userRecommendList: data,
+        })
+      }
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
         if (pathname === '/article/list') {
           dispatch({ type: 'postArticleList' })
+          dispatch({ type: 'postUserRecommend' })
         }
       })
     },

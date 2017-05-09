@@ -75,6 +75,7 @@ class ArticleList extends React.Component {
     const {
       article: {
         articleDataList,
+        userRecommendList,
         articleListPagination,
         CheckArticleType,
       },
@@ -153,20 +154,12 @@ class ArticleList extends React.Component {
       )
     })
 
-    const recommendUserDatas = [{
-      username: '11111',
-      avatar: '',
-    },
-    {
-      username: '222222',
-      avatar: '',
-    }]
-
-    const renderRecommendUser = recommendUserDatas.map((recommenduser, index) => {
+    const renderRecommendUser = userRecommendList.map((arr, index) => {
       return (
-        <Link to={URL_USER} className={styles.user} key={index}>
-          <img alt='11' src={recommenduser.avatar} />
-          <span>{recommenduser.username}</span>
+        <Link to={URL_USER} query={{ id: arr.id }} className={styles.user} key={index}>
+          <img alt={arr.nickname} src={arr.avatar === null ? DEFAULT_AVATAR : arr.avatar} />
+          <span>{arr.nickname}</span>
+          <p>发布了{arr.collect_articles_num}篇文章资讯</p>
         </Link>
       )
     })
