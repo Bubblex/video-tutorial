@@ -20,6 +20,10 @@ import {
   URL_USER,
 } from '../../../config/web'
 
+import {
+  DEFAULT_AVATAR,
+} from '../../../config'
+
 import styles from '../../article/list/index.less'
 import BasicLayout from '../../../components/layout/basic'
 
@@ -37,6 +41,14 @@ class VideoList extends React.Component {
   }
 
   render() {
+    const {
+      video: {
+        videoDataList,
+        videoListPagination,
+        RecommendCertificationList,
+      },
+    } = this.props
+
     const slickDatas = [{
       link: URL_VIDEO_DETAIL,
       img: 'aaa.png',
@@ -54,30 +66,16 @@ class VideoList extends React.Component {
       )
     })
 
-    const recommendUserDatas = [{
-      username: '11111',
-      avatar: '',
-    },
-    {
-      username: '222222',
-      avatar: '',
-    }]
-
-    const renderRecommendUser = recommendUserDatas.map((recommenduser, index) => {
+    const renderRecommendUser = RecommendCertificationList.map((arr, index) => {
       return (
-        <Link to={URL_USER} className={styles.user} key={index}>
-          <img alt='11' src={recommenduser.avatar} />
-          <span>{recommenduser.username}</span>
+        <Link to={URL_USER} query={{ id: arr.id }} className={styles.user} key={index}>
+          <img alt={arr.nickname} src={arr.avatar === null ? DEFAULT_AVATAR : arr.avatar} />
+          <span>{arr.nickname}</span>
+          <p>发布了{arr.collect_articles_num}个视频教程</p>
         </Link>
       )
     })
 
-    const {
-      video: {
-        videoDataList,
-        videoListPagination,
-      },
-    } = this.props
 
     const renderVideoList = videoDataList.map((arr, index) => {
       return (

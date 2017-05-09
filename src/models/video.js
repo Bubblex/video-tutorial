@@ -20,6 +20,7 @@ export default {
     videoDetails: {
       video_author: {},
     },
+    RecommendCertificationList: [],
   },
   reducers: {
     saveVideoList(state, { videoDataList }) {
@@ -38,6 +39,12 @@ export default {
       return {
         ...state,
         videoDetails,
+      }
+    },
+    saveRecommendCertification(state, { RecommendCertificationList }) {
+      return {
+        ...state,
+        RecommendCertificationList,
       }
     },
   },
@@ -153,6 +160,21 @@ export default {
         message.error(errmsg)
       }
     },
+    *postUserRecommendCertification({ payload }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          data,
+        },
+      } = yield call(userCommendCertification, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'saveRecommendCertification',
+          RecommendCertificationList: data,
+        })
+      }
+    },
   },
   subscriptions: {
     videolist({ dispatch, history }) {
@@ -189,6 +211,15 @@ export default {
             payload: {
               pageSize: 6,
             },
+          })
+        }
+      })
+    },
+    RecommendCertification({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/video/list') {
+          dispatch({
+            type: 'postUserRecommendCertification',
           })
         }
       })
