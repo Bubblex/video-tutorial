@@ -67,6 +67,14 @@ class ArticleDetail extends React.Component {
       replace,
       nextPathname: pathname + search,
     })
+
+    dispatch({
+      type: 'article/postArticleDetail',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
   }
 
   handleCancelCollectArticle = (e) => {
@@ -84,6 +92,14 @@ class ArticleDetail extends React.Component {
       },
       message,
     })
+
+    dispatch({
+      type: 'article/postArticleDetail',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
   }
 
   render() {
@@ -97,10 +113,15 @@ class ArticleDetail extends React.Component {
           read_num: readNum,
           summary,
           content,
-          author: {
+          is_collect: isCollect,
+          collects_count: collectsCount,
+          article_author: {
             id,
             nickname,
             avatar,
+            user_articles_count,
+            user_followers_count,
+            user_videos_count,
           },
         },
       },
@@ -125,6 +146,7 @@ class ArticleDetail extends React.Component {
           nickname={nickname}
           avatar={avatar}
           roleId={roleId}
+          collectsCount={collectsCount}
         />
         <div style={{ margin: '10px 0' }}>
           {
@@ -146,18 +168,32 @@ class ArticleDetail extends React.Component {
         <div dangerouslySetInnerHTML={{ __html: content }} />
         <Row>
           <Col span={1} offset={23}>
-            <CheckableTag color='#f50' style={{ marginTop: '10px' }}>投诉</CheckableTag>
+            {/* <CheckableTag color='#f50' style={{ marginTop: '10px' }}>投诉</CheckableTag>*/}
           </Col>
         </Row>
         <div style={{ marginTop: '20px', marginBottom: '20px' }}>
-          <UserCard avatar={avatar} username={username} />
+          <UserCard
+            avatar={avatar}
+            username={username}
+            id={id}
+            nickname={nickname}
+            user_articles_count={user_articles_count}
+            user_followers_count={user_followers_count}
+            user_videos_count={user_videos_count}
+          />
         </div>
-        <Button type='primary' icon='heart-o' size='large' onClick={this.handleCollectArticle}>收藏文章 | 111</Button>
-        <Button type='primary' icon='heart-o' size='large' onClick={this.handleCancelCollectArticle}>取消收藏文章 | 111</Button>
+        {
+          isCollect === 2
+          &&
+          <Button type='primary' icon='heart-o' size='large' onClick={this.handleCollectArticle}>收藏文章 | {collectsCount}</Button>
+        }
+        {
+          isCollect === 1
+          &&
+          <Button type='primary' icon='heart-o' size='large' onClick={this.handleCancelCollectArticle}>取消收藏文章 | {collectsCount}</Button>
+        }
         <div style={{ marginTop: '30px' }}>
-          <h2 style={{ margin: '30px', paddingBottom: '10px', borderBottom: '1px solid rgb(204, 204, 204)' }}>8条评论</h2>
-          <Comment />
-          <Comment />
+          {/* <h2 style={{ margin: '30px', paddingBottom: '10px', borderBottom: '1px solid rgb(204, 204, 204)' }}>8条评论</h2>*/}
         </div>
       </BasicLayout>
     )

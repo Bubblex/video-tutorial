@@ -67,6 +67,14 @@ class VideoDetail extends React.Component {
       replace,
       nextPathname: pathname + search,
     })
+
+    dispatch({
+      type: 'video/postVideoDetail',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
   }
 
   handleCancelCollectVideo = (e) => {
@@ -84,6 +92,14 @@ class VideoDetail extends React.Component {
       },
       message,
     })
+
+    dispatch({
+      type: 'video/postVideoDetail',
+      payload: {
+        token: Auth.getToken(),
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
   }
 
   render() {
@@ -96,10 +112,15 @@ class VideoDetail extends React.Component {
           created_at: createdAt,
           video_url: videoUrl,
           play_num: readNum,
-          author: {
+          is_collect: isCollect,
+          collects_count: collectsCount,
+          video_author: {
             avatar,
             nickname,
             id,
+            user_articles_count,
+            user_followers_count,
+            user_videos_count,
           },
         },
       },
@@ -121,24 +142,40 @@ class VideoDetail extends React.Component {
           summary={summary}
           createdAt={createdAt}
           nickname={nickname}
+          collectsCount={collectsCount}
         />
         <Player>
           <source src={videoUrl} />
         </Player>
         <Row>
           <Col span={1} offset={23}>
-            <CheckableTag color='#f50' style={{ marginTop: '10px' }}>投诉</CheckableTag>
+            {/* <CheckableTag color='#f50' style={{ marginTop: '10px' }}>投诉</CheckableTag>*/}
           </Col>
         </Row>
         <div style={{ marginTop: '20px', marginBottom: '20px' }}>
-          <UserCard avatar={avatar} username={nickname} />
+          <UserCard
+            avatar={avatar}
+            nickname={nickname}
+            id={id}
+            user_articles_count={user_articles_count}
+            user_followers_count={user_followers_count}
+            user_videos_count={user_videos_count}
+          />
         </div>
-        <Button type='primary' icon='heart-o' size='large' onClick={this.handleCollectVideo}>收藏视频 | 111</Button>
-        <Button type='primary' icon='heart-o' size='large' onClick={this.handleCancelCollectVideo}>取消收藏 | 111</Button>
+        {
+          isCollect === 2
+          &&
+          <Button type='primary' icon='heart-o' size='large' onClick={this.handleCollectVideo}>收藏视频 | {collectsCount}</Button>
+        }
+        {
+          isCollect === 1
+          &&
+          <Button type='primary' icon='heart-o' size='large' onClick={this.handleCancelCollectVideo}>取消收藏 | {collectsCount}</Button>
+        }
         <div style={{ marginTop: '30px' }}>
-          <h2 style={{ margin: '30px', paddingBottom: '10px', borderBottom: '1px solid rgb(204, 204, 204)' }}>8条评论</h2>
+          {/* <h2 style={{ margin: '30px', paddingBottom: '10px', borderBottom: '1px solid rgb(204, 204, 204)' }}>8条评论</h2>
           <Comment />
-          <Comment />
+          <Comment />*/}
         </div>
       </BasicLayout>
     )

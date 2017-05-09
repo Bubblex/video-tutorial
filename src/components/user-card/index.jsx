@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'dva/router'
 
 import {
   Row,
@@ -9,40 +10,42 @@ import {
 
 import {
   DEFAULT_AVATAR,
-  DEFAULT_USERNAME,
 } from '../../config'
 
 import styles from './index.less'
 
 class UserCard extends React.Component {
-  static defaultProps = {
-    avatar: DEFAULT_AVATAR,
-    username: DEFAULT_USERNAME,
-  }
-
   render() {
     const {
-      avatar,
-      username,
+      avatar: avatarcheck,
+      id,
+      nickname,
+      user_followers_count,
+      user_videos_count,
+      user_articles_count,
     } = this.props
+
+    const avatar = avatarcheck === null ? DEFAULT_AVATAR : avatarcheck
 
     return (
       <Card bodyStyle={{ background: '#f8f8f8' }}>
         <Row>
           <Col span={2}>
-            <img src={avatar} alt={username} className={styles.avatar} />
+            <img src={avatar} alt={nickname} className={styles.avatar} />
           </Col>
           <Col span={18}>
-            <p style={{ marginBottom: '8px', fontSize: '16px' }}>{username}</p>
+            <p style={{ marginBottom: '8px', fontSize: '16px' }}>{nickname}</p>
             <p>
               <span >注册于2017-2-2</span>
-              <span style={{ marginLeft: '20px' }}>发布了111条文章资讯</span>
-              <span style={{ marginLeft: '20px' }}>发布111个视频教程</span>
-              <span style={{ marginLeft: '20px' }}>获得111人关注</span>
+              <span style={{ marginLeft: '20px' }}>发布了{user_articles_count}条文章资讯</span>
+              <span style={{ marginLeft: '20px' }}>发布{user_videos_count}个视频教程</span>
+              <span style={{ marginLeft: '20px' }}>获得{user_followers_count}人关注</span>
             </p>
           </Col>
           <Col span={4}>
-            <Button size='large'>个人主页</Button>
+            <Link to='/user' query={{ id }}>
+              <Button size='large'>个人主页</Button>
+            </Link>
           </Col>
         </Row>
         <p style={{ marginTop: '8px', borderTop: '1px solid #ccc', padding: '10px' }}>简介简介简介简介简介简介</p>

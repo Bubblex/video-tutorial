@@ -11,14 +11,9 @@ import styles from './index.less'
 
 import {
   DEFAULT_AVATAR,
-  DEFAULT_USERNAME,
 } from '../../config'
 
 class SummaryCard extends React.Component {
-  static defaultProps = {
-    avatar: DEFAULT_AVATAR,
-    nickname: DEFAULT_USERNAME,
-  }
 
   render() {
     const {
@@ -30,6 +25,7 @@ class SummaryCard extends React.Component {
       id,
       nickname,
       roleId,
+      collectsCount,
     } = this.props
 
     const avatar = avatarcheck === null ? DEFAULT_AVATAR : avatarcheck
@@ -53,8 +49,8 @@ class SummaryCard extends React.Component {
             <div>
               <span >发布时间：{createdAt}</span>
               <span style={{ marginLeft: '20px' }}>阅读：{readNum}</span>
-              <span style={{ marginLeft: '20px' }}>评论：111</span>
-              <span style={{ marginLeft: '20px' }}>收藏：111</span>
+              {/* <span style={{ marginLeft: '20px' }}>评论：111</span>*/}
+              <span style={{ marginLeft: '20px' }}>收藏：{collectsCount}</span>
             </div>
           </Col>
         </Row>

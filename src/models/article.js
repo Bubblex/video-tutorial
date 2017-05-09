@@ -18,7 +18,7 @@ export default {
     articleListPagination: [],
     CheckArticleType: 0,
     articleDetails: {
-      author: {},
+      article_author: {},
     },
     articleContent: '',
   },
@@ -108,7 +108,7 @@ export default {
         })
       }
     },
-    *postCollectArticle({ payload, message, replace, nextPathname }, { call, put }) {
+    *postCollectArticle({ payload, message, replace, nextPathname }, { call }) {
       const {
         data: {
           errcode,
@@ -117,13 +117,9 @@ export default {
       } = yield call(articleCollect, payload)
 
       if (errcode === 1) {
-        yield put({
-          type: 'postArticleDetail',
-        })
         message.success(errmsg)
       } else if (errcode === 100) {
         message.error(errmsg, 1.5, () => {
-          // browserHistory.pushState(history,'/account/login')
           replace({
             pathname: '/account/login',
             state: {
@@ -131,9 +127,11 @@ export default {
             },
           })
         })
+      } else {
+        message.error(errmsg)
       }
     },
-    *postCancelCollectArticle({ payload, message }, { call, put }) {
+    *postCancelCollectArticle({ payload, message }, { call }) {
       const {
         data: {
           errcode,
@@ -142,9 +140,6 @@ export default {
       } = yield call(articleCancel, payload)
 
       if (errcode === 1) {
-        yield put({
-          type: 'postArticleDetail',
-        })
         message.success(errmsg)
       } else {
         message.error(errmsg)

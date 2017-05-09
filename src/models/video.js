@@ -17,7 +17,7 @@ export default {
     videoDataList: [],
     videoListPagination: [],
     videoDetails: {
-      author: {},
+      video_author: {},
     },
   },
   reducers: {
@@ -106,9 +106,6 @@ export default {
       } = yield call(videoCollect, payload)
 
       if (errcode === 1) {
-        yield put({
-          type: 'postVideoDetail',
-        })
         message.success(errmsg)
       } else if (errcode === 100) {
         message.error(errmsg, 1.5, () => {
@@ -130,9 +127,6 @@ export default {
       } = yield call(videoCancel, payload)
 
       if (errcode === 1) {
-        yield put({
-          type: 'postVideoDetail',
-        })
         message.success(errmsg)
       } else {
         message.error(errmsg)
