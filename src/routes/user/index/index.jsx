@@ -187,40 +187,49 @@ class UserIndex extends React.Component {
             <Col span={5}>
               <img src={arr.cover} alt={arr.title} style={{ width: '100%' }} />
             </Col>
-            <Col span={16} offset={1}>
-              <h2>
-                {
-                  arr.type_id === 1
-                  &&
-                  <Tag color='#f50'>邮票</Tag>
-                }
-                {
-                  arr.type_id === 2
-                  &&
-                  <Tag color='#2db7f5'>货币</Tag>
-                }
-                {
-                  arr.type_id === 3
-                  &&
-                  <Tag color='#87d068'>电话卡</Tag>
-                }
-                {arr.title}
-              </h2>
+            <Col span={18} offset={1}>
+              <Row>
+                <Col span={20}>
+                  <h2>
+                    {
+                      arr.type_id === 1
+                      &&
+                      <Tag color='#f50'>邮票</Tag>
+                    }
+                    {
+                      arr.type_id === 2
+                      &&
+                      <Tag color='#2db7f5'>货币</Tag>
+                    }
+                    {
+                      arr.type_id === 3
+                      &&
+                      <Tag color='#87d068'>电话卡</Tag>
+                    }
+                    {arr.title}
+                  </h2>
+                </Col>
+                <Col span={4}>
+                  <Link to='/article/detail' query={{ id: arr.id }}>
+                    查看详情
+                  </Link>
+                </Col>
+              </Row>
               <p style={{ margin: '10px 0' }}>{arr.summary}</p>
-              <Col span={10}>
-                <p>作者：{arr.author.nickname}</p>
-              </Col>
-              <Col span={12}>
-                <p>发布时间：{arr.created_at}</p>
-              </Col>
-            </Col>
-            {/* <Col span={2} offset={8}><p><span>{arr.look_num}</span> <Icon type='eye-o' /> </p></Col>
-            <Col span={2}><p><span>{arr.like_num}</span> <Icon type='heart-o' /> </p></Col>
-            <Col span={2}><p><span>{arr.comment_num}</span> <Icon type='message' /> </p></Col>*/}
-            <Col span={2}>
-              <Link to='/article/detail' query={{ id: arr.id }}>
-                查看详情
-              </Link>
+              <Row>
+                <Col span={7}>
+                  <p>作者：{arr.author.nickname}</p>
+                </Col>
+                <Col span={11}>
+                  <p>发布时间：{arr.created_at}</p>
+                </Col>
+                <Col span={3}>
+                  <p><span>{arr.read_num}</span> <Icon type='eye-o' /></p>
+                </Col>
+                <Col span={3}>
+                  <p><span>{arr.collects_count}</span> <Icon type='heart-o' /></p>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Card>
@@ -234,25 +243,28 @@ class UserIndex extends React.Component {
             <Col span={5}>
               <img src={arr.cover} alt={arr.title} style={{ width: '100%' }} />
             </Col>
-            <Col span={16} offset={1}>
-              <h2>
-                {arr.title}
-              </h2>
+            <Col span={18} offset={1}>
+              <Row>
+                <Col span={20}><h2>{arr.title}</h2></Col>
+                <Col span={4}>
+                  <Link to='/video/detail' query={{ id: arr.id }}>查看详情</Link>
+                </Col>
+              </Row>
               <p style={{ margin: '10px 0' }}>{arr.summary}</p>
-              <Col span={10}>
-                <p>作者：{arr.author.nickname}</p>
-              </Col>
-              <Col span={12}>
-                <p>发布时间：{arr.created_at}</p>
-              </Col>
-              <Col span={2}><p><span>{arr.play_num}</span> <Icon type='eye-o' /></p></Col>
-            </Col>
-            {/* <Col span={2}><p><span>{arr.like_num}</span> <Icon type='heart-o' /> </p></Col>
-            <Col span={2}><p><span>{arr.comment_num}</span> <Icon type='message' /> </p></Col>*/}
-            <Col span={2}>
-              <Link to='/video/detail' query={{ id: arr.id }}>
-                查看详情
-              </Link>
+              <Row>
+                <Col span={7}>
+                  <p>作者：{arr.author.nickname}</p>
+                </Col>
+                <Col span={11}>
+                  <p>发布时间：{arr.created_at}</p>
+                </Col>
+                <Col span={3}>
+                  <p><span>{arr.play_num}</span> <Icon type='eye-o' /></p>
+                </Col>
+                <Col span={3}>
+                  <p><span>{arr.collects_count}</span> <Icon type='heart-o' /></p>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Card>
