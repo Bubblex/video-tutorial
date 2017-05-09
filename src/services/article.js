@@ -8,6 +8,7 @@ import {
   API_ARTICLE_COLLECT,
   API_ARTICLE_CANCEL,
   API_ARTICLE_RELEASE,
+  API_ARTICLE_DELETE,
 } from '../config/api'
 
 // 3.3.1获取文章分类
@@ -48,6 +49,13 @@ export async function articleCancel(params) {
 // 3.3.6发布一篇文章
 export async function articleRelease(params) {
   return request(`${API_ARTICLE_RELEASE}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+// 3.3.7 删除一篇文章
+export async function articleDelete(params) {
+  return request(`${API_ARTICLE_DELETE}?${qs.stringify(params)}`, {
     method: 'POST',
   })
 }

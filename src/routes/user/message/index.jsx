@@ -9,6 +9,7 @@ import {
   Modal,
   Pagination,
   Popconfirm,
+  message,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -78,6 +79,7 @@ class UserMessage extends React.Component {
         id: userMessageList[index].id,
         token: Auth.getToken('token'),
       },
+      message,
     })
   }
 

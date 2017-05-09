@@ -8,6 +8,8 @@ import {
   Col,
   Tag,
   Pagination,
+  Popconfirm,
+  message,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -70,6 +72,26 @@ class UserArticle extends React.Component {
     dispatch({
       type: 'article/changeCheckedTag',
       CheckArticleType: articleType,
+    })
+  }
+
+  handleDeleteArticle = (e, index) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+      article: {
+        articleDataList,
+      },
+    } = this.props
+
+    dispatch({
+      type: 'article/postDeleteArticle',
+      payload: {
+        id: articleDataList[index].id,
+        token: Auth.getToken('token'),
+      },
+      message,
     })
   }
 
@@ -143,6 +165,14 @@ class UserArticle extends React.Component {
               <Link to='/article/detail' query={{ id: arr.id }}>
                 查看详情
               </Link>
+              <Popconfirm
+                title='确定删除该条文章'
+                onConfirm={(e) => { this.handleDeleteArticle(e, index) }}
+                okText='是'
+                cancelText='否'
+              >
+                <a href='javascript:'>删除</a>
+              </Popconfirm>
             </Col>
           </Row>
         </Card>
@@ -164,7 +194,7 @@ class UserArticle extends React.Component {
         authenticate={authentication}
         roleId={roleId}
       >
-        <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我发布的视频教程</h2>
+        <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我发布的文章资讯</h2>
         <div style={{ marginTop: '20px' }}>
           <CheckableTag checked={CheckArticleType === 0} onChange={() => { this.handleCheckArticleType(0) }}>全部</CheckableTag >
           <CheckableTag checked={CheckArticleType === 1} onChange={() => { this.handleCheckArticleType(1) }}>邮票</CheckableTag >

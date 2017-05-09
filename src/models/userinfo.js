@@ -201,7 +201,7 @@ export default {
     *postReadMessage({ payload }, { call }) {
       yield call(messageRead, payload)
     },
-    *postDeleteMessage({ payload }, { call, put }) {
+    *postDeleteMessage({ payload, message }, { call, put }) {
       const {
         data: {
           errcode,
@@ -216,6 +216,9 @@ export default {
             token: Auth.getToken(),
           },
         })
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
       }
     },
   },

@@ -54,6 +54,9 @@ export const API_ARTICLE_CANCEL = `${PREFIX}/article/cancel`
 // 3.3.6发布一篇文章
 export const API_ARTICLE_RELEASE = `${PREFIX}/article/release`
 
+// 3.3.7发布一篇文章
+export const API_ARTICLE_DELETE = `${PREFIX}/article/delete`
+
 // 3.4.1视频列表
 export const API_VIDEO_LIST = `${PREFIX}/video/list`
 

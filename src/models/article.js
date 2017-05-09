@@ -6,6 +6,7 @@ import {
   articleCollect,
   articleCancel,
   articleRelease,
+  articleDelete,
 } from '../services/article'
 
 import Auth from '../utils/auth.js'
@@ -143,6 +144,26 @@ export default {
       if (errcode === 1) {
         yield put({
           type: 'postArticleDetail',
+        })
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
+      }
+    },
+    *postDeleteArticle({ payload, message }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(articleDelete, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'postArticleList',
+          payload: {
+            id: Auth.getInfo().id,
+          },
         })
         message.success(errmsg)
       } else {
