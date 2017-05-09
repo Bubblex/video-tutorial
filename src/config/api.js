@@ -54,7 +54,7 @@ export const API_ARTICLE_CANCEL = `${PREFIX}/article/cancel`
 // 3.3.6发布一篇文章
 export const API_ARTICLE_RELEASE = `${PREFIX}/article/release`
 
-// 3.3.7发布一篇文章
+// 3.3.7删除一篇文章
 export const API_ARTICLE_DELETE = `${PREFIX}/article/delete`
 
 // 3.4.1视频列表
@@ -71,6 +71,9 @@ export const API_VIDEO_CANCEL = `${PREFIX}/video/cancel`
 
 // 3.4.5 发布 / 修改视频
 export const API_VIDEO_RELEASE = `${PREFIX}/video/release`
+
+// 3.4.6 删除一条视频
+export const API_VIDEO_DELETE = `${PREFIX}/video/delete`
 
 // 3.5.1 消息列表
 export const API_MESSAGE_LIST = `${PREFIX}/message/list`

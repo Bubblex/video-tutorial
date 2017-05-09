@@ -7,6 +7,7 @@ import {
   API_VIDEO_COLLECT,
   API_VIDEO_CANCEL,
   API_VIDEO_RELEASE,
+  API_VIDEO_DELETE,
 } from '../config/api'
 
 // 3.4.1视频列表
@@ -40,6 +41,13 @@ export async function videoCancel(params) {
 // 3.4.5 发布 / 修改视频
 export async function videoRelease(params) {
   return request(`${API_VIDEO_RELEASE}?${qs.stringify(params)}`, {
+    method: 'POST',
+  })
+}
+
+// 3.4.6 删除一条视频
+export async function videoDelete(params) {
+  return request(`${API_VIDEO_DELETE}?${qs.stringify(params)}`, {
     method: 'POST',
   })
 }

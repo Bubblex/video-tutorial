@@ -8,6 +8,8 @@ import {
   Col,
   Icon,
   Pagination,
+  Popconfirm,
+  message,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -45,6 +47,26 @@ class UserVideo extends React.Component {
         page: current,
         id: Auth.getInfo().id,
       },
+    })
+  }
+
+  handleDeleteVideo = (e, index) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+      video: {
+        videoDataList,
+      },
+    } = this.props
+
+    dispatch({
+      type: 'video/postDeleteVideo',
+      payload: {
+        id: videoDataList[index].id,
+        token: Auth.getToken('token'),
+      },
+      message,
     })
   }
 
@@ -102,6 +124,14 @@ class UserVideo extends React.Component {
               <Link to='/video/detail' query={{ id: arr.id }}>
                 查看详情
               </Link>
+              <Popconfirm
+                title='确定删除该条视频'
+                onConfirm={(e) => { this.handleDeleteVideo(e, index) }}
+                okText='是'
+                cancelText='否'
+              >
+                <a href='javascript:'>删除</a>
+              </Popconfirm>
             </Col>
           </Row>
         </Card>

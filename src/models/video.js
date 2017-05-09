@@ -6,6 +6,7 @@ import {
   videoCollect,
   videoCancel,
   videoRelease,
+  videoDelete,
 } from '../services/video'
 
 import Auth from '../utils/auth.js'
@@ -131,6 +132,26 @@ export default {
       if (errcode === 1) {
         yield put({
           type: 'postVideoDetail',
+        })
+        message.success(errmsg)
+      } else {
+        message.error(errmsg)
+      }
+    },
+    *postDeleteVideo({ payload, message }, { call, put }) {
+      const {
+        data: {
+          errcode,
+          errmsg,
+        },
+      } = yield call(videoDelete, payload)
+
+      if (errcode === 1) {
+        yield put({
+          type: 'postVideoList',
+          payload: {
+            id: Auth.getInfo().id,
+          },
         })
         message.success(errmsg)
       } else {
