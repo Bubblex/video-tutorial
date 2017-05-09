@@ -7,7 +7,6 @@ import {
   message,
   Upload,
   Icon,
-  Radio,
 } from 'antd'
 
 import Auth from '../../../utils/auth'

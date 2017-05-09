@@ -9,6 +9,7 @@ import {
   Row,
   Col,
   Icon,
+  BackTop,
 } from 'antd'
 
 import SideBar from '../sidebar'
@@ -135,6 +136,7 @@ class BasicLayout extends React.Component {
               }
               <Content className={classNames(styles.content, contentClass)}>
                 {children}
+                <BackTop />
               </Content>
             </Layout>
           </Container>

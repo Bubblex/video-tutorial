@@ -180,5 +180,23 @@ export default {
         }
       })
     },
+    userinfo({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/release/video') {
+          dispatch({
+            type: 'userinfo/postUserInfo',
+            payload: {
+              token: Auth.getToken(),
+            },
+          })
+          dispatch({
+            type: 'postVideoList',
+            payload: {
+              pageSize: 6,
+            },
+          })
+        }
+      })
+    },
   },
 }

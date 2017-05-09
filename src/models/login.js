@@ -32,12 +32,14 @@ export default {
       } = yield call(userLogin, payload)
 
       if (errcode === 1) {
-        yield put({
-          type: 'saveUser',
-          user: data.user,
-        })
         Auth.setInfo(data.user)
         Cookies.set('token', data.token)
+        yield put({
+          type: 'userinfo/postUserInfo',
+          payload: {
+            token: Auth.getToken(),
+          },
+        })
         message.success(errmsg, 1.5, () => {
           browserHistory.push(nextPathname)
         })
