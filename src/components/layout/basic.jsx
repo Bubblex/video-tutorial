@@ -32,6 +32,7 @@ import {
 } from '../../config/web'
 
 import styles from './basic.less'
+import Auth from '../../utils/auth'
 
 const {
   Item: MenuItem,
@@ -82,7 +83,9 @@ class BasicLayout extends React.Component {
         <Header className={classNames(styles.header, headerClass)}>
           <Container>
             <div className={styles.logo}>
-              <img src={WEBSITE_LOGO} alt={WEBSITE_TITLE} />
+              <Link to='/'>
+                <img src={WEBSITE_LOGO} alt={WEBSITE_TITLE} />
+              </Link>
             </div>
             <Menu
               theme='dark'
@@ -92,13 +95,17 @@ class BasicLayout extends React.Component {
               <MenuItem key='1'><Link to={URL_HOME}>首页</Link></MenuItem>
               <MenuItem key='2'><Link to={URL_VIDEO_LIST}>视频教程</Link></MenuItem>
               <MenuItem key='3'><Link to={URL_ARTICLE_LIST}>文章资讯</Link></MenuItem>
-              <SubMenu title='发布'>
-                <MenuItem><Link to={URL_RELEASE_VIDEO}>发布视频</Link></MenuItem>
-                <MenuItem><Link to={URL_RELEASE_ARTICLE}>发布资讯</Link></MenuItem>
-              </SubMenu>
+              {
+                Auth.getToken() != null
+                &&
+                <SubMenu title='发布'>
+                  <MenuItem><Link to={URL_RELEASE_VIDEO}>发布视频</Link></MenuItem>
+                  <MenuItem><Link to={URL_RELEASE_ARTICLE}>发布资讯</Link></MenuItem>
+                </SubMenu>
+              }
             </Menu>
             <div style={{ float: 'right' }}>
-              <HeaderSearch />
+              {/* <HeaderSearch />*/}
               <HeaderAccount
                 status={2}
                 nickname={nickname}

@@ -8,6 +8,8 @@ import {
   Row,
   Icon,
   Pagination,
+  message,
+  Popconfirm,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -43,6 +45,34 @@ class UserLikeVideo extends React.Component {
       type: 'video/postVideoList',
       payload: {
         page: current,
+        id: Auth.getInfo().id,
+        type: 2,
+      },
+    })
+  }
+
+  handleCollectVideo = (e, index) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+      video: {
+        videoDataList,
+      },
+    } = this.props
+
+    dispatch({
+      type: 'video/postCancelCollectVideo',
+      payload: {
+        token: Auth.getToken(),
+        id: videoDataList[index].id,
+      },
+      message,
+    })
+
+    dispatch({
+      type: 'video/postVideoList',
+      payload: {
         id: Auth.getInfo().id,
         type: 2,
       },
@@ -89,7 +119,14 @@ class UserLikeVideo extends React.Component {
                 <Col span={19}><h2>{arr.title}</h2></Col>
                 <Col span={5}>
                   <Link to='/video/detail' query={{ id: arr.id }}>查看详情</Link>
-                  <a style={{ marginLeft: '10px' }}>取消收藏</a>
+                  <Popconfirm
+                    title='确定取消收藏该条视频'
+                    onConfirm={(e) => { this.handleCollectVideo(e, index) }}
+                    okText='是'
+                    cancelText='否'
+                  >
+                    <a style={{ marginLeft: '10px' }} href='javascript:'>取消收藏</a>
+                  </Popconfirm>
                 </Col>
               </Row>
               <p style={{ margin: '10px 0' }}>{arr.summary}</p>

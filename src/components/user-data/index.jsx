@@ -54,6 +54,13 @@ class UserData extends React.Component {
       replace,
       nextPathname,
     })
+
+    dispatch({
+      type: 'star/postUserFollersList',
+      payload: {
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
   }
 
   handleUnFollowSomeone = () => {
@@ -68,6 +75,13 @@ class UserData extends React.Component {
         id: this.props.routing.locationBeforeTransitions.query.id,
       },
       message,
+    })
+
+    dispatch({
+      type: 'star/postUserFollersList',
+      payload: {
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
     })
   }
 

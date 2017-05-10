@@ -9,6 +9,8 @@ import {
   Tag,
   Pagination,
   Icon,
+  Popconfirm,
+  message,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -77,6 +79,34 @@ class UserLike extends React.Component {
     })
   }
 
+  handleCollectArticle = (e, index) => {
+    e.preventDefault()
+
+    const {
+      dispatch,
+      article: {
+        articleDataList,
+      },
+    } = this.props
+
+    dispatch({
+      type: 'article/postCancelCollectArticle',
+      payload: {
+        token: Auth.getToken(),
+        id: articleDataList[index].id,
+      },
+      message,
+    })
+
+    dispatch({
+      type: 'article/postArticleList',
+      payload: {
+        id: Auth.getInfo().id,
+        type: 2,
+      },
+    })
+  }
+
   render() {
     const {
       avatar: checkavatar,
@@ -139,7 +169,14 @@ class UserLike extends React.Component {
                   <Link to='/article/detail' query={{ id: arr.id }}>
                     查看详情
                   </Link>
-                  <a style={{ marginLeft: '10px' }}>取消收藏</a>
+                  <Popconfirm
+                    title='确定取消收藏该条文章'
+                    onConfirm={(e) => { this.handleCollectArticle(e, index) }}
+                    okText='是'
+                    cancelText='否'
+                  >
+                    <a style={{ marginLeft: '10px' }} href='javascript:'>取消收藏</a>
+                  </Popconfirm>
                 </Col>
               </Row>
               <p style={{ margin: '10px 0' }}>{arr.summary}</p>
