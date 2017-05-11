@@ -19,9 +19,15 @@ class ReleaseArticle extends React.Component {
     const {
       article: {
         articleContent,
+        articleDetails,
       },
       dispatch,
+      location: {
+        state,
+      },
     } = this.props
+
+    const id = state === null ? null : state.id
 
     return (
       <div>
@@ -30,7 +36,12 @@ class ReleaseArticle extends React.Component {
             <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
             <Breadcrumb.Item>发布资讯</Breadcrumb.Item>
           </Breadcrumb>
-          <ArticleForm dispatch={dispatch} articleContent={articleContent} />
+          <ArticleForm
+            dispatch={dispatch}
+            articleContent={articleContent}
+            id={id}
+            articleDetails={articleDetails}
+          />
         </BasicLayout>
       </div>
     )

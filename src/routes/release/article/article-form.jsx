@@ -42,6 +42,7 @@ class ArticleForm extends React.Component {
         getFieldsValue,
       },
       articleContent,
+      id,
     } = this.props
 
     const formValue = getFieldsValue()
@@ -50,6 +51,7 @@ class ArticleForm extends React.Component {
       type: 'article/postArticleRelease',
       payload: {
         ...formValue,
+        id,
         content: articleContent,
         token: Auth.getToken(),
         cover: `http://video.app${formValue.cover.fileList[0].response.data.file_path}`,
@@ -71,6 +73,13 @@ class ArticleForm extends React.Component {
       form: {
         getFieldDecorator,
       },
+      articleDetails: {
+        title,
+        cover,
+        summary,
+        content,
+        type_id,
+      },
     } = this.props
 
     return (
@@ -81,6 +90,7 @@ class ArticleForm extends React.Component {
         >
           {
             getFieldDecorator('title', {
+              initialValue: title,
               rules: [
                 {
                   required: true,
@@ -102,7 +112,7 @@ class ArticleForm extends React.Component {
                   message: '分类不能为空',
                 },
               ],
-              initialValue: 1,
+              initialValue: type_id,
               valuePropName: 'checked',
             })(<RadioGroup>
               <Radio value={1}>邮票</Radio>
@@ -140,6 +150,7 @@ class ArticleForm extends React.Component {
         >
           {
             getFieldDecorator('summary', {
+              initialValue: summary,
               rules: [
                 {
                   required: true,
@@ -155,6 +166,7 @@ class ArticleForm extends React.Component {
         >
           {
             getFieldDecorator('content', {
+              initialValue: content,
               rules: [
                 {
                   required: true,

@@ -102,6 +102,23 @@ class ArticleDetail extends React.Component {
     })
   }
 
+  handleEditArticle = (e) => {
+    e.preventDefault()
+
+    const {
+      router: {
+        replace,
+      },
+    } = this.context
+
+    replace({
+      pathname: '/release/article',
+      state: {
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
+  }
+
   render() {
     const {
       username,
@@ -148,23 +165,34 @@ class ArticleDetail extends React.Component {
           roleId={roleId}
           collectsCount={collectsCount}
         />
-        <div style={{ margin: '10px 0' }}>
-          {
-            typeId === 1
-            &&
-            <Tag color='#f50' style={{ marginLeft: '20px' }}>邮票</Tag>
-          }
-          {
-            typeId === 2
-            &&
-            <Tag color='#2db7f5' style={{ marginLeft: '20px' }}>货币</Tag>
-          }
-          {
-            typeId === 3
-            &&
-            <Tag color='#87d068' style={{ marginLeft: '20px' }}>电话卡</Tag>
-          }
-        </div>
+        <Row>
+          <Col span={5}>
+            <div style={{ margin: '10px 0' }}>
+              {
+                typeId === 1
+                &&
+                <Tag color='#f50' style={{ marginLeft: '20px' }}>邮票</Tag>
+              }
+              {
+                typeId === 2
+                &&
+                <Tag color='#2db7f5' style={{ marginLeft: '20px' }}>货币</Tag>
+              }
+              {
+                typeId === 3
+                &&
+                <Tag color='#87d068' style={{ marginLeft: '20px' }}>电话卡</Tag>
+              }
+            </div>
+          </Col>
+          <Col span={4} offset={15}>
+            {
+              id === Auth.getInfo().id
+              &&
+              <Button size='large' onClick={this.handleEditArticle}>编辑</Button>
+            }
+          </Col>
+        </Row>
         <div dangerouslySetInnerHTML={{ __html: content }} />
         <Row>
           <Col span={1} offset={23}>
