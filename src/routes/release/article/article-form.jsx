@@ -106,6 +106,8 @@ class ArticleForm extends React.Component {
       articleFileList,
     } = this.props
 
+    console.log(articleDetails)
+
     const title = id === null ? null : articleDetails.title
     const summary = id === null ? null : articleDetails.summary
     const content = id === null ? null : articleDetails.content

@@ -206,16 +206,11 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname }) => {
+      return history.listen(({ pathname, query }) => {
         if (pathname === '/article/list') {
           dispatch({ type: 'postArticleList' })
           dispatch({ type: 'postUserRecommend' })
-        }
-      })
-    },
-    articledetail({ dispatch, history }) {
-      return history.listen(({ pathname, query }) => {
-        if (pathname === '/article/detail') {
+        } else if (pathname === '/article/detail') {
           dispatch({
             type: 'postArticleDetail',
             payload: {
@@ -223,12 +218,7 @@ export default {
               ...query,
             },
           })
-        }
-      })
-    },
-    articlerelease({ dispatch, history }) {
-      return history.listen(({ pathname, query }) => {
-        if (pathname === '/release/article') {
+        } else if (pathname === '/release/article' && query.id !== undefined) {
           dispatch({
             type: 'postArticleDetail',
             payload: {
@@ -236,14 +226,6 @@ export default {
               ...query,
             },
           })
-          if (query.id === undefined) {
-            dispatch({
-              type: 'savaArticleDetail',
-              articleDetails: {
-                article_author: {},
-              },
-            })
-          }
         }
       })
     },
