@@ -102,23 +102,6 @@ class ArticleDetail extends React.Component {
     })
   }
 
-  handleEditArticle = (e) => {
-    e.preventDefault()
-
-    const {
-      router: {
-        replace,
-      },
-    } = this.context
-
-    replace({
-      pathname: '/release/article',
-      state: {
-        id: this.props.routing.locationBeforeTransitions.query.id,
-      },
-    })
-  }
-
   render() {
     const {
       username,
@@ -189,7 +172,11 @@ class ArticleDetail extends React.Component {
             {
               id === Auth.getInfo().id
               &&
-              <Button size='large' onClick={this.handleEditArticle}>编辑</Button>
+              <Link to='/release/article' query={{ id: this.props.routing.locationBeforeTransitions.query.id }}>
+                <Button size='large'>
+                  编辑
+                </Button>
+              </Link>
             }
           </Col>
         </Row>

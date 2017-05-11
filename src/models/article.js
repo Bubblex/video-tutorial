@@ -23,6 +23,7 @@ export default {
     },
     articleContent: '',
     userRecommendList: [],
+    articleFileList: [],
   },
   reducers: {
     saveArticleList(state, { articleDataList }) {
@@ -47,6 +48,12 @@ export default {
       return {
         ...state,
         articleDetails,
+      }
+    },
+    saveArticleFileList(state, { articleFileList }) {
+      return {
+        ...state,
+        articleFileList,
       }
     },
     saveArticleContent(state, { articleContent }) {
@@ -113,6 +120,14 @@ export default {
         yield put({
           type: 'savaArticleDetail',
           articleDetails: data,
+        })
+        yield put({
+          type: 'saveArticleFileList',
+          articleFileList: [{
+            uid: -1,
+            status: 'done',
+            url: data.cover,
+          }],
         })
       }
     },
@@ -208,6 +223,27 @@ export default {
               ...query,
             },
           })
+        }
+      })
+    },
+    articlerelease({ dispatch, history }) {
+      return history.listen(({ pathname, query }) => {
+        if (pathname === '/release/article') {
+          dispatch({
+            type: 'postArticleDetail',
+            payload: {
+              token: Auth.getToken(),
+              ...query,
+            },
+          })
+          if (query.id === undefined) {
+            dispatch({
+              type: 'savaArticleDetail',
+              articleDetails: {
+                article_author: {},
+              },
+            })
+          }
         }
       })
     },

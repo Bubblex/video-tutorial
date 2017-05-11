@@ -59,6 +59,34 @@ class ArticleForm extends React.Component {
       message,
     })
   }
+
+  handleUploadSuccess = (data) => {
+    const {
+      dispatch,
+      form: {
+        getFieldsValue,
+      },
+    } = this.props
+
+    const formValue = getFieldsValue()
+
+    if (data.file.status === 'done') {
+      dispatch({
+        type: 'article/saveArticleFileList',
+        articleFileList: [{
+          uid: -1,
+          status: 'done',
+          url: `http://video.app${formValue.cover.fileList[0].response.data.file_path}`,
+        }],
+      })
+    } else if (data.file.status === 'removed') {
+      dispatch({
+        type: 'article/saveArticleFileList',
+        articleFileList: [],
+      })
+    }
+  }
+
   render() {
     const formItemOptions = {
       labelCol: {
@@ -73,14 +101,15 @@ class ArticleForm extends React.Component {
       form: {
         getFieldDecorator,
       },
-      articleDetails: {
-        title,
-        cover,
-        summary,
-        content,
-        type_id,
-      },
+      articleDetails,
+      id,
+      articleFileList,
     } = this.props
+
+    const title = id === null ? null : articleDetails.title
+    const summary = id === null ? null : articleDetails.summary
+    const content = id === null ? null : articleDetails.content
+    const typeid = id === null ? 1 : articleDetails.type_id
 
     return (
       <Form onSubmit={this.handleReleaseArticleSubmit}>
@@ -112,9 +141,8 @@ class ArticleForm extends React.Component {
                   message: '分类不能为空',
                 },
               ],
-              initialValue: type_id,
               valuePropName: 'checked',
-            })(<RadioGroup>
+            })(<RadioGroup defaultValue={typeid} >
               <Radio value={1}>邮票</Radio>
               <Radio value={2}>货币</Radio>
               <Radio value={3}>电话卡</Radio>
@@ -137,10 +165,16 @@ class ArticleForm extends React.Component {
               <Upload
                 action='http://video.app/api/upload'
                 listType='picture'
+                defaultFileList={articleFileList}
+                onChange={this.handleUploadSuccess}
               >
-                <Button>
-                  <Icon type='upload' /> 上传
-                </Button>
+                {
+                  articleFileList.length >= 1
+                  ? null
+                  : <Button>
+                    <Icon type='upload' /> 上传
+                  </Button>
+                }
               </Upload>)
           }
         </FormItem>
@@ -166,14 +200,13 @@ class ArticleForm extends React.Component {
         >
           {
             getFieldDecorator('content', {
-              initialValue: content,
               rules: [
                 {
                   required: true,
                   message: '内容不能为空',
                 },
               ],
-            })(<LzEditor cbReceiver={this.getArticleContent} video={false} />)
+            })(<LzEditor importContent={content} cbReceiver={this.getArticleContent} video={false} />)
           }
         </FormItem>
         <Button

@@ -20,27 +20,40 @@ class ReleaseArticle extends React.Component {
       article: {
         articleContent,
         articleDetails,
+        articleFileList,
       },
       dispatch,
-      location: {
-        state,
+      routing: {
+        locationBeforeTransitions: {
+          query,
+        },
       },
     } = this.props
 
-    const id = state === null ? null : state.id
+    const id = query.id === undefined ? null : query.id
 
     return (
       <div>
         <BasicLayout>
           <Breadcrumb separator='>' style={{ marginBottom: '15px' }}>
             <Breadcrumb.Item><Link to={URL_HOME}>首页</Link></Breadcrumb.Item>
-            <Breadcrumb.Item>发布资讯</Breadcrumb.Item>
+            {
+              query.id === undefined
+              &&
+              <Breadcrumb.Item>发布资讯</Breadcrumb.Item>
+            }
+            {
+              query.id != null
+              &&
+              <Breadcrumb.Item>修改资讯</Breadcrumb.Item>
+            }
           </Breadcrumb>
           <ArticleForm
             dispatch={dispatch}
             articleContent={articleContent}
             id={id}
             articleDetails={articleDetails}
+            articleFileList={articleFileList}
           />
         </BasicLayout>
       </div>
