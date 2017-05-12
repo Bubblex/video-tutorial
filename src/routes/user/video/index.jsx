@@ -158,12 +158,16 @@ class UserVideo extends React.Component {
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我发布的视频教程</h2>
         {renderVideoList}
-        <Pagination
-          {...videoListPagination}
-          showQuickJumper
-          style={{ float: 'right', margin: '20px' }}
-          onChange={this.handleChangePage}
-        />
+        {
+          videoListPagination.total > videoListPagination.pageSize
+          &&
+          <Pagination
+            {...videoListPagination}
+            showQuickJumper
+            style={{ float: 'right', margin: '20px' }}
+            onChange={this.handleChangePage}
+          />
+        }
       </BasicLayout>
     )
   }
