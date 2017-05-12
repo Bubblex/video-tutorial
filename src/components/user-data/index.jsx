@@ -100,11 +100,8 @@ class UserData extends React.Component {
     } = this.props
 
     const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
-
     const isUserIndex = this.props.routing.locationBeforeTransitions.pathname === '/user'
     const isUserSelf = this.props.routing.locationBeforeTransitions.search === `?id=${Auth.getInfo().id}`
-
-    console.log(isUserIndex && isUserSelf)
 
     return (
       <div className={styles.data}>
