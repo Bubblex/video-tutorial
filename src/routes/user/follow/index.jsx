@@ -5,6 +5,8 @@ import { Link } from 'dva/router'
 import {
   Col,
   Card,
+  Row,
+  Pagination,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -26,6 +28,21 @@ class UserFollow extends React.Component {
       type: 'userinfo/postUserInfo',
       payload: {
         token: Auth.getToken('token'),
+      },
+    })
+  }
+
+  handleFollowerChangePage = (current) => {
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'star/postUserFollersList',
+      payload: {
+        page: current,
+        pageSize: 9,
+        id: Auth.getInfo().id,
       },
     })
   }
@@ -72,6 +89,9 @@ class UserFollow extends React.Component {
           role_id: roleId,
         },
       },
+      star: {
+        userFollowersListPagination,
+      },
     } = this.props
 
     return (
@@ -90,7 +110,19 @@ class UserFollow extends React.Component {
         roleId={roleId}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我的粉丝</h2>
-        {renderFollowersList}
+        <Row>
+          {renderFollowersList}
+        </Row>
+        {
+          userFollowersListPagination.total > userFollowersListPagination.pageSize
+          &&
+          <Pagination
+            {...userFollowersListPagination}
+            showQuickJumper
+            style={{ float: 'right', margin: '20px' }}
+            onChange={this.handleFollowerChangePage}
+          />
+        }
       </BasicLayout>
     )
   }

@@ -61,6 +61,7 @@ class UserIndex extends React.Component {
       dispatch({
         type: 'article/postArticleList',
         payload: {
+          pageSize: 9,
           id: this.props.routing.locationBeforeTransitions.query.id,
         },
       })
@@ -109,6 +110,21 @@ class UserIndex extends React.Component {
 
     dispatch({
       type: 'star/postUserStarsList',
+      payload: {
+        page: current,
+        pageSize: 9,
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
+  }
+
+  handleFollowerChangePage = (current) => {
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'star/postUserFollersList',
       payload: {
         page: current,
         pageSize: 9,
@@ -350,6 +366,16 @@ class UserIndex extends React.Component {
             <Row>
               {renderFollowersList}
             </Row>
+            {
+              userFollowersListPagination.total > userFollowersListPagination.pageSize
+              &&
+              <Pagination
+                {...userFollowersListPagination}
+                showQuickJumper
+                style={{ float: 'right', margin: '20px' }}
+                onChange={this.handleFollowerChangePage}
+              />
+            }
           </TabPane>
         </Tabs>
       </BasicLayout>
