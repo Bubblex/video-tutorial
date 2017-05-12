@@ -1,4 +1,4 @@
-import { browserHistory } from 'dva/router'
+import { Link } from 'dva/router'
 
 import React from 'react'
 import { connect } from 'dva'
@@ -96,11 +96,15 @@ class UserData extends React.Component {
       stars_num: starsNum,
       isFollow,
       account,
-      authenticate,
       roleId,
     } = this.props
 
     const hasFollow = this.props.routing.locationBeforeTransitions.pathname === '/user/info' ? 2 : 1
+
+    const isUserIndex = this.props.routing.locationBeforeTransitions.pathname === '/user'
+    const isUserSelf = this.props.routing.locationBeforeTransitions.search === `?id=${Auth.getInfo().id}`
+
+    console.log(isUserIndex && isUserSelf)
 
     return (
       <div className={styles.data}>
@@ -146,6 +150,34 @@ class UserData extends React.Component {
                     取消关注
                   </Button>
                 }
+                {
+                  isUserIndex && isUserSelf === true
+                  &&
+                  <Link to='/user/info'>
+                    <Button
+                      className={styles.followButton}
+                      size='large'
+                    >
+                      <Icon type='setting' />
+                      个人中心
+                    </Button>
+                  </Link>
+                }
+              </div>
+            }
+            {
+              this.props.routing.locationBeforeTransitions.pathname !== '/user'
+              &&
+              <div className={styles.follow}>
+                <Link to='/user' query={{ id: this.props.userinfo.userBasicInfo.id }}>
+                  <Button
+                    className={styles.followButton}
+                    size='large'
+                  >
+                    <Icon type='home' />
+                    个人主页
+                  </Button>
+                </Link>
               </div>
             }
             <div className={styles.summary}>
