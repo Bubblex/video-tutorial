@@ -258,6 +258,7 @@ export default {
             type: 'star/postUserStarsList',
             payload: {
               id: Auth.getInfo().id,
+              pageSize: 9,
             },
           })
         }

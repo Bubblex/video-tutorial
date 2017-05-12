@@ -51,6 +51,7 @@ class UserIndex extends React.Component {
       dispatch({
         type: 'star/postUserStarsList',
         payload: {
+          pageSize: 9,
           id: this.props.routing.locationBeforeTransitions.query.id,
         },
       })
@@ -101,6 +102,21 @@ class UserIndex extends React.Component {
     })
   }
 
+  handleStarChangePage = (current) => {
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'star/postUserStarsList',
+      payload: {
+        page: current,
+        pageSize: 9,
+        id: this.props.routing.locationBeforeTransitions.query.id,
+      },
+    })
+  }
+
   render() {
     const {
       userinfo: {
@@ -119,6 +135,8 @@ class UserIndex extends React.Component {
       },
       star: {
         activeTabKey,
+        userFollowersListPagination,
+        userStarrsListPagination,
       },
       location: {
         pathname,
@@ -289,26 +307,44 @@ class UserIndex extends React.Component {
         <Tabs activeKey={activeTabKey} onTabClick={this.renderUserFollersList}>
           <TabPane tab='视频教程' key='1'>
             {renderVideoList}
-            <Pagination
-              {...videoListPagination}
-              showQuickJumper
-              style={{ float: 'right', margin: '20px' }}
-              onChange={this.handleVideoChangePage}
-            />
+            {
+              videoListPagination.total > videoListPagination.pageSize
+              &&
+              <Pagination
+                {...videoListPagination}
+                showQuickJumper
+                style={{ float: 'right', margin: '20px' }}
+                onChange={this.handleVideoChangePage}
+              />
+            }
           </TabPane>
           <TabPane tab='文章资讯' key='2'>
             {renderArticleList}
-            <Pagination
-              {...articleListPagination}
-              showQuickJumper
-              style={{ float: 'right', margin: '20px' }}
-              onChange={this.handleArticleChangePage}
-            />
+            {
+              articleListPagination.total > articleListPagination.pageSize
+              &&
+              <Pagination
+                {...articleListPagination}
+                showQuickJumper
+                style={{ float: 'right', margin: '20px' }}
+                onChange={this.handleArticleChangePage}
+              />
+            }
           </TabPane>
           <TabPane tab='关注' key='3'>
             <Row>
               {renderStarsList}
             </Row>
+            {
+              userStarrsListPagination.total > userStarrsListPagination.pageSize
+              &&
+              <Pagination
+                {...userStarrsListPagination}
+                showQuickJumper
+                style={{ float: 'right', margin: '20px' }}
+                onChange={this.handleStarChangePage}
+              />
+            }
           </TabPane>
           <TabPane tab='粉丝' key='4'>
             <Row>
