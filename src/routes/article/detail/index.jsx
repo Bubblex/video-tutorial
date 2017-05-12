@@ -170,7 +170,7 @@ class ArticleDetail extends React.Component {
           </Col>
           <Col span={4} offset={15}>
             {
-              id === Auth.getInfo().id
+              id === Auth.getInfo().id && (Auth.getToken() !== undefined)
               &&
               <Link to='/release/article' query={{ id: this.props.routing.locationBeforeTransitions.query.id }}>
                 <Button size='large'>

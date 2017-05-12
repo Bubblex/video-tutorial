@@ -226,6 +226,21 @@ export default {
               ...query,
             },
           })
+        } else if (pathname === '/release/article' && query.id === undefined) {
+          dispatch({
+            type: 'savaArticleDetail',
+            articleDetails: {
+              article_author: {},
+            },
+          })
+          dispatch({
+            type: 'saveArticleFileList',
+            articleFileList: [],
+          })
+          dispatch({
+            type: 'saveArticleContent',
+            articleContent: '',
+          })
         }
       })
     },
