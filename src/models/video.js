@@ -181,6 +181,13 @@ export default {
       return history.listen(({ pathname }) => {
         if (pathname === '/video/list') {
           dispatch({ type: 'postVideoList' })
+        } else if (pathname === '/') {
+          dispatch({
+            type: 'postVideoList',
+            payload: {
+              pageSize: 6,
+            },
+          })
         }
       })
     },

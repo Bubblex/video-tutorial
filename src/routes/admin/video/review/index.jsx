@@ -137,12 +137,12 @@ class AdminVideoIndex extends React.Component {
   }
   openVideoDetailModal = (index) => {
     this.props.dispatch({
-      type: 'admin/openVideoDetailModal',
+      type: 'admin/openVideoReviewConfirmModal',
       index,
     })
   }
   closeVideoDetailModal = () => {
-    this.props.dispatch({ type: 'admin/closeVideoDetailModal' })
+    this.props.dispatch({ type: 'admin/closeVideoReviewDetailModal' })
   }
   handleDisable(id, disable, index) {
     this.props.dispatch({

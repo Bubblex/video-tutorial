@@ -29,6 +29,8 @@ import {
   DEFAULT_USERNAME,
 } from '../../../config'
 
+import Auth from '../../../utils/auth'
+
 const { CheckableTag } = Tag
 
 class ArticleList extends React.Component {
@@ -190,16 +192,35 @@ class ArticleList extends React.Component {
             />
           </Col>
           <Col span={5} offset={1}>
-            <Link to={URL_RELEASE_ARTICLE}>
-              <Button
-                type='primary'
-                icon='edit'
-                size='large'
-                style={{ marginTop: 20, marginBottom: 20 }}
-              >
-                发布资讯
-              </Button>
-            </Link>
+            {
+              Auth.getToken() != null
+              &&
+              <Link to={URL_RELEASE_ARTICLE}>
+                <Button
+                  type='primary'
+                  icon='edit'
+                  size='large'
+                  style={{ marginTop: 20, marginBottom: 20 }}
+                >
+                  发布资讯
+                </Button>
+              </Link>
+            }
+            {
+              Auth.getToken() === undefined
+              &&
+              <Link to='/account/login'>
+                <Button
+                  type='primary'
+                  icon='edit'
+                  size='large'
+                  style={{ marginTop: 20, marginBottom: 20 }}
+                >
+                  发布资讯
+                </Button>
+              </Link>
+            }
+
             <Card title='推荐作者'>
               {renderRecommendUser}
             </Card>

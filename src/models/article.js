@@ -210,6 +210,13 @@ export default {
         if (pathname === '/article/list') {
           dispatch({ type: 'postArticleList' })
           dispatch({ type: 'postUserRecommend' })
+        } else if (pathname === '/') {
+          dispatch({
+            type: 'postArticleList',
+            payload: {
+              pageSize: 5,
+            },
+          })
         } else if (pathname === '/article/detail') {
           dispatch({
             type: 'postArticleDetail',

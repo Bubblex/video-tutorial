@@ -16,7 +16,7 @@ import {
 import {
   URL_HOME,
   URL_VIDEO_DETAIL,
-  URL_VIDEO_ARTICLE,
+  URL_RELEASE_VIDEO,
   URL_USER,
 } from '../../../config/web'
 
@@ -26,6 +26,8 @@ import {
 
 import styles from '../../article/list/index.less'
 import BasicLayout from '../../../components/layout/basic'
+
+import Auth from '../../../utils/auth'
 
 class VideoList extends React.Component {
   handleChangePage = (current) => {
@@ -132,16 +134,35 @@ class VideoList extends React.Component {
             />
           </Col>
           <Col span={5} offset={1}>
-            <Link to={URL_VIDEO_ARTICLE}>
-              <Button
-                type='primary'
-                icon='edit'
-                size='large'
-                style={{ marginTop: 20, marginBottom: 20 }}
-              >
-                发布视频
-              </Button>
-            </Link>
+            {
+              Auth.getToken() != null
+              &&
+              <Link to={URL_RELEASE_VIDEO}>
+                <Button
+                  type='primary'
+                  icon='edit'
+                  size='large'
+                  style={{ marginTop: 20, marginBottom: 20 }}
+                >
+                  发布视频
+                </Button>
+              </Link>
+            }
+            {
+              Auth.getToken() === undefined
+              &&
+              <Link to='/account/login'>
+                <Button
+                  type='primary'
+                  icon='edit'
+                  size='large'
+                  style={{ marginTop: 20, marginBottom: 20 }}
+                >
+                  发布视频
+                </Button>
+              </Link>
+            }
+            
             <Card title='推荐讲师'>
               {renderRecommendUser}
             </Card>

@@ -143,11 +143,11 @@ class BasicLayout extends React.Component {
               }
               <Content className={classNames(styles.content, contentClass)}>
                 {children}
-                <BackTop />
               </Content>
             </Layout>
           </Container>
         </Content>
+        <BackTop />
         <Footer className={classNames(styles.footer, footerClass)}>
           <Row>
             <Col span={6}><h3><Icon type='link' /> 友情链接</h3></Col>
@@ -157,24 +157,21 @@ class BasicLayout extends React.Component {
           </Row>
           <Row>
             <Col span={6}>
-              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.shscce.com/html/shscce/index.shtml'>上海邮币卡交易中心</a></p>
-              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.csc.net.cn/'>中国邮币卡网</a></p>
-              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.youbicard.com/'>邮币卡之家</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.1ubk.com'>第一邮币卡</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.hbdzsc.com/'>河北邮币卡</a></p>
             </Col>
             <Col span={6}>
               <p style={{ margin: '10px' }}><a target='_blank' href='http://www.zgnjs.com/'>南京文交所开户</a></p>
               <p style={{ margin: '10px' }}><a target='_blank' href='http://www.csc.net.cn/'>中国邮币卡网</a></p>
-              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.youbicard.com/'>邮币卡之家</a></p>
             </Col>
             <Col span={6}>
               <p style={{ margin: '10px' }}><a target='_blank' href='http://www.shscce.com/html/shscce/index.shtml'>上海邮币卡交易中心</a></p>
-              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.csc.net.cn/'>中国邮币卡网</a></p>
-              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.youbicard.com/'>邮币卡之家</a></p>
+              <p style={{ margin: '10px' }}><a target='_blank' href='http://www.ypjys.com/'>北京邮票交易中心</a></p>
             </Col>
             <Col span={6}>
               <p style={{ margin: '10px' }}>{WEBSITE_TITLE}</p>
               <p style={{ margin: '10px' }}>Built with <a target='_blank' href='https://github.com/Bubblex'><Icon type='github' /> 江肖</a></p>
-            </Col>
+            </Col>  
           </Row>
         </Footer>
       </Layout>

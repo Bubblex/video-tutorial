@@ -263,13 +263,6 @@ export default {
       }
     },
 
-    openCertificationConfirmModal(state) {
-      return {
-        ...state,
-        isDisplayCertificationConfirmModal: true,
-      }
-    },
-
     closeCertificationConfirmModal(state) {
       return {
         ...state,
@@ -289,6 +282,21 @@ export default {
       return {
         ...state,
         videoReviewOptions: options,
+      }
+    },
+
+    openVideoReviewConfirmModal(state, { index }) {
+      return {
+        ...state,
+        isDisplayVideoReviewDetailModal: true,
+        videoReviewDetail: state.videoReviewList[index],
+      }
+    },
+
+    closeVideoReviewDetailModal(state) {
+      return {
+        ...state,
+        isDisplayVideoReviewDetailModal: false,
       }
     },
 
