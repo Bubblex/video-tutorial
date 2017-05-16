@@ -3,8 +3,10 @@ import { connect } from 'dva'
 import { Link } from 'dva/router'
 
 import {
+  Row,
   Col,
   Card,
+  Pagination,
 } from 'antd'
 
 import BasicLayout from '../../../components/layout/basic'
@@ -26,6 +28,21 @@ class UserStar extends React.Component {
       type: 'userinfo/postUserInfo',
       payload: {
         token: Auth.getToken('token'),
+      },
+    })
+  }
+
+  handleStarChangePage = (current) => {
+    const {
+      dispatch,
+    } = this.props
+
+    dispatch({
+      type: 'star/postUserStarsList',
+      payload: {
+        page: current,
+        pageSize: 9,
+        id: Auth.getInfo().id,
       },
     })
   }
@@ -72,6 +89,9 @@ class UserStar extends React.Component {
           role_id: roleId,
         },
       },
+      star: {
+        userStarrsListPagination,
+      },
     } = this.props
 
     return (
@@ -90,7 +110,19 @@ class UserStar extends React.Component {
         roleId={roleId}
       >
         <h2 style={{ marginBottom: 24, borderBottom: '1px solid #ccc', paddingBottom: 10 }}>我的关注</h2>
-        {renderStarsList}
+        <Row>
+          {renderStarsList}
+        </Row>
+        {
+          userStarrsListPagination.total > userStarrsListPagination.pageSize
+          &&
+          <Pagination
+            {...userStarrsListPagination}
+            showQuickJumper
+            style={{ float: 'right', margin: '20px' }}
+            onChange={this.handleStarChangePage}
+          />
+        }
       </BasicLayout>
     )
   }

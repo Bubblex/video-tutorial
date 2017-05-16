@@ -11,6 +11,8 @@ export default {
     userFollowersList: [],
     userStarrsList: [],
     activeTabKey: '1',
+    userFollowersListPagination: [],
+    userStarrsListPagination: [],
   },
   reducers: {
     saveUserFollersList(state, { userFollowersList }) {
@@ -29,6 +31,18 @@ export default {
       return {
         ...state,
         activeTabKey,
+      }
+    },
+    saveUserFollersListPagination(state, { userFollowersListPagination }) {
+      return {
+        ...state,
+        userFollowersListPagination,
+      }
+    },
+    saveUserStarsListPagination(state, { userStarrsListPagination }) {
+      return {
+        ...state,
+        userStarrsListPagination,
       }
     },
   },
@@ -82,6 +96,7 @@ export default {
           errcode,
           data: {
             list,
+            pagination,
           },
         },
       } = yield call(userFollowers, payload)
@@ -91,6 +106,10 @@ export default {
           type: 'saveUserFollersList',
           userFollowersList: list,
         })
+        yield put({
+          type: 'saveUserFollersListPagination',
+          userFollowersListPagination: pagination,
+        })
       }
     },
     *postUserStarsList({ payload }, { call, put }) {
@@ -99,6 +118,7 @@ export default {
           errcode,
           data: {
             list,
+            pagination,
           },
         },
       } = yield call(userStars, payload)
@@ -107,6 +127,10 @@ export default {
         yield put({
           type: 'saveUserStarsList',
           userStarrsList: list,
+        })
+        yield put({
+          type: 'saveUserStarsListPagination',
+          userStarrsListPagination: pagination,
         })
       }
     },

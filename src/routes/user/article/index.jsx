@@ -212,12 +212,16 @@ class UserArticle extends React.Component {
           <CheckableTag checked={CheckArticleType === 3} onChange={() => { this.handleCheckArticleType(3) }}>电话卡</CheckableTag>
         </div>
         {renderArticleDataList}
-        <Pagination
-          {...articleListPagination}
-          showQuickJumper
-          style={{ float: 'right', margin: '20px' }}
-          onChange={this.handleChangePage}
-        />
+        {
+          articleListPagination.total > articleListPagination.pageSize
+          &&
+          <Pagination
+            {...articleListPagination}
+            showQuickJumper
+            style={{ float: 'right', margin: '20px' }}
+            onChange={this.handleChangePage}
+          />
+        }
       </BasicLayout>
     )
   }

@@ -43,18 +43,36 @@ class ArticleForm extends React.Component {
       },
       articleContent,
       id,
+      articleDetails,
     } = this.props
 
     const formValue = getFieldsValue()
+
+    const coverimg = formValue.cover === undefined
+    ? articleDetails.cover
+    : `http://video.app${formValue.cover.fileList[0].response.data.file_path}`
+
+    const defaultTypeid = articleDetails.type_id === undefined
+    ? 1
+    : articleDetails.type_id
+
+    const typeid = formValue.type_id === undefined
+    ? defaultTypeid
+    : formValue.type_id
+
+    const lastcontent = articleContent.length === 0
+    ? articleDetails.content
+    : articleContent
 
     dispatch({
       type: 'article/postArticleRelease',
       payload: {
         ...formValue,
+        type_id: typeid,
         id,
-        content: articleContent,
+        content: lastcontent,
         token: Auth.getToken(),
-        cover: `http://video.app${formValue.cover.fileList[0].response.data.file_path}`,
+        cover: coverimg,
       },
       message,
     })
@@ -102,15 +120,18 @@ class ArticleForm extends React.Component {
         getFieldDecorator,
       },
       articleDetails,
+      articleDetails: {
+        title,
+        summary,
+        content,
+      },
       id,
       articleFileList,
     } = this.props
 
-    console.log(articleDetails)
-
-    const title = id === null ? null : articleDetails.title
-    const summary = id === null ? null : articleDetails.summary
-    const content = id === null ? null : articleDetails.content
+    // const title = id === null ? null : articleDetails.title
+    // const summary = id === null ? null : articleDetails.summary
+    // const content = id === null ? null : articleDetails.content
     const typeid = id === null ? 1 : articleDetails.type_id
 
     return (
