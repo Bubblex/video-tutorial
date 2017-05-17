@@ -67,7 +67,7 @@ class UserFollow extends React.Component {
     ? null
     : this.props.star.userFollowersList.map((arr, index) => {
       return (
-        <Col span={8} key={index}>
+        <Col span={8} key={index} style={{ marginBottom: '40px' }}>
           <Link to='/user' query={{ id: arr.id }}>
             <Card style={{ width: '80%' }}>
               <img

@@ -255,7 +255,7 @@ class AdminArticleIndex extends React.Component {
                 身份证正面照：
               </Col>
               <Col span={this.wrapperSpan}>
-                <span>{cardFrontImage}</span>
+                <img src={cardFrontImage} className={styles.avatar} alt={cardFrontImage} />
               </Col>
             </Row>
           }
@@ -267,7 +267,7 @@ class AdminArticleIndex extends React.Component {
                 身份证背面照：
               </Col>
               <Col span={this.wrapperSpan}>
-                <span>{cardBackImage}</span>
+                <img src={cardBackImage} className={styles.avatar} alt={cardBackImage} />
               </Col>
             </Row>
           }

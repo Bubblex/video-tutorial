@@ -144,6 +144,7 @@ class AdminArticleIndex extends React.Component {
             role_name: roleName,
           },
           summary,
+          status,
           created_at: createdAt,
           card_number: cardNumber,
           card_front_image: cardFrontImage,

@@ -16,6 +16,11 @@ import Banner1 from './Banner_01.jpg'
 import Banner2 from './Banner_02.jpg'
 import Banner3 from './Banner_05.jpg'
 import Banner4 from './Banner_06.jpg'
+import center1 from './center1.png'
+import center2 from './center2.jpg'
+import center3 from './center3.jpg'
+import center4 from './center4.jpg'
+import center5 from './center5.jpg'
 
 class Home extends React.Component {
   render() {
@@ -97,6 +102,53 @@ class Home extends React.Component {
           <Col span={2} offset={17}><Link to='/video/list'>更多</Link></Col>
         </Row>
         <Row>{renderVideoList}</Row>
+
+        <Row>
+          <Col span={5} style={{ margin: '20px' }}>
+            <Carousel
+              autoplay='true'
+              effect='fade'
+              dots='false'
+            >
+              <div><img src={center1} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center2} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+            </Carousel>
+          </Col>
+          <Col span={5} style={{ margin: '20px' }}>
+            <Carousel
+              autoplay='true'
+              effect='fade'
+              dots='false'
+            >
+              <div><img src={center2} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+            </Carousel>
+          </Col>
+          <Col span={5} style={{ margin: '20px' }}>
+            <Carousel
+              autoplay='true'
+              effect='fade'
+              dots='false'
+            >
+              <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center5} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+            </Carousel>
+          </Col>
+          <Col span={5} style={{ margin: '20px' }}>
+            <Carousel
+              autoplay='true'
+              effect='fade'
+              dots='false'
+            >
+              <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center5} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center1} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+            </Carousel>
+          </Col>
+        </Row>
 
         <Row style={{ marginTop: '20px' }}>
           <Col span={4} offset={1}><h2><Icon type='file-text' /> 最新文章</h2></Col>

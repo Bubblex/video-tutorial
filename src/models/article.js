@@ -214,7 +214,7 @@ export default {
           dispatch({
             type: 'postArticleList',
             payload: {
-              pageSize: 5,
+              pageSize: 6,
             },
           })
         } else if (pathname === '/article/detail') {
