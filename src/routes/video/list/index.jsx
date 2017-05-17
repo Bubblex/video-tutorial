@@ -29,6 +29,8 @@ import BasicLayout from '../../../components/layout/basic'
 
 import Auth from '../../../utils/auth'
 
+import banner2 from './banner2.png'
+
 class VideoList extends React.Component {
   handleChangePage = (current) => {
     const {
@@ -50,23 +52,6 @@ class VideoList extends React.Component {
         RecommendCertificationList,
       },
     } = this.props
-
-    const slickDatas = [{
-      link: URL_VIDEO_DETAIL,
-      img: 'aaa.png',
-    },
-    {
-      link: URL_VIDEO_DETAIL,
-      img: 'bbb.png',
-    }]
-
-    const renderSlick = slickDatas.map((slick, index) => {
-      return (
-        <Link className={styles.slick} to={slick.link} key={index}>
-          <img alt='article' src={slick.img} />
-        </Link>
-      )
-    })
 
     const renderRecommendUser = RecommendCertificationList.map((arr, index) => {
       return (
@@ -121,7 +106,8 @@ class VideoList extends React.Component {
           <Breadcrumb.Item>视频教程</Breadcrumb.Item>
         </Breadcrumb>
         <Carousel autoplay>
-          {renderSlick}
+          <img alt='banner2' src={banner2} />
+          <img alt='banner2' src={banner2} />
         </Carousel>
         <Row>
           <Col span={18}>

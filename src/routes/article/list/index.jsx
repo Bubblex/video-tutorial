@@ -31,6 +31,8 @@ import {
 
 import Auth from '../../../utils/auth'
 
+import banner1 from './banner1.png'
+
 const { CheckableTag } = Tag
 
 class ArticleList extends React.Component {
@@ -83,22 +85,6 @@ class ArticleList extends React.Component {
       },
     } = this.props
 
-    const slickDatas = [{
-      link: URL_ARTICLE_DETAIL,
-      img: 'aaa.png',
-    },
-    {
-      link: URL_ARTICLE_DETAIL,
-      img: 'bbb.png',
-    }]
-
-    const renderSlick = slickDatas.map((slick, index) => {
-      return (
-        <Link className={styles.slick} to={slick.link} key={index}>
-          <img alt='article' src={slick.img} />
-        </Link>
-      )
-    })
 
     const renderArtrcleList = articleDataList.map((arr, index) => {
       return (
@@ -173,7 +159,8 @@ class ArticleList extends React.Component {
           <Breadcrumb.Item>文章资讯</Breadcrumb.Item>
         </Breadcrumb>
         <Carousel autoplay>
-          {renderSlick}
+          <img alt='banner1' src={banner1} />
+          <img alt='banner1' src={banner1} />
         </Carousel>
         <Row>
           <Col span={18}>
