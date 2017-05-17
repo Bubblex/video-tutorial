@@ -129,9 +129,6 @@ class ArticleForm extends React.Component {
       articleFileList,
     } = this.props
 
-    // const title = id === null ? null : articleDetails.title
-    // const summary = id === null ? null : articleDetails.summary
-    // const content = id === null ? null : articleDetails.content
     const typeid = id === null ? 1 : articleDetails.type_id
 
     return (
@@ -229,7 +226,12 @@ class ArticleForm extends React.Component {
                   message: '内容不能为空',
                 },
               ],
-            })(<LzEditor importContent={content} cbReceiver={this.getArticleContent} video={false} />)
+            })(<LzEditor
+              importContent={content}
+              cbReceiver={this.getArticleContent}
+              video={false}
+              image={false}
+            />)
           }
         </FormItem>
         <Button

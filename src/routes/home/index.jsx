@@ -114,37 +114,37 @@ class Home extends React.Component {
               dots='false'
             >
               <div><img src={center1} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-              <div><img src={center2} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-            </Carousel>
-          </Col>
-          <Col span={5} style={{ margin: '20px' }}>
-            <Carousel
-              autoplay='true'
-              effect='fade'
-              dots='false'
-            >
-              <div><img src={center2} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-              <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-            </Carousel>
-          </Col>
-          <Col span={5} style={{ margin: '20px' }}>
-            <Carousel
-              autoplay='true'
-              effect='fade'
-              dots='false'
-            >
-              <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-              <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-            </Carousel>
-          </Col>
-          <Col span={5} style={{ margin: '20px' }}>
-            <Carousel
-              autoplay='true'
-              effect='fade'
-              dots='false'
-            >
-              <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
               <div><img src={center1} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+            </Carousel>
+          </Col>
+          <Col span={5} style={{ margin: '20px' }}>
+            <Carousel
+              autoplay='true'
+              effect='fade'
+              dots='false'
+            >
+              <div><img src={center2} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center2} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+            </Carousel>
+          </Col>
+          <Col span={5} style={{ margin: '20px' }}>
+            <Carousel
+              autoplay='true'
+              effect='fade'
+              dots='false'
+            >
+              <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+            </Carousel>
+          </Col>
+          <Col span={5} style={{ margin: '20px' }}>
+            <Carousel
+              autoplay='true'
+              effect='fade'
+              dots='false'
+            >
+              <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
+              <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
             </Carousel>
           </Col>
         </Row>
