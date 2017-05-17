@@ -20,7 +20,6 @@ import center1 from './center1.png'
 import center2 from './center2.jpg'
 import center3 from './center3.jpg'
 import center4 from './center4.jpg'
-import center5 from './center5.jpg'
 
 class Home extends React.Component {
   render() {
@@ -98,11 +97,15 @@ class Home extends React.Component {
         </Carousel>
 
         <Row style={{ marginTop: '20px' }}>
-          <Col span={4} offset={1}><h2><Icon type='video-camera' /> 最新视频</h2></Col>
-          <Col span={2} offset={17}><Link to='/video/list'>更多</Link></Col>
+          <Col span={4} offset={1}><h2><Icon type='file-text' /> 最新文章</h2></Col>
+          <Col span={2} offset={17}><Link to='/article/list'>更多</Link></Col>
         </Row>
-        <Row>{renderVideoList}</Row>
+        <Row>{renderArtrcleList}</Row>
 
+
+        <Row style={{ marginTop: '20px' }}>
+          <Col span={4} offset={1}><h2> 热门邮票</h2></Col>
+        </Row>
         <Row>
           <Col span={5} style={{ margin: '20px' }}>
             <Carousel
@@ -112,7 +115,6 @@ class Home extends React.Component {
             >
               <div><img src={center1} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
               <div><img src={center2} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-              <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
             </Carousel>
           </Col>
           <Col span={5} style={{ margin: '20px' }}>
@@ -123,7 +125,6 @@ class Home extends React.Component {
             >
               <div><img src={center2} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
               <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-              <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
             </Carousel>
           </Col>
           <Col span={5} style={{ margin: '20px' }}>
@@ -134,7 +135,6 @@ class Home extends React.Component {
             >
               <div><img src={center3} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
               <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-              <div><img src={center5} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
             </Carousel>
           </Col>
           <Col span={5} style={{ margin: '20px' }}>
@@ -144,17 +144,17 @@ class Home extends React.Component {
               dots='false'
             >
               <div><img src={center4} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
-              <div><img src={center5} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
               <div><img src={center1} alt='banner' style={{ width: '100%', height: '200px' }} /></div>
             </Carousel>
           </Col>
         </Row>
 
         <Row style={{ marginTop: '20px' }}>
-          <Col span={4} offset={1}><h2><Icon type='file-text' /> 最新文章</h2></Col>
-          <Col span={2} offset={17}><Link to='/article/list'>更多</Link></Col>
+          <Col span={4} offset={1}><h2><Icon type='video-camera' /> 最新视频</h2></Col>
+          <Col span={2} offset={17}><Link to='/video/list'>更多</Link></Col>
         </Row>
-        <Row>{renderArtrcleList}</Row>
+        <Row>{renderVideoList}</Row>
+
       </BasicLayout>
     )
   }

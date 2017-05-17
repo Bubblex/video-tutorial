@@ -147,7 +147,7 @@ class ArticleList extends React.Component {
         <Link to={URL_USER} query={{ id: arr.id }} className={styles.user} key={index}>
           <img alt={arr.nickname} src={arr.avatar === null ? DEFAULT_AVATAR : arr.avatar} />
           <span>{arr.nickname}</span>
-          <p>发布了{arr.collect_articles_num}篇文章资讯</p>
+          <p>发布了{arr.articles_num}篇文章资讯</p>
         </Link>
       )
     })
@@ -159,8 +159,8 @@ class ArticleList extends React.Component {
           <Breadcrumb.Item>文章资讯</Breadcrumb.Item>
         </Breadcrumb>
         <Carousel autoplay>
-          <img alt='banner1' src={banner1} />
-          <img alt='banner1' src={banner1} />
+          <img alt='banner1' src={banner1} style={{ width: '100%', height: '280px' }} />
+          <img alt='banner1' src={banner1} style={{ width: '100%', height: '280px' }} />
         </Carousel>
         <Row>
           <Col span={18}>

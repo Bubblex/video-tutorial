@@ -255,7 +255,8 @@ class AdminArticleIndex extends React.Component {
               内容：
             </Col>
             <Col span={this.wrapperSpan}>
-              <span>{content}</span>
+              {/* <span>{content}</span>*/}
+              <span dangerouslySetInnerHTML={{ __html: content }} />
             </Col>
           </Row>
         </Modal>

@@ -113,6 +113,7 @@ class ArticleDetail extends React.Component {
           read_num: readNum,
           summary,
           content,
+          cover,
           is_collect: isCollect,
           collects_count: collectsCount,
           article_author: {
@@ -180,7 +181,23 @@ class ArticleDetail extends React.Component {
             }
           </Col>
         </Row>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <img
+          src={cover}
+          alt='cover'
+          style={{
+            margin: '10px auto',
+            display: 'block',
+          }}
+        />
+        <div
+          dangerouslySetInnerHTML={{ __html: content }}
+          style={{
+            margin: '10px 100px',
+            lineHeight: '1.8rem',
+            border: '1px solid #ccc',
+            padding: '20px',
+          }}
+        />
         <Row>
           <Col span={1} offset={23}>
             {/* <CheckableTag color='#f50' style={{ marginTop: '10px' }}>投诉</CheckableTag>*/}

@@ -58,7 +58,7 @@ class VideoList extends React.Component {
         <Link to={URL_USER} query={{ id: arr.id }} className={styles.user} key={index}>
           <img alt={arr.nickname} src={arr.avatar === null ? DEFAULT_AVATAR : arr.avatar} />
           <span>{arr.nickname}</span>
-          <p>发布了{arr.collect_articles_num}个视频教程</p>
+          <p>发布了{arr.videos_num}个视频教程</p>
         </Link>
       )
     })
@@ -106,18 +106,22 @@ class VideoList extends React.Component {
           <Breadcrumb.Item>视频教程</Breadcrumb.Item>
         </Breadcrumb>
         <Carousel autoplay>
-          <img alt='banner2' src={banner2} />
-          <img alt='banner2' src={banner2} />
+          <img alt='banner2' src={banner2} style={{ width: '100%', height: '280px' }} />
+          <img alt='banner2' src={banner2} style={{ width: '100%', height: '280px' }} />
         </Carousel>
         <Row>
           <Col span={18}>
             {renderVideoList}
-            <Pagination
-              {...videoListPagination}
-              showQuickJumper
-              style={{ float: 'right', margin: '20px' }}
-              onChange={this.handleChangePage}
-            />
+            {
+              videoListPagination.total > videoListPagination.pageSize
+              &&
+              <Pagination
+                {...videoListPagination}
+                showQuickJumper
+                style={{ float: 'right', margin: '20px' }}
+                onChange={this.handleChangePage}
+              />
+            }
           </Col>
           <Col span={5} offset={1}>
             {
@@ -148,7 +152,6 @@ class VideoList extends React.Component {
                 </Button>
               </Link>
             }
-            
             <Card title='推荐讲师'>
               {renderRecommendUser}
             </Card>

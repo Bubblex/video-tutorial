@@ -49,8 +49,12 @@ export async function articleCancel(params) {
 
 // 3.3.6发布一篇文章
 export async function articleRelease(params) {
-  return request(`${API_ARTICLE_RELEASE}?${qs.stringify(params)}`, {
+  return request(`${API_ARTICLE_RELEASE}`, {
     method: 'POST',
+    body: JSON.stringify(params),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
 }
 

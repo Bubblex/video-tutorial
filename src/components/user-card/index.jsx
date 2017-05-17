@@ -48,7 +48,7 @@ class UserCard extends React.Component {
             </Link>
           </Col>
         </Row>
-        <p style={{ marginTop: '8px', borderTop: '1px solid #ccc', padding: '10px' }}>简介简介简介简介简介简介</p>
+        <p style={{ marginTop: '8px', borderTop: '1px solid #ccc', padding: '10px' }}>邮币卡爱好者</p>
       </Card>
     )
   }
