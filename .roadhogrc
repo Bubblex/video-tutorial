@@ -10,9 +10,7 @@
     "production": {
       "extraBabelPlugins": [
         "transform-runtime"
-      ],
-      "publicPath": "/resource/",
-      "outputPath": "./dist/resource"
+      ]
     }
   },
   "proxy": {
